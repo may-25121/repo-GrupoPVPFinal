@@ -16,17 +16,17 @@ public class PaymentsId implements Serializable{
 	@JoinColumn(name = "customer_number")
 	private Customer customerNumber;
 	
-	@OneToOne
-	@JoinColumn(name = "check_number")
-	private Payment checkNumber;
+	
+	private String checkNumber;
 
 	public PaymentsId() {
 	}
 
-	public PaymentsId(Customer customerNumber, Payment checkNumber) {
+	public PaymentsId(Customer customerNumber, String checkNumber) {
 		this.customerNumber = customerNumber;
 		this.checkNumber = checkNumber;
 	}
+
 
 	public Customer getCustomerNumber() {
 		return customerNumber;
@@ -36,11 +36,11 @@ public class PaymentsId implements Serializable{
 		this.customerNumber = customerNumber;
 	}
 
-	public Payment getCheckNumber() {
+	public String getCheckNumber() {
 		return checkNumber;
 	}
 
-	public void setCheckNumber(Payment checkNumber) {
+	public void setCheckNumber(String checkNumber) {
 		this.checkNumber = checkNumber;
 	}
 

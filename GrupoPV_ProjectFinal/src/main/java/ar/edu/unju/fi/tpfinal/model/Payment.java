@@ -1,12 +1,13 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -17,8 +18,9 @@ public class Payment {
 	@EmbeddedId
 	private PaymentsId paymentsId;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name = "payment_date")
-	private Date paymentDate;
+	private LocalDate paymentDate;
 	
 	@Column(name = "amount")
 	private Double amount;
@@ -28,7 +30,7 @@ public class Payment {
 	public Payment() {
 	}
 
-	public Payment(PaymentsId paymentsId, Date paymentDate, Double amount) {
+	public Payment(PaymentsId paymentsId, LocalDate paymentDate, Double amount) {
 		this.paymentsId = paymentsId;
 		this.paymentDate = paymentDate;
 		this.amount = amount;
@@ -36,11 +38,11 @@ public class Payment {
 
 	//----- METODOS ACCESORES ------
 
-	public Date getPaymentDate() {
+	public LocalDate getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(Date paymentDate) {
+	public void setPaymentDate(LocalDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
@@ -52,5 +54,12 @@ public class Payment {
 		this.amount = amount;
 	}
 
+	@Override
+	public String toString() {
+		return "Payment [paymentsId=" + paymentsId + ", paymentDate=" + paymentDate + ", amount=" + amount + "]";
+	}
+
+	
+	
 	
 }
