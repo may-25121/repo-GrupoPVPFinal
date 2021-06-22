@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<title>Página principal</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
+	</head>
+	<body>
+	
+		<header th:insert="layout/header :: header"></header>
+		
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
+					<h2><i class="far fa-building fa-lg"></i>&nbsp;Registro oficina</h2>
+				</div>
+				<!--  <form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/oficina/guardar}" th:method="post" th:object="${oficina}">-->
+					<form class="bg-white col-sm-7 p-auto m-auto border">
+					<div class="p-2">
+					  <div class="form-group">
+						  	<div class="p-3">
+						  		<div class="form-group">
+								    <label for="codigo">Código</label>
+								    <input type="text" class="form-control" id="codigo" placeholder="Ingresar el código de la oficina">
+						  		</div>
+						  		<div class="form-group">
+								    <label for="ciudad">Ciudad</label>
+								    <input type="text" class="form-control" id="ciudad" placeholder="Ingresar la ciudad donde se encuantra la oficina">
+						  		</div>
+						  		<div class="form-group">
+								    <label for="telefono">Teléfono</label>
+								    <input type="text" class="form-control" id="telefono" placeholder="Ingresar el número de teléfono de la oficina">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="direccion">Dirección</label>
+								    <input type="text" class="form-control" id="direccion"placeholder="Ingresar la direccion de la oficina">
+							  	</div>
+							  	<div class="form-group">
+								    <label for="direccionsec">Dirección secundaria</label>
+								    <input type="text" class="form-control" id="direccionsec" placeholder="Ingresar una segunda direccion que posea la oficina">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="estado">Estado</label>
+								    <input type="text" class="form-control" id="estado" placeholder="Ingresar el estado donde se encuentra la oficina">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="pais">País</label>
+								    <input type="text" class="form-control" id="pais" placeholder="Ingresar el país donde se encuentra la oficina">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="cp">Codigo postal</label>
+								    <input type="text" class="form-control" id="cp" placeholder="Ingresar el codigo postal donde se encuentra la oficina">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="territorio">Territorio</label>
+								    <input type="text" class="form-control" id="territorio" placeholder="Ingresar el territorio en el que se encuentra la oficina">
+						  		</div>
+							  	<div class="mt-4">
+							  		<button type="button" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear oficina</button>
+							  	</div>
+								  
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<footer th:insert="layout/footer :: footer"></footer>
+		
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+	</body>
+</html>

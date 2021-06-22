@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<body>
+		<header id="header row" th:fragment="header">
+			<div class="bg-darkblue py-1 text-white">
+				<div class="pl-3 ml-2 d-flex bd-highlight">
+					<div class="p-2 bd-highlight"><img class="img-fluid" alt="" th:src="@{/img/logo.png}"></div>
+					<div class="p-2 bd-highlight"><h3>Netlify</h3></div>
+					<div class="ml-auto p-2 bd-highlight d-flex align-items-center">Argentina, 21 de Junio de 2021 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;ADMIN -- <i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-power-off"></i></div>
+				</div>
+			</div>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-darkcyan">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+						 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						    <li class="nav-item">
+						       <a class="nav-link active text-white hoverlink" aria-current="page"><i class="fas fa-home"></i>&nbsp;Inicio</a>
+						    </li>
+						    <li class="nav-item dropdown">
+							    <a class="nav-link dropdown-toggle text-white hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							       <i class="fas fa-users"></i>&nbsp;Usuarios
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink">Nuevo usuario</a>
+									<a class="dropdown-item text-white hoverlink">Lista de usuarios</a>
+								</div>
+						    </li>	
+						    <li class="nav-item dropdown ">
+							    <a class="nav-link dropdown-toggle text-white hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							       <i class="fas fa-user-tie"></i>&nbsp;Empleados
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink">Nuevo empleado</a>
+									<a class="dropdown-item text-white hoverlink">Lista de empleados</a>
+								</div>
+						    </li>
+						    <li class="nav-item dropdown">
+							    <a class="nav-link dropdown-toggle text-white hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							       <i class="far fa-building"></i>&nbsp;Oficinas
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink">Nueva oficina</a>
+									<a class="dropdown-item text-white hoverlink">Lista de oficinas</a>
+								</div>
+						    </li>
+						    <li class="nav-item dropdown">
+							    <a class="nav-link dropdown-toggle text-white hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							       <i class="fas fa-universal-access"></i>&nbsp;Clientes
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink hoverlink">Nuevo cliente</a>
+									<a class="dropdown-item text-white hoverlink hoverlink">Lista de clientes</a>
+								</div>
+						    </li>
+						    <li class="nav-item dropdown ">
+							    <a class="nav-link dropdown-toggle text-white hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							       <i class="fas fa-boxes">&nbsp;</i>Productos
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink hoverlink">Nuevo producto</a>
+									<a class="dropdown-item text-white hoverlink hoverlink">Lista de productos</a>
+								</div>
+						    </li>
+						    <li class="nav-item dropdown ">
+							    <a class="nav-link dropdown-toggle text-white hoverlink hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							        <i class="fas fa-coins">&nbsp;</i>Pagos
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink">Nuevo pago</a>
+									<a class="dropdown-item text-white hoverlink">Lista de pagos</a>
+								</div>
+						    </li>
+						    <li class="nav-item dropdown ">
+							    <a class="nav-link dropdown-toggle text-white hoverlink" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							        <i class="fas fa-clipboard-list"></i>&nbsp;Ordenes
+							    </a>
+								<div class="dropdown-menu bg-darkcyan">
+									<a class="dropdown-item text-white hoverlink">Nueva orden</a>
+									<a class="dropdown-item text-white hoverlink">Lista de ordenes</a>
+									<a class="dropdown-item text-white hoverlink">Nuevo detalle de Orden</a>
+									<a class="dropdown-item text-white hoverlink">Lista de detalles de ordenes</a>
+								</div>
+						    </li>
+						    
+						 </ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+	</body>
+</html>

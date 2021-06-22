@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+body{
+	background-color:#BFC9CA;
+}
+
+.bg-maxblue{
+	background-color: #3498DB;
+}
+
+.bg-darkcyan{
+	background-color: #117864;
+}
+
+.bg-darkblue{
+	background-color: #2E4053; 
+}
+
+.bg-dodgerblue{
+	background-color:#5D6D7E;
+}
+
+.bg-medsuccess{
+	background-color:#16A085;
+}
+
+.txt-title{
+	color: #3498DB;
+}
+
+.bg-buebird{
+	background-color: #2980B9;
+}
+
+.imageline{
+	max-width: 4rem;
+}
+
+.hoverlink:hover { background: #0E6251; } 
+

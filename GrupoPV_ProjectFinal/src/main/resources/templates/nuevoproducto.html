@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<title>Página principal</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
+	</head>
+	<body>
+	
+		<header th:insert="layout/header :: header"></header>
+		
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
+					<h2><i class="fab fa-dropbox fa-lg"></i>&nbsp;Registro producto</h2>
+				</div>
+				<form class="bg-white col-sm-7 p-auto m-auto border">
+					<div class="p-2">
+					  <div class="form-group">
+						  	<div class="p-3">
+						  		<div class="form-group">
+								    <label for="codigo">Código</label>
+								    <input type="text" class="form-control" id="codigo" placeholder="Ingresar el codigo del producto">
+						  		</div>
+						  		<div class="form-group">
+								    <label for="nombre">Nombre</label>
+								    <input type="text" class="form-control" id="nombre" placeholder="Ingresar el nombre del producto">
+						  		</div>
+						  		<div class="form-group">
+								    <label for="lineaproducto">Linea de producto</label>
+								    <select class="form-control" id="lineaproducto">
+									  <option>Seleccione una opción</option>
+									</select>								    
+							  	</div>
+							  	<div class="form-group">
+								    <label for="vendedorproducto">Escala</label>
+								    <input type="text" class="form-control" id="proveedor" placeholder="Ingresar la escala del producto">
+						  		</div>
+						  		<div class="form-group">
+								    <label for="vendedorproducto">Proveedor</label>
+								    <input type="text" class="form-control" id="proveedor" placeholder="Ingresar el proveedor del producto">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="descripcion">Descripción</label>
+								    <input type="text" class="form-control" id="descripcion" placeholder="Ingresar descripción del producto">
+							  	</div>
+							  	<div class="form-group">
+								    <label for="stock">Stock</label>
+								    <input type="text" class="form-control" id="stock" placeholder="Ingresar stock del producto">
+							  	</div>
+						  		<div class="form-group">
+								    <label for="preciocompra">Precio de compra</label>
+								    <input type="text" class="form-control" id="preciocompra" placeholder="Ingresar precio de compra del producto">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="preciolista">Precio de lista</label>
+								    <input type="text" class="form-control" id="preciolista" placeholder="Ingresar precio de lista del producto">
+							  	</div>
+							  	<div class="mt-4">
+							  		<button type="button" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear producto</button>
+							  	</div>
+								  
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<footer th:insert="layout/footer :: footer"></footer>
+		
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+	</body>
+</html>
