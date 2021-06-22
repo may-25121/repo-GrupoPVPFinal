@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<title>Página principal</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
+	</head>
+	<body>
+	
+		<header th:insert="layout/header :: header"></header>
+		
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-12 mt-3 mb-3 py-2 d-flex bd-highlight mb-3">
+					<div class="p-2 bd-highlight">
+						<h2><i class="fas fa-boxes  fa-lg"></i>&nbsp;Listar lineas de productos</h2>
+					</div>
+					<div class="p-2 bd-highlight">
+						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear linea de producto</button>
+					</div>
+					<div class ="ml-auto p-2 bd-highlight">
+						<form class="form-inline">
+						   <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Buscar</button>
+						</form>
+					</div>
+				</div>
+				<table class="table table-striped col-sm-12 bg-light border ">
+				  <thead>
+				    <tr class="bg-buebird text-white">
+				      <th scope="col">Linea de producto</th>
+				      <th scope="col">Descripción</th>
+				      <th scope="col">Descipción de la página</th>
+				      <th scope="col">Imagen</th>
+				      <th scope="col">Acciones</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td class="align-middle">Mark</td>
+				      <td class="align-middle">Otto</td>
+				      <td class="align-middle">@mdo</td>
+				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				      <td class="align-middle">
+				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td class="align-middle">Mark</td>
+				      <td class="align-middle">Otto</td>
+				      <td class="align-middle">@mdo</td>
+				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				      <td class="align-middle">
+				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      </td>
+				    <tr>
+				      <td class="align-middle">Mark</td>
+				      <td class="align-middle">Otto</td>
+				      <td class="align-middle">@mdo</td>
+				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				      <td class="align-middle">
+				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      </td>
+				    </tr>				    
+				    <tr>
+				      <td class="align-middle">Mark</td>
+				      <td class="align-middle">Otto</td>
+				      <td class="align-middle">@mdo</td>
+				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				      <td class="align-middle">
+				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td class="align-middle">Mark</td>
+				      <td class="align-middle">Otto</td>
+				      <td class="align-middle">@mdo</td>
+				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				      <td class="align-middle">
+				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      </td>
+				    </tr>				  
+				  </tbody>
+				</table>
+			</div>
+		</div>
+		
+		<footer th:insert="layout/footer :: footer"></footer>
+		
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+	</body>
+</html>

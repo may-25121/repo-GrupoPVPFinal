@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<title>Página principal</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
+	</head>
+	<body>
+	
+		<header th:insert="layout/header :: header"></header>
+		
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
+					<h2><i class="fas fa-clipboard-list fa-lg"></i>&nbsp;Registro detalle de orden</h2>
+				</div>
+				<form class="bg-white col-sm-7 p-auto m-auto border">
+					<div class="p-2">
+					  <div class="form-group">
+						  	<div class="p-3">
+						  		<div class="form-group">
+								    <label for="numeroorden">Número de orden</label>
+								    <select class="form-control" id="numeroorden">
+									  <option>Seleccione una opción</option>
+									</select>								    
+							  	</div>
+						  		<div class="form-group">
+								    <label for="codigoproducto">Código de producto</label>
+								    <select class="form-control" id="codigoproducto">
+									  <option>Seleccione una opción</option>
+									</select>								    
+							  	</div>
+						  		<div class="form-group">
+								    <label for="cantidadpedida">Cantidad pedida</label>
+								    <input type="number" class="form-control" id="cantidadpedida" placeholder="Ingresar la cantidad pedida">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="preciounitario">Precio unitario</label>
+								    <input type="number" class="form-control" id="preciounitario" placeholder="Ingresar precio unitario del pedido">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="numerolinea">Número de linea del pedido</label>
+								    <input type="number" class="form-control" id="numerolinea" placeholder="Ingresar numero de linea del pedido">
+						  		</div>
+							  	<div class="mt-4">
+							  		<button type="button" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear detalle de orden</button>
+							  	</div>
+								  
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<footer th:insert="layout/footer :: footer"></footer>
+		
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+	</body>
+</html>
