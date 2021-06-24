@@ -17,51 +17,49 @@
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="far fa-building fa-lg"></i>&nbsp;Registro oficina</h2>
 				</div>
-				<!--  <form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/oficina/guardar}" th:method="post" th:object="${oficina}">-->
-					<form class="bg-white col-sm-7 p-auto m-auto border">
+				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/oficina/guardar}" th:method="post" th:object="${office}">
 					<div class="p-2">
 					  <div class="form-group">
 						  	<div class="p-3">
 						  		<div class="form-group">
-								    <label for="codigo">Código</label>
-								    <input type="text" class="form-control" id="codigo" placeholder="Ingresar el código de la oficina">
+								    <label for="officeCode">Código</label>
+								    <input type="text" class="form-control" id="officeCode" th:field="*{officeCode}" placeholder="Ingresar el código de la oficina">
 						  		</div>
 						  		<div class="form-group">
-								    <label for="ciudad">Ciudad</label>
-								    <input type="text" class="form-control" id="ciudad" placeholder="Ingresar la ciudad donde se encuantra la oficina">
+								    <label for="city">Ciudad</label>
+								    <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="Ingresar la ciudad donde se encuantra la oficina">
 						  		</div>
 						  		<div class="form-group">
-								    <label for="telefono">Teléfono</label>
-								    <input type="text" class="form-control" id="telefono" placeholder="Ingresar el número de teléfono de la oficina">
+								    <label for="phone">Teléfono</label>
+								    <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Ingresar el número de teléfono de la oficina">
 						  		</div>
 							  	<div class="form-group">
-								    <label for="direccion">Dirección</label>
-								    <input type="text" class="form-control" id="direccion"placeholder="Ingresar la direccion de la oficina">
+								    <label for="addressLine1">Dirección</label>
+								    <input type="text" class="form-control" id="addressLine1" th:field="*{addressLine1}" placeholder="Ingresar la direccion de la oficina">
 							  	</div>
 							  	<div class="form-group">
-								    <label for="direccionsec">Dirección secundaria</label>
-								    <input type="text" class="form-control" id="direccionsec" placeholder="Ingresar una segunda direccion que posea la oficina">
+								    <label for="addressLine2">Dirección secundaria</label>
+								    <input type="text" class="form-control" id="addressLine2" th:field="*{addressLine2}" placeholder="Ingresar una segunda direccion que posea la oficina">
 						  		</div>
 							  	<div class="form-group">
-								    <label for="estado">Estado</label>
-								    <input type="text" class="form-control" id="estado" placeholder="Ingresar el estado donde se encuentra la oficina">
+								    <label for="state">Estado</label>
+								    <input type="text" class="form-control" id="state" th:field="*{state}" placeholder="Ingresar el estado donde se encuentra la oficina">
 						  		</div>
 							  	<div class="form-group">
 								    <label for="pais">País</label>
-								    <input type="text" class="form-control" id="pais" placeholder="Ingresar el país donde se encuentra la oficina">
+								    <input type="text" class="form-control" id="pais" th:field="*{country}" placeholder="Ingresar el país donde se encuentra la oficina">
 						  		</div>
 							  	<div class="form-group">
-								    <label for="cp">Codigo postal</label>
-								    <input type="text" class="form-control" id="cp" placeholder="Ingresar el codigo postal donde se encuentra la oficina">
+								    <label for="postalCode">Codigo postal</label>
+								    <input type="text" class="form-control" id="postalCode" th:field="*{postalCode}" placeholder="Ingresar el codigo postal donde se encuentra la oficina">
 						  		</div>
 							  	<div class="form-group">
-								    <label for="territorio">Territorio</label>
-								    <input type="text" class="form-control" id="territorio" placeholder="Ingresar el territorio en el que se encuentra la oficina">
+								    <label for="territory">Territorio</label>
+								    <input type="text" class="form-control" id="territory" th:field="*{territory}" placeholder="Ingresar el territorio en el que se encuentra la oficina">
 						  		</div>
 							  	<div class="mt-4">
-							  		<button type="button" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear oficina</button>
-							  	</div>
-								  
+							  		<button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear oficina</button>
+							  	</div>  
 							</div>
 						</div>
 					</div>

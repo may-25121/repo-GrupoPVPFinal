@@ -4,8 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ar.edu.unju.fi.tpfinal.model.Office;
 
-public interface IOfficeDAO extends CrudRepository<Office, Long> {
-	
-	public Office findById(long id);
+public interface IOfficeDAO extends CrudRepository<Office, String> {
 	
 }

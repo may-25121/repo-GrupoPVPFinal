@@ -1,7 +1,6 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class OfficeServiceImp implements IOfficeService{
 	
 	@Override
 	public Office getOffice() {
-		return office;
+		return this.office;
 	}
 
 	@Override
@@ -30,8 +29,8 @@ public class OfficeServiceImp implements IOfficeService{
 	}
 
 	@Override
-	public Optional<Office> searchOffice(Long code) {
-		Optional<Office> office = officeDAO.findById(code); 
+	public Office getOfficeById(String code) {
+		Office office = officeDAO.findById(code).get(); 
 		return office;
 	}
 	
@@ -42,7 +41,7 @@ public class OfficeServiceImp implements IOfficeService{
 	}
 
 	@Override
-	public void deleteOffice(Long code) {
+	public void deleteOfficeById(String code) {
 		officeDAO.deleteById(code);
 	}
 

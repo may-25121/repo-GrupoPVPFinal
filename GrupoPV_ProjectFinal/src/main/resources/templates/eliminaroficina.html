@@ -23,11 +23,11 @@
 					<br>
 					<div class="my-4">
 						<span class="font-weight-bolder">¿Esta seguro de eliminar el siguiente registro?</span>
-						<p>Oficina: 123</p>
+						<p>Oficina:<span th:text="${office.officeCode}"></span></p>
 					</div>
 					<div class="my-3">
-						<button type="button" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
-						<button type="button" class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+						<a type="button" th:href="@{/oficina/listar}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancelar</a>
+						<a type="button" th:href="@{/oficina/borrar/confirmar/}+${office.officeCode}"  class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</a>
 					</div>
 					</div>
 				</div>
