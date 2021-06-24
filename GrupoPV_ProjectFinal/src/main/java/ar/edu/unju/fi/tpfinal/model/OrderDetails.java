@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -20,13 +19,6 @@ public class OrderDetails implements Serializable {
 	
 	@EmbeddedId
 	private OrderDetailsId id;
-	/*
-	@Column(name = "ORDER_NUMBER")
-	private Integer orderNumber;
-	*/
-	
-	@Column(name = "PRODUCT_CODE")
-	private String productCode;
 	
 	@Column(name = "QUANTITY_ORDERED")
 	private Integer quantityOrdered;
@@ -42,51 +34,45 @@ public class OrderDetails implements Serializable {
 	
 
 	public OrderDetails() {
+		// TODO Auto-generated constructor stub
 		super();
 	}
 
-	public OrderDetails(OrderDetailsId id, Integer orderNumber, String productCode, Integer quantityOrdered,
-			Double priceEach, Short orderLineNumber) {
+	
+
+	/**
+	 * Constructor Parametrizado
+	 * 
+	 * @param quantityOrdered
+	 * @param priceEach
+	 * @param orderLineNumber
+	 * @param orderNumber
+	 * @param orderCode
+	 *
+	 */
+	
+
+	public OrderDetails(OrderDetailsId id, Integer quantityOrdered, Double priceEach, Short orderLineNumber) {
 		super();
 		this.id = id;
-	//	this.orderNumber = orderNumber;
-		this.productCode = productCode;
 		this.quantityOrdered = quantityOrdered;
 		this.priceEach = priceEach;
 		this.orderLineNumber = orderLineNumber;
 	}
 
-	
+
 
 	//----- METODOS ACCESORES ------
 
 
-/*
-
-	public Integer getOrderNumber() {
-		return orderNumber;
-	}
 
 
-
-	public void setOrderNumber(Integer orderNumber) {
-		this.orderNumber = orderNumber;
-	}
-
-*/
-	public String getProductCode() {
-		return productCode;
-	}
-
-
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
-	}
 
 
 	public Integer getQuantityOrdered() {
 		return quantityOrdered;
 	}
+	
 
 
 	public void setQuantityOrdered(Integer quantityOrdered) {
@@ -131,14 +117,21 @@ public class OrderDetails implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-/*
+
+
+	//TO STRING
+	
 	@Override
 	public String toString() {
-		return "OrderDetails [id=" + id + ", orderNumber=" + orderNumber + ", productCode=" + productCode
-				+ ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber="
-				+ orderLineNumber + "]";
+		return "OrderDetails [id=" + id + ", quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach
+				+ ", orderLineNumber=" + orderLineNumber + "]";
 	}
 
-*/
+	
+	
+	
+
+
+	
 }
 

@@ -36,20 +36,27 @@ public class Productlines {
 	//------ CONSTRUCTORES -------
 	
 	public Productlines() {
+		// TODO Auto-generated constructor stub
 		super();
 	}
 
+	/**
+	 * Constructor parametrizado
+	 * 
+	 * @param productline
+	 * @param textDescription
+	 * @param htmlDescription
+	 * @param image
+	 * 
+	 */
 	
-	public Productlines(String productLine, String textDescripton, String htmlDescription, String image,
-			Products product) {
+	public Productlines(String productLine, String textDescripton, String htmlDescription, String image) {
 		super();
 		this.productLine = productLine;
 		this.textDescripton = textDescripton;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
-	//	this.product = product;
 	}
-	
 	
 
 	//----- METODOS ACCESORES ------
@@ -60,7 +67,6 @@ public class Productlines {
 	public String getTextDescripton() {
 		return textDescripton;
 	}
-
 
 
 
@@ -104,6 +110,12 @@ public class Productlines {
 		this.image = image;
 	}
 
+	@Override
+	public String toString() {
+		return "Productlines [productLine=" + productLine + ", textDescripton=" + textDescripton + ", htmlDescription="
+				+ htmlDescription + ", image=" + image + "]";
+	}
+
 
 	
 /*
@@ -117,12 +129,7 @@ public class Productlines {
 	}
 
 */
-	@Override
-	public String toString() {
-		return "Productlines [productLine=" + productLine + ", textDescripton=" + textDescripton + ", htmlDescription="
-				+ htmlDescription + ", image=" + image + ", product=" +  "]";
-	}
-
+	
 
 	
 }

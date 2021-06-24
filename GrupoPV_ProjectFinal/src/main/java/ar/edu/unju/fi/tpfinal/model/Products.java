@@ -6,11 +6,14 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+
+
+
 
 @Entity
 @Table(name="PRODUCTS")
@@ -22,10 +25,10 @@ public class Products {
 	
 	@Column(name = "PRODUCT_NAME")
 	private String productName;
-	
+	/*
 	@Column(name = "PRODUCT_LINE")
 	private  String  productLine;
-	
+	*/
 	@Column(name = "PRODUCT_SCALE")
 	private  String  productScale;
 	
@@ -42,68 +45,62 @@ public class Products {
 	private Double buyPrice;
 	
 	@Column(name = "MSRP")
-	private Double MSRP;
+	private Double msrp;
 	
 	//RELACION CON LA CLASE PRODUCTLINES
-	/*
+	
 	@Autowired
-	@OneToMany(mappedBy = "order_details")
-	private OrderDetails orderDetails;
-	*/
-	@Autowired
-	@ManyToOne
-	@JoinColumn(name = "product_lines")
-	private Productlines productLines;
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name="productline")
+	private Productlines productlines;
 	
+	//CONSTRUCTORES
 	
-	
-	//------ CONSTRUCTORES -------
 	public Products() {
 		super();
 	}
+	 
 
 
+
+	/**
+	 * 
+	 * @param productCode
+	 * @param productName
+	 * @param productLine 
+	 * @param productScale
+	 * @param productVendor
+	 * @param productDescripton
+	 * @param quantityInStock
+	 * @param buyPrice
+	 * @param MSRP
+	 * 
+	 */
 	
 	
-
-
-
-
-	public Products(String productCode, String productName, String productLine, String productScale,
-			String productVendor, String productDescripton, Integer quantityInStock, Double buyPrice, Double mSRP,
-			OrderDetails orderDetails, Productlines productLines) {
+	public Products(String productCode, String productName, String productScale, String productVendor,
+			String productDescripton, Integer quantityInStock, Double buyPrice, Double msrp,
+			Productlines productlines) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
-		this.productLine = productLine;
 		this.productScale = productScale;
 		this.productVendor = productVendor;
 		this.productDescripton = productDescripton;
 		this.quantityInStock = quantityInStock;
 		this.buyPrice = buyPrice;
-		MSRP = mSRP;
-		//this.orderDetails = orderDetails;
-		this.productLines = productLines;
+		this.msrp = msrp;
+		this.productlines = productlines;
 	}
-
-
-
-
-
-
-
+	
 
 	//----- METODOS ACCESORES ------
 	
 
 
-	
-	
-
 	public String getProductCode() {
 		return productCode;
 	}
-
 
 
 	public void setProductCode(String productCode) {
@@ -123,7 +120,7 @@ public class Products {
 	}
 
 
-
+/*
 	public String getProductLine() {
 		return productLine;
 	}
@@ -133,7 +130,7 @@ public class Products {
 	public void setProductLine(String productLine) {
 		this.productLine = productLine;
 	}
-
+*/
 
 
 	public String getProductScale() {
@@ -201,27 +198,45 @@ public class Products {
 
 
 
-	public Double getMSRP() {
-		return MSRP;
+	
+
+	public Double getMsrp() {
+		return msrp;
 	}
 
 
 
-	public void setMSRP(Double mSRP) {
-		MSRP = mSRP;
+
+	public void setMsrp(Double msrp) {
+		this.msrp = msrp;
 	}
 
 
 
-	public Productlines getProductLines() {
-		return productLines;
+
+	public Productlines getProductlines() {
+		return productlines;
 	}
 
 
 
-	public void setProductLines(Productlines productLines) {
-		this.productLines = productLines;
+
+	public void setProductlines(Productlines productlines) {
+		this.productlines = productlines;
 	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Products [productCode=" + productCode + ", productName=" + productName + ", productScale="
+				+ productScale + ", productVendor=" + productVendor + ", productDescripton=" + productDescripton
+				+ ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", msrp=" + msrp
+				+ ", productlines=" + productlines + "]";
+	}
+
+
 
 
 
@@ -243,19 +258,5 @@ public class Products {
 
 
 */
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "Products [productCode=" + productCode + ", productName=" + productName + ", productLine=" + productLine
-				+ ", productScale=" + productScale + ", productVendor=" + productVendor + ", productDescripton="
-				+ productDescripton + ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP="
-				+ MSRP + ", orderDetails=" +  ", productLines=" + productLines + "]";
-	}
-
-
 
 }

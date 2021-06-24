@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Component;
 public class Orders {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_NUMBER")
 	private Integer orderNumber;
 	
@@ -59,7 +62,7 @@ public class Orders {
 	 @Autowired
 	 @ManyToOne
 	 @JoinColumn(name = "customerNumber" )
-	 private Customer customer;
+	 private Customer customers;
 	 
 	 
 	 
@@ -67,12 +70,28 @@ public class Orders {
 	//------ CONSTRUCTORES -------
 	
 	public Orders() {
+		// TODO Auto-generated constructor stub
 		super();
 	}
+	
 
+	/**
+	 * Constructor Parametrizado
+	 * 
+	 * 
+	 * @param orderNumber
+	 * @param orderDate
+	 * @param requiredDate
+	 * @param shippedDate
+	 * @param status
+	 * @param comments
+	 * @param customers
+	 */
+	
+	
 
 	public Orders(Integer orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
-			String status, String comments, Integer customerNumber, OrderDetails orderDetails, Customer customer) {
+			String status, String comments, Customer customers) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderDate = orderDate;
@@ -80,12 +99,8 @@ public class Orders {
 		this.shippedDate = shippedDate;
 		this.status = status;
 		this.comments = comments;
-		//this.customerNumber = customerNumber;
-		//this.orderDetails = orderDetails;
-		this.customer = customer;
+		this.customers = customers;
 	}
-
-
 
 
 
@@ -93,7 +108,9 @@ public class Orders {
 	//----- METODOS ACCESORES ------
 
 	
-
+	/**
+	 * @return the orderNumber
+	 */
 
 	public Integer getOrderNumber() {
 		return orderNumber;
@@ -101,56 +118,94 @@ public class Orders {
 
 
 	
+	/**
+	 * @param orderNumber the orderNumber to set
+	 */
 
 	public void setOrderNumber(Integer orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
 
+	/**
+	 * @return the orderDate
+	 */
+	
+	
 	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 
+	/**
+	 * @param orderDate the orderDate to set
+	 */
 
 	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 
-
+	/**
+	 * @return the requiredDate
+	 */
+	
 	public LocalDate getRequiredDate() {
 		return requiredDate;
 	}
 
 
+	/**
+	 * @param requiredDate the requiredDate to set
+	 */
+
 	public void setRequiredDate(LocalDate requiredDate) {
 		this.requiredDate = requiredDate;
 	}
 
+	/**
+	 * @return the shippedDate
+	 */
 
 	public LocalDate getShippedDate() {
 		return shippedDate;
 	}
+	
+	/**
+	 * @param shippedDate the shippedDate to set
+	 */
 
 
 	public void setShippedDate(LocalDate shippedDate) {
 		this.shippedDate = shippedDate;
 	}
 
+	/**
+	 * @return the status
+	 */
 
 	public String getStatus() {
 		return status;
 	}
 
+	/**
+	 * @param status the status to set
+	 */
 
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
 
+	/**
+	 * @return the comments
+	 */
+
 	public String getComments() {
 		return comments;
 	}
 
+	/**
+	 * @param comments the comments to set
+	 */
 
 	public void setComments(String comments) {
 		this.comments = comments;
@@ -183,20 +238,19 @@ public class Orders {
 
 
 	 public Customer getCustomer() {
-		return customer;
+		return customers;
 	}
 
 
 	public void setCustomer(Customer customer) {
-		this.customer = customer;
+		this.customers = customer;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Orders [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
-				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customerNumber="
-				+  ", orderDetails="  + ", customer=" + customer + "]";
+				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customers="
+				+ customers + "]";
 	}
 
 

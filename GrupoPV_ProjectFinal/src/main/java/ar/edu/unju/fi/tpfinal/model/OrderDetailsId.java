@@ -1,11 +1,13 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class OrderDetailsId {
+public class OrderDetailsId implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -20,8 +22,17 @@ public class OrderDetailsId {
 	//------ CONSTRUCTORES -------
 
 	public OrderDetailsId() {
+		// TODO Auto-generated constructor stub
 		super();
 	}
+	
+
+	/**
+	 * Constructor Parametrizado
+	 * 
+	 * @param productCode
+	 * @param orderNumber
+	 */
 
 	public OrderDetailsId(Products productCode, Orders orderNumber) {
 		super();
@@ -50,13 +61,15 @@ public class OrderDetailsId {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	//ToString
 
 	@Override
 	public String toString() {
 		return "OrderDetailsId [productCode=" + productCode + ", orderNumber=" + orderNumber + "]";
 	}
-	
-	
+
+
 	
 	
 
