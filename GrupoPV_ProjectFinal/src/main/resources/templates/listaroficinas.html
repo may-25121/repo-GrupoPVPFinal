@@ -19,7 +19,7 @@
 						<h2><i class="far fa-building fa-lg"></i>&nbsp;Lista de oficinas</h2>
 					</div>
 					<div class="p-2 bd-highlight">
-						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear oficina</button>
+						<a class="btn btn-info" th:href="@{/oficina/nueva}"><i class="fas fa-plus"></i>&nbsp;Crear oficina</a>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
 						<form class="form-inline">
@@ -31,93 +31,31 @@
 				<table class="table table-striped col-sm-12 bg-light border">
 				  <thead>
 				    <tr class="bg-buebird text-white">
-				      <th scope="col">Codigo</th>
+				      <th scope="col">Cod.</th>
 				      <th scope="col">Ciudad</th>
 				      <th scope="col">Teléfono</th>
 				      <th scope="col">Dirección</th>
-				      <th scope="col">Dirección secundaria</th>
 				      <th scope="col">Estado</th>
 				      <th scope="col">País</th>
-				      <th scope="col">Codigo postal</th>
+				      <th scope="col">C.P.</th>
 				      <th scope="col">Territorio</th>
 				      <th scope="col">Acciones</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>@mdo</td>
-				      <td>@twitter</td>
+				    <tr th:each="o: ${offices}">
+				      <td th:text="${o.officeCode}"></td>
+				      <td th:text="${o.city}"></td>
+				      <td th:text="${o.phone}"></td>
+				      <td th:text="${o.addressLine1}"></td>
+				      <td th:text="${o.state}"></td>
+				      <td th:text="${o.country}"></td>
+				      <td th:text="${o.postalCode}"></td>
+				      <td th:text="${o.territory}"></td>
 				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				      <td>@fat</td>
-				      <td>@fat</td>
-				      
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>@twitter</td>
-				      <td>@twitter</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>@twitter</td>
-				      <td>@twitter</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>@twitter</td>
-				      <td>@twitter</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+						<!--   -->
+				      	<a class="btn btn-warning" th:href="@{/oficina/editar/}+${o.officeCode}"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger" th:href="@{/oficina/borrar/}+${o.officeCode}"><i class="far fa-trash-alt"></i></a>
 				      </td>
 				    </tr>
 				  </tbody>

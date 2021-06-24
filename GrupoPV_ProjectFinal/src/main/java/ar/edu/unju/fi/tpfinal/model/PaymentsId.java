@@ -16,7 +16,7 @@ public class PaymentsId implements Serializable{
 	@JoinColumn(name = "customer_number")
 	private Customer customerNumber;
 	
-	
+	@JoinColumn(name = "check_number")
 	private String checkNumber;
 
 	public PaymentsId() {
