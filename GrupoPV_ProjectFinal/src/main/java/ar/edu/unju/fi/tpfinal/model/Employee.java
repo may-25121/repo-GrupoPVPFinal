@@ -68,62 +68,113 @@ public class Employee {
 
 	//----- METODOS ACCESORES ------
 
+	/**
+	 * @return EmployeeNumber
+	 */
+
+	
 	public Integer getEmployeeNumber() {
 		return employeeNumber;
 	}
+	/**
+	 * @param status the setEmployeeNumber
+	 */
 
 	public void setEmployeeNumber(Integer employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
+	
+	/**
+	 * @return lastName
+	 */
 
 	public String getLastName() {
 		return lastName;
 	}
+	/**
+	 * @param status the setEmployeeNumber
+	 */
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	/**
+	 * @return firstName
+	 */
 
 	public String getFirstName() {
 		return firstName;
 	}
+	/**
+	 * @param status the setFirstName
+	 */
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * @return extension
+	 */
+	
 	public String getExtension() {
 		return extension;
 	}
+	/**
+	 * @param status the setExtension
+	 */
 
 	public void setExtension(String extension) {
 		this.extension = extension;
 	}
+	
+	/**
+	 * @return email
+	 */
 
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param setEmail
+	 */
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return officeCode
+	 */
+	
 	public Office getOfficeCode() {
 		return officeCode;
 	}
+	/**
+	 * @param status the setOfficeCode
+	 */
 
 	public void setOfficeCode(Office officeCode) {
 		this.officeCode = officeCode;
 	}
 
+	/**
+	 * @return jobTitle
+	 */
 	public String getJobTitle() {
 		return jobTitle;
 	}
+	/**
+	 * @param status the setJobTitle
+	 */
 
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
 
+	//ToString
 	@Override
 	public String toString() {
 		return "Employee [employeeNumber=" + employeeNumber + ", lastName=" + lastName + ", firstName=" + firstName

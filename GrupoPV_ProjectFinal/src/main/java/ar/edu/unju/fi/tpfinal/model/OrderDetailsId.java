@@ -40,20 +40,38 @@ public class OrderDetailsId implements Serializable{
 		this.orderNumber = orderNumber;
 	}
 
-	//----- METODOS ACCESORES ------	
+	//----- METODOS ACCESORES ------
+	
+	/**
+	 * @return productCode
+	 */
 	
 	public Products getProductCode() {
 		return productCode;
 	}
 
+	/**
+	 * @param status the setProductCode
+	 */
+
+	
 	public void setProductCode(Products productCode) {
 		this.productCode = productCode;
 	}
 
+	/**
+	 * @return orderNumber
+	 */
+	
 	public Orders getOrderNumber() {
 		return orderNumber;
 	}
 
+	/**
+	 * @param status the setOrderNumber
+	 */
+
+	
 	public void setOrderNumber(Orders orderNumber) {
 		this.orderNumber = orderNumber;
 	}

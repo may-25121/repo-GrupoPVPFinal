@@ -41,14 +41,11 @@ public class OrderDetails implements Serializable {
 	
 
 	/**
-	 * Constructor Parametrizado
 	 * 
+	 * @param id
 	 * @param quantityOrdered
 	 * @param priceEach
 	 * @param orderLineNumber
-	 * @param orderNumber
-	 * @param orderCode
-	 *
 	 */
 	
 
@@ -66,47 +63,66 @@ public class OrderDetails implements Serializable {
 
 
 
-
+	/**
+	 * @return quantityOrdered
+	 */
 
 
 	public Integer getQuantityOrdered() {
 		return quantityOrdered;
 	}
 	
-
+	/**
+	 * @param status the setQuantityOrdered
+	 */
 
 	public void setQuantityOrdered(Integer quantityOrdered) {
 		this.quantityOrdered = quantityOrdered;
 	}
 
-
+	/**
+	 * @return priceEach
+	 */
+	
 	public Double getPriceEach() {
 		return priceEach;
 	}
-
+	
+	/**
+	 * @param status the setPriceEach
+	 */
 
 	public void setPriceEach(Double priceEach) {
 		this.priceEach = priceEach;
 	}
-
+	/**
+	 * @return orderLineNumber
+	 */
 
 	public Short getOrderLineNumber() {
 		return orderLineNumber;
 	}
-
+	
+	/**
+	 * @param status the setOrderLineNumber
+	 */
 
 	public void setOrderLineNumber(Short orderLineNumber) {
 		this.orderLineNumber = orderLineNumber;
 	}
 
 	
-	
+	/**
+	 * @return id
+	 */
 
 	public OrderDetailsId getId() {
 		return id;
 	}
 
-
+	/**
+	 * @param status the setId
+	 */
 
 	public void setId(OrderDetailsId id) {
 		this.id = id;

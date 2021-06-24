@@ -53,12 +53,6 @@ public class Orders {
 	private Integer customerNumber;
 	*/
 	
-	
-	/* @Autowired
-	 @ManyToOne
-	 @JoinColumn(name = "order_details")
-	private OrderDetails orderDetails;
-	 */
 	 @Autowired
 	 @ManyToOne
 	 @JoinColumn(name = "customerNumber" )
@@ -211,31 +205,6 @@ public class Orders {
 		this.comments = comments;
 	}
 
-/*
-	public Integer getCustomerNumber() {
-		return customerNumber;
-	}
-
-
-	public void setCustomerNumber(Integer customerNumber) {
-		this.customerNumber = customerNumber;
-	}
-*/
-/*
-
-	public OrderDetails getOrderDetails() {
-		return orderDetails;
-	}
-
-
-
-
-	public void setOrderDetails(OrderDetails orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-
-*/
-
 
 	 public Customer getCustomer() {
 		return customers;
@@ -246,6 +215,8 @@ public class Orders {
 		this.customers = customer;
 	}
 
+	//ToString
+	
 	@Override
 	public String toString() {
 		return "Orders [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate

@@ -67,14 +67,13 @@ public class Products {
 	 * 
 	 * @param productCode
 	 * @param productName
-	 * @param productLine 
 	 * @param productScale
 	 * @param productVendor
 	 * @param productDescripton
 	 * @param quantityInStock
 	 * @param buyPrice
-	 * @param MSRP
-	 * 
+	 * @param msrp
+	 * @param productlines
 	 */
 	
 	
@@ -96,108 +95,126 @@ public class Products {
 
 	//----- METODOS ACCESORES ------
 	
-
+	/**
+	 * @return productCode
+	 */
 
 	public String getProductCode() {
 		return productCode;
 	}
 
-
+	/**
+	 * @param status the setProductCode
+	 */
+	
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
 
-
+	/**
+	 * @return productName
+	 */
 
 	public String getProductName() {
 		return productName;
 	}
 
-
+	/**
+	 * @param status the setProductName
+	 */
 
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
-
-/*
-	public String getProductLine() {
-		return productLine;
-	}
-
-
-
-	public void setProductLine(String productLine) {
-		this.productLine = productLine;
-	}
-*/
-
+	/**
+	 * @return productScale
+	 */
 
 	public String getProductScale() {
 		return productScale;
 	}
 
-
+	/**
+	 * @param status the setProductScale
+	 */
 
 	public void setProductScale(String productScale) {
 		this.productScale = productScale;
 	}
 
-
+	/**
+	 * @return productVendor
+	 */
 
 	public String getProductVendor() {
 		return productVendor;
 	}
 
-
+	/**
+	 * @param status the setProductVendor
+	 */
 
 	public void setProductVendor(String productVendor) {
 		this.productVendor = productVendor;
 	}
 
-
+	/**
+	 * @return productDescripton
+	 */
 
 	public String getProductDescripton() {
 		return productDescripton;
 	}
 
-
+	/**
+	 * @param status the setProductDescripton
+	 */
 
 	public void setProductDescripton(String productDescripton) {
 		this.productDescripton = productDescripton;
 	}
 
 
-
+	/**
+	 * @return quantityInStock
+	 */
 	
-
 
 	public Integer getQuantityInStock() {
 		return quantityInStock;
 	}
 
 
-
+	/**
+	 * @param status the setQuantityInStock
+	 */
 
 	public void setQuantityInStock(Integer quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
 
-
+	/**
+	 * @return buyPrice
+	 */
 
 
 	public Double getBuyPrice() {
 		return buyPrice;
 	}
 
-
+	/**
+	 * @param status the setBuyPrice
+	 */
 
 	public void setBuyPrice(Double buyPrice) {
 		this.buyPrice = buyPrice;
 	}
 
 
-
+	/**
+	 * @return msrp
+	 */
 	
 
 	public Double getMsrp() {
@@ -205,20 +222,26 @@ public class Products {
 	}
 
 
-
+	/**
+	 * @param status the setMsrp
+	 */
 
 	public void setMsrp(Double msrp) {
 		this.msrp = msrp;
 	}
 
 
-
+	/**
+	 * @return productlines
+	 */
 
 	public Productlines getProductlines() {
 		return productlines;
 	}
 
-
+	/**
+	 * @param status the setProductlines
+	 */
 
 
 	public void setProductlines(Productlines productlines) {
@@ -226,7 +249,7 @@ public class Products {
 	}
 
 
-
+//ToString
 
 	@Override
 	public String toString() {

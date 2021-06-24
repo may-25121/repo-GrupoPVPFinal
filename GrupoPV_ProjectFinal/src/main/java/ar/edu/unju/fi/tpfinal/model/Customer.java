@@ -64,8 +64,25 @@ public class Customer {
 	
 	//------ CONSTRUCTORES -------
 	
+	/**
+	 * Constructor por defecto
+	 */
+	
 	public Customer() {
 	}
+	/**
+	 * Constructor parametrizado
+	 * 
+	 * @param customerNumber
+	 * @param customerName
+	 * @param contactLastName
+	 * @param contactFirstName
+	 * @param phone
+	 * @param ddressLine1
+	 * @param addressLine2
+	 * @param city
+	 * @param state
+	 */
 
 	public Customer(Integer customerNumber, String customerName, String contactLastName, String contactFirstName,
 			String phone, String addressLine1, String addressLine2, String city, String state, String postalCode,
@@ -86,111 +103,220 @@ public class Customer {
 	}
 	
 	//----- METODOS ACCESORES ------
+	
+	/**
+	 * @return the CustomerNumber
+	 */
 
 	public Integer getCustomerNumber() {
 		return customerNumber;
 	}
 
+	/**
+	 * @param status the setCustomerNumber
+	 */
 	public void setCustomerNumber(Integer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
+	
+	/**
+	 * @return the CustomerName
+	 */
 
 	public String getCustomerName() {
 		return customerName;
 	}
-
+	
+	/**
+	 * @param status the setCustomerName
+	 */
+	
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
 
+	/**
+	 * @return the ContactLastName
+	 */
+
 	public String getContactLastName() {
 		return contactLastName;
 	}
-
+	
+	/**
+	 * @param status the setContactLastName
+	 */
+	
 	public void setContactLastName(String contactLastName) {
 		this.contactLastName = contactLastName;
 	}
+	/**
+	 * @return the ContactFirstName
+	 */
+
 
 	public String getContactFirstName() {
 		return contactFirstName;
 	}
+	/**
+	 * @param status the setContactFirstName
+	 */
 
 	public void setContactFirstName(String contactFirstName) {
 		this.contactFirstName = contactFirstName;
 	}
+	
+	/**
+	 * @return the Phone
+	 */
+
 
 	public String getPhone() {
 		return phone;
 	}
+	
+	/**
+	 * @param status the setPhone
+	 */
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	/**
+	 * @return the AddressLine1
+	 */
+
 
 	public String getAddressLine1() {
 		return addressLine1;
 	}
+	
+	/**
+	 * @param status the setAddressLine1
+	 */
 
 	public void setAddressLine1(String addressLine1) {
 		this.addressLine1 = addressLine1;
 	}
+	
+	/**
+	 * @return the AddressLine2
+	 */
+
 
 	public String getAddressLine2() {
 		return addressLine2;
 	}
-
+	
+	/**
+	 * @param status the setAddressLine2
+	 */
+	
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
 	}
+	
+	/**
+	 * @return the City
+	 */
+
 
 	public String getCity() {
 		return city;
 	}
+	
+	/**
+	 * @param status the setCity
+	 */
 
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	/**
+	 * @return the State
+	 */
+
 
 	public String getState() {
 		return state;
 	}
+	
+	/**
+	 * @param status the setState
+	 */
 
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	/**
+	 * @return the PostalCode
+	 */
+
 	public String getPostalCode() {
 		return postalCode;
 	}
+	
+	/**
+	 * @param status setPostalCode
+	 */
 
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
+	/**
+	 * @return the Country
+	 */
+
 	public String getCountry() {
 		return country;
 	}
+	
+	/**
+	 * @param status setCountry
+	 */
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+	/**
+	 * @return the SalesRepEmployeeNumber
+	 */
+
 	public Employee getSalesRepEmployeeNumber() {
 		return salesRepEmployeeNumber;
 	}
+	
+	/**
+	 * @param status setSalesRepEmployeeNumber
+	 */
 
 	public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
 		this.salesRepEmployeeNumber = salesRepEmployeeNumber;
 	}
+	
+	/**
+	 * @return the getCreditLimit
+	 */
+
 
 	public Double getCreditLimit() {
 		return creditLimit;
 	}
+	
+	/**
+	 * @param status setCreditLimit
+	 */
 
 	public void setCreditLimit(Double creditLimit) {
 		this.creditLimit = creditLimit;
 	}
-
+//	ToString
+	
 	@Override
 	public String toString() {
 		return "Customer [customerNumber=" + customerNumber + ", customerName=" + customerName + ", contactLastName="

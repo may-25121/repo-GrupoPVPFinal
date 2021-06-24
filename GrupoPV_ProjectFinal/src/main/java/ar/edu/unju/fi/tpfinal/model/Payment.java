@@ -30,6 +30,13 @@ public class Payment {
 	public Payment() {
 	}
 
+	/**
+	 * CONSTRUCTOR PARAMETRIZADO
+	 * 
+	 * @param paymentsId
+	 * @param paymentDate
+	 * @param amount
+	 */
 	public Payment(PaymentsId paymentsId, LocalDate paymentDate, Double amount) {
 		this.paymentsId = paymentsId;
 		this.paymentDate = paymentDate;
@@ -37,22 +44,43 @@ public class Payment {
 	}
 
 	//----- METODOS ACCESORES ------
+	
+
+	/**
+	 * @return paymentDate
+	 */
+
 
 	public LocalDate getPaymentDate() {
 		return paymentDate;
 	}
 
+	/**
+	 * @param status the setPaymentDate
+	 */
+	
 	public void setPaymentDate(LocalDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
+	/**
+	 * @return amount
+	 */
+
+
 	public Double getAmount() {
 		return amount;
 	}
+	
+	/**
+	 * @param status the setAmount
+	 */
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
+	
+	//ToString
 
 	@Override
 	public String toString() {
