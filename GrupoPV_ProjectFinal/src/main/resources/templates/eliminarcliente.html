@@ -26,8 +26,8 @@
 							<p>Cliente: Alfredo Giron</p>
 						</div>
 						<div class="my-3">
-							<button type="button" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
-							<button type="button" class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+							<button type="button" th:href="@{/cliente/listar}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
+							<button type="button" th:href="@{/cliente/borrar/confirmar}+${cliente.customerNumber}" class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
 						</div>
 					</div>
 				</div>
