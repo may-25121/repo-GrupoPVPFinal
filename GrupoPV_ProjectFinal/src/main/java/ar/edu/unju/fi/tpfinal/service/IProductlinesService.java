@@ -2,15 +2,15 @@ package ar.edu.unju.fi.tpfinal.service;
 
 import java.util.List;
 
+
 import ar.edu.unju.fi.tpfinal.model.Productlines;
 
 
 public interface IProductlinesService {
-	/*
-	public void guardarProductLine(Productlines productLine);
-	public void eliminarProductlines(String id);
-	public List<Productlines> getAllProductsLine();
-	public Productlines getProductLineById(String id);
-	
-*/
+
+	public Productlines getProductlines();
+	public void saveProductlines(Productlines productlines);
+	public Productlines getProductlinesById(String productLine);
+	public List<Productlines> getAllProductlines();
+	public void deleteProductlinesById(String productLine);
 }
