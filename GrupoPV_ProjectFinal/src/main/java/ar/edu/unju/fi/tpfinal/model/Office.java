@@ -4,9 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
-
 
 @Entity
 @Table(name = "OFFICES")
@@ -15,15 +15,19 @@ public class Office {
 	
 	@Id
 	@Column(name = "office_code")
+	@NotBlank(message ="You must a code")
 	private String officeCode;
 	
 	@Column(name = "city")
+	@NotBlank(message ="You must add the city")
 	private String city;
 	
 	@Column(name = "phone")
+	@NotBlank(message ="You must add phone")
 	private String phone;
 	
 	@Column(name = "address_line1")
+	@NotBlank(message ="You must add an address")
 	private String addressLine1;
 	
 	@Column(name = "address_line2")
@@ -33,12 +37,15 @@ public class Office {
 	private String state;
 	
 	@Column(name = "country")
+	@NotBlank(message ="You must add a country")
 	private String country;
 	
 	@Column(name = "postal_code")
+	@NotBlank(message ="You must add a zip code")
 	private String postalCode;
 	
 	@Column(name = "territory")
+	@NotBlank(message ="You must add phone a territory")
 	private String territory;
 	
 	//------ CONSTRUCTORES -------
@@ -60,7 +67,7 @@ public class Office {
 	}
 
 	//----- METODOS ACCESORES ------
-
+	
 	public String getOfficeCode() {
 		return officeCode;
 	}
@@ -135,7 +142,7 @@ public class Office {
 
 	@Override
 	public String toString() {
-		return "Office [officeCode=" + officeCode + ", city=" + city + ", phone=" + phone + ", addressLine1="
+		return "Office [ officeCode=" + officeCode + ", city=" + city + ", phone=" + phone + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", state=" + state + ", country=" + country
 				+ ", postalCode=" + postalCode + ", territory=" + territory + "]";
 	}

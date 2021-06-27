@@ -11,5 +11,6 @@ public interface IOfficeService {
 	public Office getOfficeById(String code);
 	public List<Office> getAllOffices();
 	public void deleteOfficeById(String code);
+	public List<Office> getOffices(String code, String city);
 
 }

@@ -15,26 +15,26 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
-					<h2><i class="far fa-trash-alt fa-lg"></i>&nbsp;Eliminación de registro</h2>
+					<h2><i class="far fa-trash-alt fa-lg"></i>&nbsp;Registry deletion</h2>
 				</div>
 				<div class="col-sm-7 p-auto m-auto">
 					<div class="p-3 text-center">
 						<i class="far fa-building fa-8x" style="color: #C0392B;"></i>
 					<br>
 					<div class="my-4">
-						<span class="font-weight-bolder">¿Esta seguro de eliminar el siguiente registro?</span>
-						<p>Oficina:<span th:text="${office.officeCode}"></span></p>
+						<span class="font-weight-bolder">Are you sure to delete the following record?</span>
+						<p>Office code:<span th:text="${office.officeCode}"></span></p>
 					</div>
 					<div class="my-3">
-						<a type="button" th:href="@{/oficina/listar}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancelar</a>
-						<a type="button" th:href="@{/oficina/borrar/confirmar/}+${office.officeCode}"  class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</a>
+						<a type="button" th:href="@{/office/list}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+						<a type="button" th:href="@{/office/delete/confirm/}+${office.officeCode}"  class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Delete</a>
 					</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<footer th:insert="layout/footer :: footer"></footer>
+		<footer class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
