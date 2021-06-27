@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import ar.edu.unju.fi.tpfinal.service.IOfficeService;
 public class OfficeServiceImp implements IOfficeService{
 
 	@Autowired
-	IOfficeDAO officeDAO;
+	private IOfficeDAO officeDAO;
 	
 	@Autowired
 	private Office office;
@@ -43,6 +44,19 @@ public class OfficeServiceImp implements IOfficeService{
 	@Override
 	public void deleteOfficeById(String code) {
 		officeDAO.deleteById(code);
+	}
+
+	@Override
+	public List<Office> getOffices(String code, String city) {
+		List<Office> offices = new ArrayList<>();
+		if(!code.isEmpty() && !officeDAO.findById(code).isEmpty()) {
+			offices.add( officeDAO.findById(code).get());
+		}else if (!city.isEmpty() && !officeDAO.findByCity(city).isEmpty()) {
+			offices = officeDAO.findByCity(city);
+		}else {
+			offices = (List<Office>) officeDAO.findAll();
+		}
+		return offices;
 	}
 
 }
