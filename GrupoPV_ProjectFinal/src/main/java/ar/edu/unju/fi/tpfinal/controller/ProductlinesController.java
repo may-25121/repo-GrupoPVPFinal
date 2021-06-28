@@ -31,7 +31,7 @@ public String getProductoPage(Model model) {
 
 @PostMapping("/lineaproducto/guardar")
 public String saveLineProductoPage(@ModelAttribute("productline")Productlines productline, Model model) {
-//public ModelAndView saveLineProducto(@ModelAttribute("productline")Productlines productline) {
+
 try {
 	productlinesService.saveProductlines(productline);
 } catch (Exception e) {
@@ -55,9 +55,9 @@ public String getListarLineaProductoPage(Model model) {
 	return "listarlineasproductos";
 
 }
-@GetMapping("/lineaproducto/editar/{productLine}")
-public String getEditarPage(@PathVariable ("productLine") String productLine, Model model) {
-	this.productlines = productlinesService.getProductlinesById(productLine);
+@GetMapping("/lineaproducto/editar/{Line}")
+public String getEditarPage(@PathVariable ("Line") String Line, Model model) {
+	this.productlines = productlinesService.getProductlinesById(Line);
 	model.addAttribute("productline", this.productlines);
 	return "nuevalineaproducto";
 
@@ -70,9 +70,9 @@ public String getborrarPage(@PathVariable ("productLine") String productLine, Mo
 	return "";
 }
 */
-@GetMapping("/lineaproducto/borrar/confirmar/{productLine}")
-public String getConfirmarBorrarPage(@PathVariable("productLine") String productLine, Model model) {
-	productlinesService.deleteProductlinesById(productLine);
+@GetMapping("/lineaproducto/borrar/confirmar/{Line}")
+public String getConfirmarBorrarPage(@PathVariable("Line") String Line, Model model) {
+	productlinesService.deleteProductlinesById(Line);
 	model.addAttribute("productlines", productlinesService.getAllProductlines());
 	return "listarlineasproductos";
 }

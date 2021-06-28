@@ -30,8 +30,8 @@ public class ProductlinesServiceImp implements IProductlinesService {
 	}
 
 	@Override
-	public Productlines getProductlinesById(String productLine) {
-		Productlines productline = productlinesDAO.findById(productLine).get();
+	public Productlines getProductlinesById(String Line) {
+		Productlines productline = productlinesDAO.findById(Line).get();
 		return productline;
 	}
 
@@ -42,8 +42,8 @@ public class ProductlinesServiceImp implements IProductlinesService {
 	}
 
 	@Override
-	public void deleteProductlinesById(String productLine) {
-		productlinesDAO.deleteById(productLine);
+	public void deleteProductlinesById(String Line) {
+		productlinesDAO.deleteById(Line);
 	}
 
 }
