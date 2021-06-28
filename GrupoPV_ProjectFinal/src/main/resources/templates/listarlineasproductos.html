@@ -39,56 +39,16 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <td class="align-middle">Mark</td>
-				      <td class="align-middle">Otto</td>
-				      <td class="align-middle">@mdo</td>
-				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
-				      <td class="align-middle">
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td class="align-middle">Mark</td>
-				      <td class="align-middle">Otto</td>
-				      <td class="align-middle">@mdo</td>
-				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
-				      <td class="align-middle">
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    <tr>
-				      <td class="align-middle">Mark</td>
-				      <td class="align-middle">Otto</td>
-				      <td class="align-middle">@mdo</td>
-				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
-				      <td class="align-middle">
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>				    
-				    <tr>
-				      <td class="align-middle">Mark</td>
-				      <td class="align-middle">Otto</td>
-				      <td class="align-middle">@mdo</td>
-				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
-				      <td class="align-middle">
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td class="align-middle">Mark</td>
-				      <td class="align-middle">Otto</td>
-				      <td class="align-middle">@mdo</td>
-				      <td class="align-middle"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
-				      <td class="align-middle">
-				      
-				      <!--  <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>-->
-				      	<a class="btn btn-warning" th:href="@{/lineaproducto/editar/}+${o.officeCode}"><i class="fas fa-edit"></i></a>
-				      	<a class="btn btn-danger" th:href="@{/lineaproducto/borrar/}+${o.officeCode}"><i class="far fa-trash-alt"></i></a>
+				   
+				    <tr th:each="p: ${productlines}">
+				      <td th:text="${p.productLine}"></td>
+				      <td th:text="${p.textDescription}"></td>
+				      <td th:text="${p.htmlDescription}"></</td>
+				      <td th:text="${p.image}"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				     
+				     
+				      	<a class="btn btn-warning" th:href="@{/lineaproducto/editar/}+${p.productLine}"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger" th:href="@{/lineaproducto/borrar/}+${p.productLine}"><i class="far fa-trash-alt"></i></a>
 				      </td>
 				    </tr>				  
 				  </tbody>
