@@ -23,54 +23,50 @@
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="officeCode">Code</label>
-								     <input type="text" class="form-control" id="officeCode" th:field="*{officeCode}">
-								     <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode')}" th:errors="*{officeCode}"></div>
+								     <input type="text" class="form-control" id="officeCode" th:field="*{officeCode}" placeholder="Enter the office code">
+								     <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode')}" th:errors="*{officeCode}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="city">City</label>
-								    <input type="text" class="form-control" id="city" th:field="*{city}">
+								    <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="Enter the city where the office is located">
 								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="phone">Phone</label>
-								    <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Ex. +12158370825">
+								    <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter the office phone number">
 								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="addressLine1">Address Line 1</label>
-								    <input type="text" class="form-control" id="addressLine1" th:field="*{addressLine1}" placeholder="Ex. 1550 Court Place">
+								    <input type="text" class="form-control" id="addressLine1" th:field="*{addressLine1}" placeholder="Enter the office address line 1">
 								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="addressLine2">Address Line 2</label>
-								    <input type="text" class="form-control" id="addressLine2" th:field="*{addressLine2}" placeholder="Ex. Suite 102">
+								    <input type="text" class="form-control" id="addressLine2" th:field="*{addressLine2}" placeholder="Enter the office address line 2 (optional)">
 						  		</div>
 							  	<div class="form-group">
 								    <label for="state">State</label>
-								    <input type="text" class="form-control" id="state" th:field="*{state}">
+								    <input type="text" class="form-control" id="state" th:field="*{state}" placeholder="Enter the state where the office is located">
 						  		</div>
 							  	<div class="form-group">
 								    <label for="country">Country</label>
-								    <input type="text" class="form-control" id="country" th:field="*{country}">
+								    <input type="text" class="form-control" id="country" th:field="*{country}" placeholder="Enter the country where the office is located">
 								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="postalCode">Postal code</label>
-								    <input type="text" class="form-control" id="postalCode" th:field="*{postalCode}" placeholder="Ex. 02107">
+								    <input type="text" class="form-control" id="postalCode" th:field="*{postalCode}" placeholder="Enter the zip code where the office is located">
 						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="territory">Territory</label>
-								    <input type="text" class="form-control" id="territory" th:field="*{territory}">
+								    <input type="text" class="form-control" id="territory" th:field="*{territory}" placeholder="Enter the territory where the office is located">
 								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('territory')}" th:errors="*{territory}"></div>
 						  		</div>
 							  	<div class="mt-4">
-
-							  		<button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save office</button>
+							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save office</button>
 							  		<a th:href="@{/office/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
-<!--
-							  		<button type="submit" th:href="@{/oficina/nuevo}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear oficina</button>
--->
 							  	</div>  
 							</div>
 						</div>

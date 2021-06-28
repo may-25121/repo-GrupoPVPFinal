@@ -36,5 +36,9 @@ body{
 	max-width: 4rem;
 }
 
+.bg-darkgray{
+	background-color: #BFC9CA;
+}
+
 .hoverlink:hover { background: #0E6251; } 
 

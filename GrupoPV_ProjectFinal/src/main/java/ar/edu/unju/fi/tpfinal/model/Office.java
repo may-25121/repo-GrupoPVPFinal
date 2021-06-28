@@ -15,7 +15,7 @@ public class Office {
 	
 	@Id
 	@Column(name = "office_code")
-	@NotBlank(message ="You must a code")
+	@NotBlank(message ="You must enter a code")
 	private String officeCode;
 	
 	@Column(name = "city")
@@ -139,7 +139,9 @@ public class Office {
 	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
-
+	
+	//----- METODO TOSTRING------
+	
 	@Override
 	public String toString() {
 		return "Office [ officeCode=" + officeCode + ", city=" + city + ", phone=" + phone + ", addressLine1="
