@@ -1,16 +1,20 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,35 +25,50 @@ import org.springframework.stereotype.Component;
 public class Employee {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_number")
 	private Integer employeeNumber;
 	
 	@Column(name = "last_name")
+	@NotBlank(message ="You must enter a last name")
 	private String lastName;
 	
 	@Column(name = "first_name")
+	@NotBlank(message ="You must add a first name")
 	private String firstName;
 	
 	@Column(name = "extension")
+	@NotBlank(message ="You must add an extension")
 	private String extension;
 	
 	@Column(name = "email")
+	@NotBlank(message = "You must enter a valid email.")
+	@Email(message = "Enter a valid email")
 	private String email;
 	
-	//RELACION CON LA CLASE OFFICE
+	//RELATIONSHIP WITH THE OFFICE CLASS
+	
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "office_code")
+	@NotNull(message ="You must select an office")
 	private Office officeCode;
 	
 	@Column(name = "job_title")
+	@NotBlank(message ="You must add a job title")
 	private String jobTitle;
 	
-	//RELACION CONSIGO MISMA
+	//RELATIONSHIP WITH YOURSELF
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reportsTo")
 	private Employee employee;
+	
+	//RELATIONSHIP WITH THE USER
+	@Valid
+	@Autowired
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user")
+	private User user;
 	
 	//------ CONSTRUCTORES -------
 	
@@ -57,7 +76,7 @@ public class Employee {
 	}
 
 	public Employee(Integer employeeNumber, String lastName, String firstName, String extension, String email,
-			Office officeCode, String jobTitle, Employee employee) {
+			Office officeCode, String jobTitle, Employee employee, User user) {
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -66,6 +85,7 @@ public class Employee {
 		this.officeCode = officeCode;
 		this.jobTitle = jobTitle;
 		this.employee = employee;
+		this.user = user;
 	}
 
 	//----- METODOS ACCESORES ------
@@ -134,6 +154,8 @@ public class Employee {
 		this.employee = employee;
 	}
 
+	//----- METODO TOSTRING------
+	
 	@Override
 	public String toString() {
 		return "Employee [employeeNumber=" + employeeNumber + ", lastName=" + lastName + ", firstName=" + firstName

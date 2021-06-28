@@ -9,65 +9,101 @@
 	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
 	</head>
 	<body>
-	
+		<!-- HEADER -->
+		
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
-					<h2><i class="fas fa-user-tie fa-lg"></i>&nbsp;Registro empleado</h2>
+					<h2><i class="fas fa-user-tie fa-lg"></i>&nbsp;Employee registration</h2>
 				</div>
-				  <form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/empleado/guardar}" th:method="post" th:object="${employee}">
+				  <form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/employee/save}" th:method="post" th:object="${employee}">
 				
 					<div class="p-2">
+					
+					  <!-- FORM WITH EMPLOYEE DATA -->
+					  
 					  <div class="form-group">
 						  	<div class="p-3">
+						  	
+						  		<!-- PERSONAL INFORMATION -->
+						  		
 						  		<div class="form-group">
-								    <label for="number">N°</label>
-								    <input type="number" class="form-control" id="number" th:field="*{employeeNumber}" placeholder="Ingresar el apellido del empleado">
+								    <label for="number">Number</label>
+								    <input type="number" class="form-control" id="number" th:field="*{employeeNumber}" placeholder="Enter the employee number">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('employeeNumber')}" th:errors="*{employeeNumber}" ></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="apellido">Apellido</label>
-								    <input type="text" class="form-control" id="apellido" th:field="*{lastName}" placeholder="Ingresar el apellido del empleado">
+								    <label for="lastName">Last name</label>
+								    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter the employee's last name">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="nombre">Nombre</label>
-								    <input type="text" class="form-control" id="nombre" th:field="*{firstName}" placeholder="Ingresar el nombre del empleado">
+								    <label for="firstName">First name</label>
+								    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Enter the name of the employee">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="extension">Extensión</label>
-								    <input type="text" class="form-control" id="extension" th:field="*{extension}" placeholder="Ingresar la extensión del empleado">
+								    <label for="extension">Extension</label>
+								    <input type="text" class="form-control" id="extension" th:field="*{extension}" placeholder="Enter the employee's extension">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('extension')}" th:errors="*{extension}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="email">Email</label>
-								    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Ingresar el email del empleado">
+								    <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter the employee's email">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 							  	</div>
 							  	<div class="form-group">
-								    <label for="oficina">Oficina</label>
-								    <select class="form-control" name="officeCode">
-									  <option th:each="o:${offices}" th:value="${o.officeCode}">
-									  		<spam th:text="${o.officeCode}"></spam>	
-									  </option>
-									</select>								    
+								    <label for="officeCode">Office code</label>
+								    <select th:field="*{officeCode.officeCode}" class="form-control" id="officecode" name="officecode">
+										<option th:each="o:${offices}" th:value="${o.officeCode}">
+									  		<span th:text="${o.officeCode}"></span>	
+									  	</option>
+									</select>
+									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode.officeCode')}" th:errors="*{officeCode.officeCode}"></div>						    
 							  	</div>
 						  		<div class="form-group">
-								    <label for="ocupacion">Ocupación</label>
-								    <input type="text" class="form-control" id="ocupacion" th:field="*{jobTitle}" placeholder="Ingresar la ocupación del empleado">
+								    <label for="jobTitle">Job title</label>
+								    <input type="text" class="form-control" id="jobTitle" th:field="*{jobTitle}" placeholder="Enter the employee's job title">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="employee">N° de empleado</label>
-								    <select class="form-control"  name="numeremplo" id="numeremplo">
-								      <option th:value="0" >Ninguno</option>
+								    <label for="employee">Report to</label>
+								    <select th:field="*{employee.employeeNumber}" class="form-control"  name="employeeNumber" id="employeeNumber">
+								      <option th:value="0" >None</option>
 									  <option th:each="e:${employees}" th:value="${e.employeeNumber}">
 											<span th:text="${e.lastName} + ${e.firstName}"></span>
 									  </option>
 									</select>								    
 							  	</div>
+							  	
+							  	<!-- USER DATA -->
+							  	
+							  	<div class="my-2 p-2 bg-darkgray text-dark text-center">
+							  		<h3><i class="fas fa-user-lock fa-sm"></i>&nbsp;User date</h3>
+							  	</div>
+						  		<div class="form-group">
+								    <label for="jobTitle">Username</label>
+								    <input type="text" class="form-control" id="jobTitle" placeholder="Enter a username">
+						  		</div>						  	
+						  		<div class="form-group">
+								    <label for="jobTitle">Password</label>
+								    <input type="password" class="form-control" id="jobTitle" placeholder="Enter a user password">
+						  		</div>
+							  	<div class="form-group">
+								    <label for="role">Role</label>
+								    <select class="form-control" id="role" name="role">
+									  <option value="">Select option</option>
+									  <option value="admin">Administrator</option>
+									  <option value="director">Director</option>
+									  <option value="supervisor">Supervisor</option>
+									  <option value="seller">Seller</option>
+									</select>								    
+							  	</div>
 							  	<div class="mt-4">
-							  		<button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear empleado</button>
-<!--
-							  		<button type="button" th:href="@{/empleado/nuevo}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear empleado</button>
--->
+							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save employee</button>
+									<a th:href="@{/employee/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>
 							</div>
 						</div>
@@ -75,6 +111,8 @@
 				</form>
 			</div>
 		</div>
+		
+		<!-- FOOTER -->
 		
 		<footer th:insert="layout/footer :: footer"></footer>
 		

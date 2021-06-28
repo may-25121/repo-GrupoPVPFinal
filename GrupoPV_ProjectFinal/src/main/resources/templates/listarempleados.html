@@ -15,30 +15,32 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-12 mt-3 mb-3 py-2 d-flex bd-highlight mb-3">
-					<div class="p-2 bd-highlight">
-						<h2><i class="fas fa-user-tie fa-lg"></i>&nbsp;Lista de empleados</h2>
+					<div class="col-sm-4 p-2 bd-highlight">
+						<h2><i class="fas fa-user-tie fa-lg"></i>&nbsp;List of employees</h2>
 					</div>
-					<div class="p-2 bd-highlight">
-						<a class="btn btn-info" th:href="@{/empleado/nuevo}"><i class="fas fa-plus"></i>&nbsp;Crear empleado</a>
+					<div class="col-sm-2 p-2 bd-highlight">
+						<a class="btn btn-info" th:href="@{/employee/new}"><i class="fas fa-plus"></i>&nbsp;Create employee</a>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
-						<form class="form-inline">
-						   <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Buscar</button>
+						<form class="form-inline d-flex justify-content-end" th:action="@{/employee/search}" th:method="get">
+							<input class="form-control mr-sm-2 col-sm-3 p-2" type="text" id="employeenumber" name="employeenumber" placeholder="Number" aria-label="Search">
+							<input class="form-control mr-sm-2 col-sm-3 p-2 " type="text" id="lastname" name="lastname" placeholder="Last name" aria-label="Search">
+							<input class="form-control mr-sm-2 col-sm-3 p-2 " type="text" id="jobtitle" name="jobtitle" placeholder="Job title" aria-label="Search">
+						    <button class="btn btn btn-info my-2 my-sm-0 p-2 bd-highlight" type="submit"><i class="fas fa-search"></i>&nbsp;Search</button>
 						</form>
 					</div>
 				</div>
 				<table class="table table-striped col-sm-12 bg-light border">
 				  <thead>
 				    <tr class="bg-buebird text-white">
-				      <th scope="col">N°</th>
-				      <th scope="col">Apellido</th>
-				      <th scope="col">Nombre</th>
+				      <th scope="col">Number</th>
+				      <th scope="col">Last name</th>
+				      <th scope="col">First name</th>
 				      <th scope="col">Email</th>
-				      <th scope="col">Oficina</th>
-				      <th scope="col">Ocupación</th>
-				     <!-- <th scope="col">N°de empleado</th>-->
-				      <th scope="col">Acciones</th>
+				      <th scope="col">Office code</th>
+				      <th scope="col">Job title</th>
+				      <!--  <th scope="col">Employee</th>-->
+				      <th scope="col">Actions</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -49,10 +51,10 @@
 				      <td th:text="${e.email}"></td>
 				      <td th:text="${e.officeCode.officeCode}"></td>
 				      <td th:text="${e.jobTitle}"></td>
-				      <!--<td th:text="${e.employee}"></td>-->
+				      <!--  <td th:text="${e.employee}"></td>-->
 				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>				      
+				      	<a th:href="@{/employee/edit/}+${e.employeeNumber}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+				      	<a th:href="@{/employee/delete/}+${e.employeeNumber}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>				      
 				      </td>
 				    </tr>
 				  </tbody>
