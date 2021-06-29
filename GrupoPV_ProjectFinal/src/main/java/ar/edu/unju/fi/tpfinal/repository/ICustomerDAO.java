@@ -1,5 +1,11 @@
 package ar.edu.unju.fi.tpfinal.repository;
 
-public interface ICustomerDAO {
+import org.springframework.data.repository.CrudRepository;
 
+import ar.edu.unju.fi.tpfinal.model.Customer;
+
+public interface ICustomerDAO extends CrudRepository<Customer, Integer> {
+
+	
+	
 }
