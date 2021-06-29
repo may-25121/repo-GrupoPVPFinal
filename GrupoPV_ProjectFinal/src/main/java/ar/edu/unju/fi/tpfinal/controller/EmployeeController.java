@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ar.edu.unju.fi.tpfinal.model.Employee;
+import ar.edu.unju.fi.tpfinal.model.User;
 import ar.edu.unju.fi.tpfinal.service.IEmployeeService;
 import ar.edu.unju.fi.tpfinal.service.IOfficeService;
 
@@ -48,11 +49,12 @@ public class EmployeeController {
 	
 	@PostMapping("/employee/save")
 	public String saveEmployeePage(@Valid @ModelAttribute("employee") Employee emp, BindingResult result, @RequestParam(name="employeeNumber") String employeeNumber, @RequestParam(name="lastName") String lastName,
-		@RequestParam(name="firstName") String firstName, @RequestParam(name="extension") String extension, @RequestParam(name="email") String email,
-		@RequestParam(name="officeCode.officeCode") String officeCode,@RequestParam(name="jobTitle") String jobTitle, @RequestParam(name="employee.employeeNumber") String employee, Model model) {
+		@RequestParam(name="firstName") String firstName, @RequestParam(name="extension") String extension, @RequestParam(name="email") String email, @RequestParam(name="officeCode.officeCode") String officeCode,
+		@RequestParam(name="jobTitle") String jobTitle, @RequestParam(name="employee.employeeNumber") String employee, Model model) {
 		LOGGER.info("CONTROLLER : EmployeeController with /employee/save invoke the post method");
 		
 		Employee employe = new Employee();
+		//User user = new User();
 		//employe = this.employeeService.getEmployee();
 		employe.setEmployeeNumber(Integer.valueOf(employeeNumber));
 		employe.setLastName(lastName);
@@ -61,6 +63,7 @@ public class EmployeeController {
 		employe.setEmail(email);
 		employe.setOfficeCode(this.officeService.getOfficeById(officeCode));
 		employe.setJobTitle(jobTitle);
+		
 		if(Integer.valueOf(employee)==0) {
 			employe.setEmployee(null);
 		}else {

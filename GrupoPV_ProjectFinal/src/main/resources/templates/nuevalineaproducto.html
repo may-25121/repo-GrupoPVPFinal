@@ -23,15 +23,15 @@
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="codigo">Linea de producto</label>
-								    <input type="text" class="form-control" id="codigo" placeholder="Ingresar linea de producto">
+								    <input th:field="*{productLine}" type="text" class="form-control" id="codigo" placeholder="Ingresar linea de producto">
 						  		</div>
 						  		<div class="form-group">
 								    <label for="descripcion">Descripción</label>
-								    <input type="text" class="form-control" id="descripcion" placeholder="Ingresar descripción de la linea">
+								    <input th:field="*{textDescripton}" type="text" class="form-control" id="descripcion" placeholder="Ingresar descripción de la linea">
 						  		</div>
 							  	<div class="form-group">
 								    <label for="vendedorproducto">Descipción de la página</label>
-								    <input type="text" class="form-control" id="proveedor" placeholder="Ingresar la descripcion de la pagina">
+								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="proveedor" placeholder="Ingresar la descripcion de la pagina">
 						  		</div>
 								<div class="card text-center mx-auto px-auto my-4" style="width: 18rem;">
 								  	<img th:src="@{/img/noimageavaiable.png}" class="card-img-top" alt="...">
@@ -40,8 +40,8 @@
 									</div>
 								</div>	  		
 							  	<div class="mt-4">
-							  		 <button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear linea de producto</button> 
-							  <button type="submit" th:href="@{/lineaproducto/nuevo}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear linea producto</button>
+							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save office</button>
+							  		<a th:href="@{/lineaproducto/listar}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>	  
 							</div>
 						</div>

@@ -24,16 +24,16 @@ private IProductlinesService productlinesService;
 
 @GetMapping("/lineaproducto/nuevo")
 public String getProductoPage(Model model) {
-	model.addAttribute("productline",productlinesService.getProductlines());
+	model.addAttribute("productlines",productlinesService.getProductlines());
 	return "nuevalineaproducto";
 }
 
 
 @PostMapping("/lineaproducto/guardar")
-public String saveLineProductoPage(@ModelAttribute("productline")Productlines productline, Model model) {
+public String saveLineProductoPage(@ModelAttribute("productlines")Productlines productlines, Model model) {
 
 try {
-	productlinesService.saveProductlines(productline);
+	productlinesService.saveProductlines(productlines);
 } catch (Exception e) {
 	System.out.println(e.getMessage());
 }
