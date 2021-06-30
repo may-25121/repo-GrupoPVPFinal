@@ -37,8 +37,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		List<Employee> employee = (List<Employee>) employeeDAO.findAll();
-		return employee;
+		List<Employee> employees = (List<Employee>) employeeDAO.findAll();
+		return employees;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +38,26 @@ public class CustomerServiceImp implements ICustomerService {
 
 	@Override
 	public List<Customer> getAllCustomers() {
-		
-		return null;
+		List<Customer> customers = (List<Customer>) customerDAO.findAll();
+		return customers;
 	}
 
 	@Override
 	public void deleteCustomerById(int id) {
-		// TODO Auto-generated method stub
-		
+		customerDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Customer> getCustomers(String customerNumber, String city) {
+		List<Customer> customers = new ArrayList<>();
+		if(!customerNumber.isEmpty() && !customerDAO.findById(Integer.valueOf(customerNumber)).isEmpty()){
+			customers.add(customerDAO.findById(Integer.valueOf(customerNumber)).get());
+		}else if(!city.isEmpty() && !customerDAO.findByCity(city).isEmpty()) {
+			customers = customerDAO.findByCity(city);
+		}else {
+			customers = (List<Customer>) customerDAO.findAll();
+		}
+		return customers;
 	}
 
 }

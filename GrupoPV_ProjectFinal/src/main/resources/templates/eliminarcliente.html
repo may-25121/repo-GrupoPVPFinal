@@ -15,19 +15,19 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
-					<h2><i class="far fa-trash-alt fa-lg"></i>&nbsp;Eliminación de registro</h2>
+					<h2><i class="far fa-trash-alt fa-lg"></i>&nbsp;Registry deletion</h2>
 				</div>
 				<div class="col-sm-7 p-auto m-auto">
 					<div class="p-3 text-center">
 						<i class="fas fa-user-alt fa-8x" style="color: #C0392B;"></i>
 						<br>
 						<div class="my-4">
-							<span class="font-weight-bolder">¿Esta seguro de eliminar el siguiente registro?</span>
-							<p>Cliente: Alfredo Giron</p>
+							<span class="font-weight-bolder">Are you sure to delete the following record?</span>
+							<p>Customer name:<span th:text="${customer.customerName}"></span></p>
 						</div>
 						<div class="my-3">
-							<button type="button" th:href="@{/cliente/listar}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
-							<button type="button" th:href="@{/cliente/borrar/confirmar}+${cliente.customerNumber}" class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</button>
+							<a type="button" th:href="@{/customer/list}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+							<a type="button" th:href="@{/customer/delete/confirm/}+${customer.customerNumber}" class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Delete</a>
 						</div>
 					</div>
 				</div>
