@@ -17,50 +17,64 @@
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="fab fa-dropbox fa-lg"></i>&nbsp;Registro producto</h2>
 				</div>
-				<form class="bg-white col-sm-7 p-auto m-auto border">
+				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/producto/guardar}" th:method="post" th:object="${products}">
 					<div class="p-2">
 					  <div class="form-group">
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="codigo">Código</label>
-								    <input type="text" class="form-control" id="codigo" placeholder="Ingresar el codigo del producto">
+								    <input type="text" class="form-control" id="codigo" th:field="*{productCode}" placeholder="Ingresar el codigo del producto">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productCode')}" th:errors="*{productCode}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="nombre">Nombre</label>
-								    <input type="text" class="form-control" id="nombre" placeholder="Ingresar el nombre del producto">
+								    <input type="text" class="form-control" id="nombre" th:field="*{productName}" placeholder="Ingresar el nombre del producto">
+						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="lineaproducto">Linea de producto</label>
-								    <select class="form-control" id="lineaproducto">
-									  <option>Seleccione una opción</option>
-									</select>								    
+								    <select th:field="*{productlines.productLine}" class="form-control" id="lineaproducto" name="productLine" id="productLine">
+									  <option th:each="p:${productliness}" th:value="${p.productLine}">
+										<span th:text="${p.productLine}"></span>
+									</option>
+									</select>
+									  	
+									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productLine.productLine')}" th:errors="*{productLine.productLine}"></div>											    
 							  	</div>
 							  	<div class="form-group">
 								    <label for="vendedorproducto">Escala</label>
-								    <input type="text" class="form-control" id="proveedor" placeholder="Ingresar la escala del producto">
+								    <input type="text" class="form-control" id="proveedor"  th:field="*{productScale}" placeholder="Ingresar la escala del producto">
+						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productScale')}" th:errors="*{productScale}"></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="vendedorproducto">Proveedor</label>
-								    <input type="text" class="form-control" id="proveedor" placeholder="Ingresar el proveedor del producto">
+								    <input type="text" class="form-control" id="proveedor" th:field="*{productVendor}" placeholder="Ingresar el proveedor del producto">
+						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productVendor')}" th:errors="*{productVendor}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="descripcion">Descripción</label>
-								    <input type="text" class="form-control" id="descripcion" placeholder="Ingresar descripción del producto">
+								    <input type="text" class="form-control" id="descripcion" th:field="*{productDescripton}" placeholder="Ingresar descripción del producto">
+							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productDescripton')}" th:errors="*{productDescripton}"></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="stock">Stock</label>
-								    <input type="text" class="form-control" id="stock" placeholder="Ingresar stock del producto">
+								    <input type="text" class="form-control" id="stock" th:field="*{quantityInStock}" placeholder="Ingresar stock del producto">
+							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"></div>
 							  	</div>
 						  		<div class="form-group">
 								    <label for="preciocompra">Precio de compra</label>
-								    <input type="text" class="form-control" id="preciocompra" placeholder="Ingresar precio de compra del producto">
+								    <input type="text" class="form-control" id="preciocompra" th:field="*{buyPrice}" placeholder="Ingresar precio de compra del producto">
+						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('buyPrice')}" th:errors="*{buyPrice}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="preciolista">Precio de lista</label>
-								    <input type="text" class="form-control" id="preciolista" placeholder="Ingresar precio de lista del producto">
+								    <input type="text" class="form-control" id="preciolista" th:field="*{msrp}" placeholder="Ingresar precio de lista del producto">
+							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('msrp')}" th:errors="*{msrp}"></div>
 							  	</div>
+							  
 							  	<div class="mt-4">
-							  		<button type="button" th:href = "@{/producto/nuevo}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Crear producto</button>
+							  		<button type="submit" th:href="@{/producto/guardar}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save customer</button>
+							  		<a th:href="@{/producto/listar}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>
 								  
 							</div>

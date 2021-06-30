@@ -27,10 +27,7 @@ public class Productlines {
 	@Column(name = "IMAGE")
 	private String image;
 	
-	/*@Autowired
-	@OneToMany(mappedBy = "product")
-	private Products product;
-	*/
+	
 	
 	
 	//------ CONSTRUCTORES -------

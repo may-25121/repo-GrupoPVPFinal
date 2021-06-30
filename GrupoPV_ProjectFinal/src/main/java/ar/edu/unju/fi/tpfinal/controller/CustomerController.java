@@ -20,7 +20,7 @@ import ar.edu.unju.fi.tpfinal.service.IEmployeeService;
 @Controller
 public class CustomerController {
 	
-	private static final Log LOGGER = LogFactory.getLog(OfficeController.class);
+	private static final Log LOGGER = LogFactory.getLog(CustomerController.class);
 	
 	@Autowired
 	private  Customer customer;
