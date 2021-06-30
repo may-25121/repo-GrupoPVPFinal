@@ -34,13 +34,29 @@
 								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="proveedor" placeholder="Ingresar la descripcion de la pagina">
 						  		</div>
 								<div class="card text-center mx-auto px-auto my-4" style="width: 18rem;">
-								  	<img th:src="@{/img/noimageavaiable.png}" class="card-img-top" alt="...">
-									<div class="card-body">
+								   	<img th:src="@{/img/noimageavaiable.png}" class="card-img-top" alt="...">
+									<!--<div class="card-body">
 									    <a href="#" class="btn btn-info"><i class="fas fa-upload"></i>&nbsp;subir imagen</a>
-									</div>
-								</div>	  		
+									</div> 
+									<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">-->
+									
+            					<div class="col-md-8 offset-md-2">
+            		<label for="image" class="form-label"> Image</label>
+            		<div class="cont-form">
+            			<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">
+            			<br>
+            			<input th:field="*{image}" type="file" class="form-control-file inputfile " id="image" 
+            				accept="image/x-png,image/gif,image/jpeg,image/png"
+            				onchange="loadFile(event)" style="margin-top: 20px;"
+            			/> 
+            			
+                  <div class=" alert alert-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}" ></div>
+            		    </div>
+            		
+          		            </div>
+									</div>	  		
 							  	<div class="mt-4">
-							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save office</button>
+							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save Productline</button>
 							  		<a th:href="@{/lineaproducto/listar}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>	  
 							</div>

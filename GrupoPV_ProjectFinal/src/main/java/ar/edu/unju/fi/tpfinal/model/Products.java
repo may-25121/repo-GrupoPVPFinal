@@ -25,10 +25,7 @@ public class Products {
 	
 	@Column(name = "PRODUCT_NAME")
 	private String productName;
-	/*
-	@Column(name = "PRODUCT_LINE")
-	private  String  productLine;
-	*/
+	
 	@Column(name = "PRODUCT_SCALE")
 	private  String  productScale;
 	

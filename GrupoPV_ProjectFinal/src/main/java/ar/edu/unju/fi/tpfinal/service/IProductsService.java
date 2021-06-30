@@ -2,15 +2,18 @@ package ar.edu.unju.fi.tpfinal.service;
 
 import java.util.List;
 
+
 import ar.edu.unju.fi.tpfinal.model.Products;
 
 
 public interface IProductsService {
-/*
-	public void guardarProduct(Products product);
-	public void eliminarProduct(String id);
+	
+    public Products getProducts();
+    public void saveProducs(Products products);
+	public Products getProductsById(int code);
+	public Products getNuevoProducto();
 	public List<Products> getAllProducts();
-	public Products getProductById(String id);
-	public Products getNewProduct();
-	*/
+	public void deleteProductsById(int code);
+	
+
 }
