@@ -33,13 +33,13 @@
 						  		</div>
 						  		<div class="form-group">
 								    <label for="lineaproducto">Linea de producto</label>
-								    <select th:field="*{productlines.productLine}" class="form-control" id="lineaproducto" name="productLine" id="productLine">
-									  <option th:each="p:${productliness}" th:value="${p.productLine}">
+								    <select th:field="*{productlines.productLine}" class="form-control" name="productLine" id="productLine">
+									  <option th:each="p:${productlines}" th:value="${p.productLine}">
 										<span th:text="${p.productLine}"></span>
 									</option>
 									</select>
 									  	
-									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productLine.productLine')}" th:errors="*{productLine.productLine}"></div>											    
+									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productlines.productLine')}" th:errors="*{productlines.productLine}"></div>											    
 							  	</div>
 							  	<div class="form-group">
 								    <label for="vendedorproducto">Escala</label>

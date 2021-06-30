@@ -35,7 +35,7 @@ public class ProductsController {
 		LOGGER.info("METHOD : getProductoPage()");
 		LOGGER.info("RESULT : Page is displayed nuevoproducto.html");
 	model.addAttribute("products", productsService.getProducts());
-	model.addAttribute("productliness", productlinesService.getAllProductlines());
+	model.addAttribute("productlines", productlinesService.getAllProductlines());
 	return "nuevoproducto";
 	}
 	@PostMapping("/producto/guardar")
