@@ -1,10 +1,12 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import ar.edu.unju.fi.tpfinal.model.Productlines;
 import ar.edu.unju.fi.tpfinal.repository.IProductlinesDAO;
@@ -44,6 +46,21 @@ public class ProductlinesServiceImp implements IProductlinesService {
 	@Override
 	public void deleteProductlinesById(String Line) {
 		productlinesDAO.deleteById(Line);
+	}
+
+	@Override
+	public List<Productlines> getProductlines(String Line) {
+		List<Productlines> productlines = new ArrayList<>();
+		if(!Line.isEmpty() && !productlinesDAO.findById(Line).isEmpty()) {
+			productlines.add( productlinesDAO.findById(Line).get());
+		
+		}else {
+			productlines = (List<Productlines>) productlinesDAO.findAll();
+		}
+		return productlines;
+	
+		// TODO Auto-generated method stub
+	
 	}
 
 }

@@ -23,15 +23,18 @@
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="codigo">Linea de producto</label>
-								    <input th:field="*{productLine}" type="text" class="form-control" id="codigo" placeholder="Ingresar linea de producto">
+								    <input th:field="*{productLine}" type="text" class="form-control" id="productLine" placeholder="Ingresar linea de producto">
+						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('productLine')}" th:errors="*{productLine}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="descripcion">Descripción</label>
-								    <input th:field="*{textDescripton}" type="text" class="form-control" id="descripcion" placeholder="Ingresar descripción de la linea">
+								    <input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" placeholder="Ingresar descripción de la linea">
+						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('textDescription')}" th:errors="*{textDescription}" ></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="vendedorproducto">Descipción de la página</label>
-								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="proveedor" placeholder="Ingresar la descripcion de la pagina">
+								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" placeholder="Ingresar la descripcion de la pagina">
+						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('htmlDescription')}" th:errors="*{htmlDescription}" ></div>
 						  		</div>
 								<div class="card text-center mx-auto px-auto my-4" style="width: 18rem;">
 								   	<img th:src="@{/img/noimageavaiable.png}" class="card-img-top" alt="...">

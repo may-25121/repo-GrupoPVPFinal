@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,27 +25,41 @@ import org.springframework.stereotype.Component;
 public class Products {
 	@Id
 	@Column(name = "PRODUCT_CODE")
+	@NotEmpty(message="Debes ingresar productCode")
 	private  String  productCode;
 	
 	@Column(name = "PRODUCT_NAME")
+	@NotEmpty(message="Debes ingresar productName")
+	@Size(min = 3,max = 30, message="Minimo 3 y Maximo 30 caracteres")
 	private String productName;
 	
 	@Column(name = "PRODUCT_SCALE")
+	@NotEmpty(message="Debes ingresar productScale")
 	private  String  productScale;
 	
 	@Column(name = "PRODUCT_VENDOR")
+	@NotEmpty(message="Debes ingresar productVendor")
+	@Size(min = 3,max = 30, message="Minimo 3 y Maximo 30 caracteres")
 	private  String  productVendor;
 	
 	@Column(name = "PRODUCT_DESCRIPTION")
+	@NotEmpty(message="Debes ingresar productDescription")
+	@Size(min = 5,max = 30, message="Minimo 5 y Maximo 30 caracteres")
 	private String productDescripton;
 	
 	@Column(name = "QUANTITY_IN_STOCK")
+	@NotNull(message = "Debes introducir quantityInStock")
+	@Min(value=1,message="minimo 1 digito")
 	private Integer quantityInStock;
 	
 	@Column(name = "BUY_PRICE")
+	@NotNull(message = "El campo buyPrice no puede estar vacio")
+	@Min(value=1,message="minimo 1 digito")
 	private Double buyPrice;
 	
 	@Column(name = "MSRP")
+	@NotNull(message = "El campo msrp no puede estar vacio")
+	@Min(value=1,message="minimo 1 digito")
 	private Double msrp;
 	
 	//RELACION CON LA CLASE PRODUCTLINES
