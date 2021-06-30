@@ -11,5 +11,7 @@ public interface ICustomerService {
 	public Customer getCustomerById(int id);
 	public List<Customer> getAllCustomers();
 	public void deleteCustomerById(int id);
+	public List<Customer> getCustomers(String customerNumber, String city);
+	
 
 }

@@ -17,66 +17,70 @@
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="fas fa-user-friends fa-lg"></i>&nbsp;Customers registration</h2>
 				</div>
-				<form class="bg-white col-sm-7 p-auto m-auto border">
+				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/customer/save}" th:method="post" th:object="${customer}">
 					<div class="p-2">
 					  <div class="form-group">
 						  	<div class="p-3">
 						  		<div class="form-group">
-								    <label for="nombreyapellido">Number</label>
-								    <input type="text" class="form-control" id="nombreyapellido" placeholder="Ingresar el nombre y apellido del cliente">
+								    <label for="customerNumber">Number</label>
+								    <input th:field="*{customerNumber}" type="number" class="form-control" id="customerNumber" placeholder="Enter the customer number">
+						  		</div>
+						  		
+						  		<div class="form-group">
+								    <label for="customerName">Name</label>
+								    <input th:field="*{customerName}" type="text" class="form-control" id="customerName" placeholder="Enter the customer's full name">
 						  		</div>
 						  		<div class="form-group">
-								    <label for="nombreyapellido">Name</label>
-								    <input type="text" class="form-control" id="nombreyapellido" placeholder="Ingresar el nombre y apellido del cliente">
+								    <label for="contactLastName">Contact last name</label>
+								    <input th:field="*{contactLastName}" type="text" class="form-control" id="contactLastName" placeholder="Enter the name of the customer contact">
 						  		</div>
 						  		<div class="form-group">
-								    <label for="nombrecontacto">Contact last name</label>
-								    <input type="text" class="form-control" id="nombrecontacto" placeholder="Ingresar el nombre del contacto del cliente">
-						  		</div>
-						  		<div class="form-group">
-								    <label for="apellidocontacto">Contact first name</label>
-								    <input type="text" class="form-control" id="apellidocontacto" placeholder="Ingresar el apellido del contacto del cliente">
+								    <label for="contactFirstName">Contact first name</label>
+								    <input th:field="*{contactFirstName}" type="text" class="form-control" id="contactFirstName" placeholder="Enter the last name of the customer contact">
 						  		</div>
 							  	<div class="form-group">
-								    <label for="telefono">Phone</label>
-								    <input type="text" class="form-control" id="telefono" placeholder="Ingresar el número de teléfono del cliente">
+								    <label for="phone">Phone</label>
+								    <input th:field="*{phone}" type="text" class="form-control" id="phone" placeholder="Enter the customer's phone number">
 							  	</div>
 							  	<div class="form-group">
-								    <label for="direccion">Address line 1</label>
-								    <input type="text" class="form-control" id="direccion" placeholder="Ingresar la dirección del cliente">
+								    <label for="addressLine1">Address line 1</label>
+								    <input th:field="*{addressLine1}" type="text" class="form-control" id="addressLine1" placeholder="Enter the customer address line 1">
 							  	</div>
 						  		<div class="form-group">
-								    <label for="direccionsecundaria">Address line 2</label>
-								    <input type="text" class="form-control" id="direccionsecundaria" placeholder="Ingresar una dirección secundaria del cliente">
+								    <label for="addressLine2">Address line 2</label>
+								    <input th:field="*{addressLine2}" type="text" class="form-control" id="addressLine2" placeholder="Enter the customer address line 2 (optional)">
 						  		</div>
 							  	<div class="form-group">
-								    <label for="ciudad">City</label>
-								    <input type="text" class="form-control" id="ciudad" placeholder="Ingresar la ciudad donde reside cliente">
+								    <label for="city">City</label>
+								    <input th:field="*{city}" type="text" class="form-control" id="city" placeholder="Enter the city where the customer resides">
 							  	</div>
 							  	<div class="form-group">
-								    <label for="estado">State</label>
-								    <input type="text" class="form-control" id="estado" placeholder="Ingresar el estado donde reside el cliente">
+								    <label for="state">State</label>
+								    <input th:field="*{state}" type="text" class="form-control" id="state" placeholder="Enter the state where the customer resides">
 							  	</div>
 							  	<div class="form-group">
-								    <label for="cp">Postal code</label>
-								    <input type="text" class="form-control" id="cp" placeholder="Ingresar el codigo postal de lugar donde reside el cliente">
+								    <label for="postalCode">Postal code</label>
+								    <input th:field="*{postalCode}" type="text" class="form-control" id="postalCode" placeholder="Enter the zip code of the place where the customer resides">
 							  	</div>
 							  	<div class="form-group">
-								    <label for="pais">Country</label>
-								    <input type="text" class="form-control" id="pais" placeholder="Ingresar país donde reside el cliente">
-							  	</div>
+								    <label for="country">Country</label>
+								    <input th:field="*{country}" type="text" class="form-control" id="country" placeholder="Enter country where the customer resides">
+							  	</div> 
 						  		<div class="form-group">
-								    <label for="empleado">Sales rep employee number</label>
-								    <select class="form-control" id="empleado">
-									  <option>Select an option</option>
+								    <label for="employeeNumber">Sales rep employee number</label>
+								    <select th:field="*{salesRepEmployeeNumber.employeeNumber}" class="form-control" name="employeeNumber" id="employeeNumber">
+									  <option th:each="e:${employees}" th:value="${e.employeeNumber}">
+									  	<span th:text="${e.lastName} + ' ' + ${e.firstName}"></span>
+									  </option>
 									</select>								    
 							  	</div>
 							  	<div class="form-group">
 								    <label for="cledito">Credit limit</label>
-								    <input type="number" class="form-control" id="credito" placeholder="Ingresar el credito disponible del cliente">
+								    <input th:field="*{creditLimit}" type="number" class="form-control" id="creditLimit" placeholder="Enter the customer's credit">
 							  	</div>
 							  	<div class="mt-4">
-							  		<button type="button" th:href="@{/cliente/nuevo}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Create customer</button>
+							  		<button type="submit" th:href="@{/customer/save}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save customer</button>
+							  		<a th:href="@{/customer/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>
 								  
 							</div>
