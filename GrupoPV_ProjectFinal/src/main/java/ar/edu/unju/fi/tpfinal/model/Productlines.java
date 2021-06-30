@@ -3,9 +3,13 @@ package ar.edu.unju.fi.tpfinal.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,15 +20,22 @@ public class Productlines {
 
 	@Id
 	@Column(name = "PRODUCT_LINE")
+	@NotEmpty(message="Debes ingresar productline")
 	private String productLine;
 	
 	@Column(name = "TEXT_DESCRIPTION")
-	private String textDescripton;
+	@NotBlank(message="Debes ingresar textDescription")
+	@Size(min = 3,max = 30, message="Minimo 3 y Maximo 30 caracteres")
+	private String textDescription;
 	
 	@Column(name = "HTML_DESCRIPTION")
+	@NotEmpty(message="Debes ingresar htmlDescription")
+	@Size(min = 5,max = 30, message="Minimo 5 y Maximo 30 caracteres")
 	private String htmlDescription;
 	
+	@Lob
 	@Column(name = "IMAGE")
+	//@NotEmpty(message="Debes ingresar image")
 	private String image;
 	
 	
@@ -47,25 +58,34 @@ public class Productlines {
 	 * 
 	 */
 	
-	public Productlines(String productLine, String textDescripton, String htmlDescription, String image) {
+	
+	public Productlines(@NotEmpty(message = "Debes ingresar productline") String productLine,
+			@NotBlank(message = "Debes ingresar textDescription") @Size(min = 3, max = 30, message = "Minimo 3 y Maximo 30 caracteres") String textDescription,
+			@NotEmpty(message = "Debes ingresar htmlDescription") @Size(min = 5, max = 30, message = "Minimo 5 y Maximo 30 caracteres") String htmlDescription,
+			String image) {
 		super();
 		this.productLine = productLine;
-		this.textDescripton = textDescripton;
+		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
-	
 
 	//----- METODOS ACCESORES ------
 
 	
 	
 	
-	public String getTextDescripton() {
-		return textDescripton;
+	public String getTextDescription() {
+		return textDescription;
 	}
 
 
+
+
+
+	public void setTextDescription(String textDescription) {
+		this.textDescription = textDescription;
+	}
 
 	public String getProductLine() {
 		return productLine;
@@ -79,10 +99,7 @@ public class Productlines {
 
 
 
-	public void setTextDescripton(String textDescripton) {
-		this.textDescripton = textDescripton;
-	}
-
+	
 
 
 	public String getHtmlDescription() {
@@ -109,7 +126,7 @@ public class Productlines {
 
 	@Override
 	public String toString() {
-		return "Productlines [productLine=" + productLine + ", textDescripton=" + textDescripton + ", htmlDescription="
+		return "Productlines [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
 				+ htmlDescription + ", image=" + image + "]";
 	}
 

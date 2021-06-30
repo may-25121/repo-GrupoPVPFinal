@@ -1,16 +1,19 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ar.edu.unju.fi.tpfinal.model.Products;
 import ar.edu.unju.fi.tpfinal.service.IProductlinesService;
@@ -39,10 +42,14 @@ public class ProductsController {
 	return "nuevoproducto";
 	}
 	@PostMapping("/producto/guardar")
-	public String saveProductoPage(@ModelAttribute("products")Products products, Model model) {
+	public String saveProductoPage(@Valid @ModelAttribute("products")Products products,BindingResult result,  Model model) {
 		LOGGER.info("CONTROLLER : ProductsController with /peoducto/guardar invoke the post method");
 		LOGGER.info("METHOD : saveProductoPage() -- PARAMS: customer'"+products+"'");
 		LOGGER.info("RESULT : Page is displayed listarproductos.html");
+		if(result.hasErrors()) {
+			model.addAttribute("products", products);
+			return "nuevoproducto";
+		}else {
 		try {
 			productsService.saveProducs(products);
 		}catch (Exception e) {
@@ -52,7 +59,7 @@ public class ProductsController {
 		return "listarproductos";
 	}
 	
-	
+	}
 
 	@GetMapping("/producto/listar")
 	public String getListarProductoPage(Model model) {
@@ -96,4 +103,16 @@ public String getConfirmarBorrarPage(@PathVariable("code") String code, Model mo
 	return "listarproductos";
 	
 }
+
+@GetMapping("/producto/buscar")
+public String getBuscarProductoPage(@RequestParam(name="productcode") String productcode,  Model model) {
+	LOGGER.info("CONTROLLER : ProductsController with /producto/buscarinvoke the get method");
+	LOGGER.info("METHOD : getBuscarProductoPage()");
+	LOGGER.info("RESULT : Page is displayed listarproductos.html");
+	model.addAttribute("products", products);
+	model.addAttribute("products", productsService.getProducts(productcode));
+	return "listarproductos";
+
+}
+
 }

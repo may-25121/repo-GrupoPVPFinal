@@ -1,16 +1,20 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ar.edu.unju.fi.tpfinal.model.Productlines;
 import ar.edu.unju.fi.tpfinal.service.IProductlinesService;
@@ -37,11 +41,14 @@ LOGGER.info("RESULT : Page is displayed nuevalineaproducto.html");
 
 
 @PostMapping("/lineaproducto/guardar")
-public String saveLineProductoPage(@ModelAttribute("productlines")Productlines productlines, Model model) {
+public String saveLineProductoPage(@Valid @ModelAttribute("productlines")Productlines productlines,BindingResult result, Model model) {
 	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/guardar invoke the post method");
 	LOGGER.info("METHOD : saveLineProductoPage() -- PARAMS: productlines'"+productlines+"'");
 	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");
-
+	if(result.hasErrors()) {
+		model.addAttribute("productlnes", productlines);
+		return "nuevalineaproducto";
+	}else {
 try {
 	productlinesService.saveProductlines(productlines);
 } catch (Exception e) {
@@ -51,7 +58,7 @@ model.addAttribute("productlines", productlinesService.getAllProductlines());
 
 return "listarlineasproductos";
 }
-
+}
 @GetMapping("/lineaproducto/listar")
 public String getListarLineaProductoPage(Model model) {
 	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/listar invoke the get method");
@@ -90,6 +97,16 @@ public String getConfirmarBorrarPage(@PathVariable("Line") String Line, Model mo
 	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");
 	productlinesService.deleteProductlinesById(Line);
 	model.addAttribute("productlines", productlinesService.getAllProductlines());
+	return "listarlineasproductos";
+}
+
+@GetMapping("/lineaproducto/buscar")
+public String getBuscarProductlinesPage(@RequestParam(name="productlines") String productlines, Model model) {
+	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/buscar invoke the get method");
+	LOGGER.info("METHOD : getBuscarProductlinesPage()");
+	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");		
+	model.addAttribute("productlines", productlines);
+	model.addAttribute("productlines", productlinesService.getProductlines(productlines));
 	return "listarlineasproductos";
 }
 }
