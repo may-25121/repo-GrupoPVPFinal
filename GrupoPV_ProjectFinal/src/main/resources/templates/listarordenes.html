@@ -16,95 +16,44 @@
 			<div class="row">
 				<div class="col-12 mt-3 mb-3 py-2 d-flex bd-highlight mb-3">
 					<div class="p-2 bd-highlight">
-						<h2><i class="far fa-list-alt fa-lg"></i>&nbsp;Lista de ordenes</h2>
+						<h2><i class="far fa-list-alt fa-lg"></i>&nbsp;List of orders</h2>
 					</div>
 					<div class="p-2 bd-highlight">
-						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear orden</button>
+						<a type="button" class="btn btn-info" th:href="@{/order/new}"><i class="fas fa-plus"></i>&nbsp;Create order</a>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
-						<form class="form-inline">
-						   <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Buscar</button>
+						<form class="form-inline" th:action="@{/order/search}" th:method="get">
+						   <input class="form-control mr-sm-2" type="text" id="ordernumber" name="ordernumber" placeholder="Number" aria-label="Search">
+						   <input class="form-control mr-sm-2" type="text" id="state" name="state" placeholder="State" aria-label="Search">
+						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Search</button>
 						</form>
 					</div>
 				</div>
-				<table class="table table-striped col-sm-12 bg-light border">
+				<table class="table table-striped col-sm-12 bg-light border text-center">
 				  <thead>
 				    <tr class="bg-buebird text-white">
-				      <th scope="col">Número</th>
-				      <th scope="col">Fecha de orden</th>
-				      <th scope="col">Fecha de confirmación</th>
-				      <th scope="col">Fecha de envío</th>
-				      <th scope="col">Estado</th>
-				      <th scope="col">Comentario</th>
-				      <th scope="col">Cliente</th>
-				      <th scope="col">Acciones</th>
+				      <th scope="col">Number</th>
+				      <th scope="col">Order date</th>
+				      <th scope="col">Required date</th>
+				      <th scope="col">Shipped date</th>
+				      <th scope="col">Status</th>
+				      <th scope="col">Comments</th>
+				      <th scope="col">Customer</th>
+				      <th scope="col">Actions</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
+				    <tr th:each="o: ${orders}">
+				      <td th:text="${o.orderNumber}"></td>
+				      <td th:text="${o.orderDate}"></td>
+				      <td th:text="${o.requiredDate}"></td>
+				      <td th:text="${o.shippedDate}"></td>
+				      <td th:text="${o.status}"></td>
+				      <td th:text="${o.comments}"></td>
+				      <td th:text="${o.customerNumber.customerName}"></td>
 				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				      <td>Jacob</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      	<a class="btn btn-warning" th:href="@{/order/edit/}+${o.orderNumber}"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger" th:href="@{/order/delete/}+${o.orderNumber}"><i class="far fa-trash-alt"></i></a>
 				      </td>
 				    </tr>
 				  </tbody>
@@ -112,7 +61,7 @@
 			</div>
 		</div>
 		
-		<footer th:insert="layout/footer :: footer"></footer>
+		<footer class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>

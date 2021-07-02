@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,10 +25,10 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="ORDERS")
 @Component
-public class Orders {
+public class Order {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_NUMBER")
 	private Integer orderNumber;
 	
@@ -60,16 +61,16 @@ public class Orders {
 	private OrderDetails orderDetails;
 	 */
 	 @Autowired
-	 @ManyToOne
-	 @JoinColumn(name = "customerNumber" )
-	 private Customer customers;
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "customer_number" )
+	 private Customer customerNumber;
 	 
 	 
 	 
 	
 	//------ CONSTRUCTORES -------
 	
-	public Orders() {
+	public Order() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
@@ -90,8 +91,8 @@ public class Orders {
 	
 	
 
-	public Orders(Integer orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
-			String status, String comments, Customer customers) {
+	public Order(Integer orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
+			String status, String comments, Customer customerNumber) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderDate = orderDate;
@@ -99,7 +100,7 @@ public class Orders {
 		this.shippedDate = shippedDate;
 		this.status = status;
 		this.comments = comments;
-		this.customers = customers;
+		this.customerNumber = customerNumber;
 	}
 
 
@@ -211,16 +212,8 @@ public class Orders {
 		this.comments = comments;
 	}
 
-/*
-	public Integer getCustomerNumber() {
-		return customerNumber;
-	}
 
 
-	public void setCustomerNumber(Integer customerNumber) {
-		this.customerNumber = customerNumber;
-	}
-*/
 /*
 
 	public OrderDetails getOrderDetails() {
@@ -237,20 +230,22 @@ public class Orders {
 */
 
 
-	 public Customer getCustomer() {
-		return customers;
+	public Customer getCustomerNumber() {
+		return customerNumber;
 	}
 
 
-	public void setCustomer(Customer customer) {
-		this.customers = customer;
+	public void setCustomerNumber(Customer customerNumber) {
+		this.customerNumber = customerNumber;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Orders [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
 				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customers="
-				+ customers + "]";
+				+ customerNumber + "]";
 	}
 
 

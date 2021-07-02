@@ -17,7 +17,7 @@ public class OrderDetailsId implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "order_number")
-	private Orders orderNumber;
+	private Order orderNumber;
 	
 	//------ CONSTRUCTORES -------
 
@@ -34,7 +34,7 @@ public class OrderDetailsId implements Serializable{
 	 * @param orderNumber
 	 */
 
-	public OrderDetailsId(Products productCode, Orders orderNumber) {
+	public OrderDetailsId(Products productCode, Order orderNumber) {
 		super();
 		this.productCode = productCode;
 		this.orderNumber = orderNumber;
@@ -50,11 +50,11 @@ public class OrderDetailsId implements Serializable{
 		this.productCode = productCode;
 	}
 
-	public Orders getOrderNumber() {
+	public Order getOrderNumber() {
 		return orderNumber;
 	}
 
-	public void setOrderNumber(Orders orderNumber) {
+	public void setOrderNumber(Order orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
