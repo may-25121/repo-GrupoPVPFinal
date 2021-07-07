@@ -47,12 +47,12 @@ public class OfficeServiceImp implements IOfficeService{
 	}
 
 	@Override
-	public List<Office> getOffices(String code, String city) {
+	public List<Office> getOffices(String var) {
 		List<Office> offices = new ArrayList<>();
-		if(!code.isEmpty() && !officeDAO.findById(code).isEmpty()) {
-			offices.add( officeDAO.findById(code).get());
-		}else if (!city.isEmpty() && !officeDAO.findByCity(city).isEmpty()) {
-			offices = officeDAO.findByCity(city);
+		if(!var.isEmpty() && !officeDAO.findById(var).isEmpty()) {
+			offices.add( officeDAO.findById(var).get());
+		}else if(!var.isEmpty() && !officeDAO.findByCity(var).isEmpty()) {
+			offices = officeDAO.findByCity(var);
 		}else {
 			offices = (List<Office>) officeDAO.findAll();
 		}

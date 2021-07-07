@@ -26,7 +26,7 @@ public class Employee {
 	
 	@Id
 	@Column(name = "employee_number")
-	private Integer employeeNumber;
+	private String employeeNumber;
 	
 	@Column(name = "last_name")
 	@NotBlank(message ="You must enter a last name")
@@ -75,7 +75,7 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(Integer employeeNumber, String lastName, String firstName, String extension, String email,
+	public Employee(String employeeNumber, String lastName, String firstName, String extension, String email,
 			Office officeCode, String jobTitle, Employee employee, User user) {
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
@@ -90,11 +90,11 @@ public class Employee {
 
 	//----- METODOS ACCESORES ------
 
-	public Integer getEmployeeNumber() {
+	public String getEmployeeNumber() {
 		return employeeNumber;
 	}
 
-	public void setEmployeeNumber(Integer employeeNumber) {
+	public void setEmployeeNumber(String employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
 

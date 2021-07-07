@@ -31,7 +31,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Override
 	public Employee getEmployeeById(int id) {
-		Employee employee = employeeDAO.findById(id).get();
+		Employee employee = employeeDAO.findById(String.valueOf(id)).get();
 		return employee;
 	}
 
@@ -43,24 +43,18 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Override
 	public void deteEmployeById(int id) {
-		employeeDAO.deleteById(id);
+		employeeDAO.deleteById(String.valueOf(id));
 	}
 
 	@Override
-	public List<Employee> getEmployees(String employeenumber, String lastname, String jobtitle) {
+	public List<Employee> getEmployees(String var) {
 		List<Employee> employees = new ArrayList<>();
-		if(!employeenumber.isEmpty() && !employeeDAO.findById(Integer.valueOf(employeenumber)).isEmpty()) {
-			employees.add(employeeDAO.findById(Integer.valueOf(employeenumber)).get());
-		}else if(!lastname.isEmpty() && !jobtitle.isEmpty()) {
-			if(!employeeDAO.findByLastName(lastname).isEmpty() && !employeeDAO.findByJobTitle(jobtitle).isEmpty()) {
-				employees = employeeDAO.findByLastNameAndJobTitle(lastname, jobtitle);
-			}else if(!employeeDAO.findByLastName(lastname).isEmpty() || !employeeDAO.findByJobTitle(jobtitle).isEmpty()) {
-				employees = employeeDAO.findByLastNameOrJobTitle(lastname, jobtitle);
-			}else {
-				employees = (List<Employee>) employeeDAO.findAll();
-			}	
-		}else if((!lastname.isEmpty() && !employeeDAO.findByLastName(lastname).isEmpty()) || (!jobtitle.isEmpty() && !employeeDAO.findByJobTitle(jobtitle).isEmpty())) {
-			employees = employeeDAO.findByLastNameOrJobTitle(lastname, jobtitle);
+		if(!var.isEmpty() && !employeeDAO.findById(var).isEmpty()) {
+			employees.add(employeeDAO.findById(var).get());
+		}else if(!var.isEmpty() && !employeeDAO.findByLastName(var).isEmpty()) {
+			employees = employeeDAO.findByLastName(var);
+		}else if(!var.isEmpty() && !employeeDAO.findByJobTitle(var).isEmpty()) {
+			employees = employeeDAO.findByJobTitle(var);
 		}else {
 			employees = (List<Employee>) employeeDAO.findAll();
 		}

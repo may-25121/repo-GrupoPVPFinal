@@ -15,52 +15,48 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
-					<h2><i class="fas fa-boxes  fa-lg"></i>&nbsp;Registro linea de producto</h2>
+					<h2><i class="fas fa-boxes  fa-lg"></i>&nbsp;Product line registration</h2>
 				</div>
-				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/lineaproducto/guardar}" th:method="post" th:object="${productlines}">
+				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/productline/save}" th:method="post" th:object="${productlines}" enctype="multipart/form-data">
 					<div class="p-2">
 					  <div class="form-group">
 						  	<div class="p-3">
 						  		<div class="form-group">
-								    <label for="codigo">Linea de producto</label>
+								    <label for="codigo">Product line</label>
 								    <input th:field="*{productLine}" type="text" class="form-control" id="productLine" placeholder="Ingresar linea de producto">
 						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('productLine')}" th:errors="*{productLine}" ></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="descripcion">Descripción</label>
+								    <label for="descripcion">Description</label>
 								    <input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" placeholder="Ingresar descripción de la linea">
 						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('textDescription')}" th:errors="*{textDescription}" ></div>
 						  		</div>
 							  	<div class="form-group">
-								    <label for="vendedorproducto">Descipción de la página</label>
+								    <label for="vendedorproducto">Description of the page</label>
 								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" placeholder="Ingresar la descripcion de la pagina">
 						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('htmlDescription')}" th:errors="*{htmlDescription}" ></div>
 						  		</div>
-								<div class="card text-center mx-auto px-auto my-4" style="width: 18rem;">
-								   	<img th:src="@{/img/noimageavaiable.png}" class="card-img-top" alt="...">
-									<!--<div class="card-body">
-									    <a href="#" class="btn btn-info"><i class="fas fa-upload"></i>&nbsp;subir imagen</a>
-									</div> 
-									<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">-->
-									
-            					<div class="col-md-8 offset-md-2">
-            		<label for="image" class="form-label"> Image</label>
-            		<div class="cont-form">
-            			<img id="output" style="padding-top: 5px; width: 180px;height: 100%;">
-            			<br>
-            			<input th:field="*{image}" type="file" class="form-control-file inputfile " id="image" 
-            				accept="image/x-png,image/gif,image/jpeg,image/png"
-            				onchange="loadFile(event)" style="margin-top: 20px;"
-            			/> 
-            			
-                  <div class=" alert alert-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}" ></div>
-            		    </div>
-            		
-          		            </div>
-									</div>	  		
+								
+								<label>Image</label>
+								<br>
+								<div th:if=${productlines.image} class="card px-auto mx-auto" style="max-width: 12rem; max-height: 18rem;">
+									<img th:src="@{${'/resources/' + productlines.image}}" class="card-img-top" id="thumbnail" style="max-width: 13rem; max-height: 13rem;">
+									<div class="card-body mx-auto px-auto my-2 bg-info p-2 col-11 text-center">
+										<label for="image" class="text-center text-white"><i class="fas fa-upload"></i>&nbsp;Upload image</label>
+										<input type="file" name="file" class="form-control form-control-sm p-0" id="image">
+									</div>
+								</div>  
+								<div th:unless=${productlines.image} class="card px-auto mx-auto" style="max-width: 12rem; max-height: 18rem;">
+									<img class="card-img-top" id="thumbnail" style="max-width: 13rem; max-height: 13rem;"/>
+									<div class="mx-auto px-auto my-2 bg-info p-2 col-11 text-center">
+										<label for="image" class="text-center text-white"><i class="fas fa-upload"></i>&nbsp;Upload image</label>
+										<input type="file" name="file" class="form-control form-control-sm p-0" id="image" accept="image/png, image/jpeg">
+									</div>
+								</div>
+
 							  	<div class="mt-4">
-							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save Productline</button>
-							  		<a th:href="@{/lineaproducto/listar}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save Product line</button>
+							  		<a th:href="@{/productline/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>	  
 							</div>
 						</div>
@@ -69,10 +65,26 @@
 			</div>
 		</div>
 		
-		<footer th:insert="layout/footer :: footer"></footer>
+		<!--Script for image preview-->
+		<script type="text/javascript">
+		document.getElementById("image").onchange = function () {
+		    var reader = new FileReader();
+
+		    reader.onload = function (e) {
+		        // get loaded data and render thumbnail.
+		        document.getElementById("thumbnail").src = e.target.result;
+		    };
+
+		    // read the image file as a data URL.
+		    reader.readAsDataURL(this.files[0]);
+		};
+		</script>
+		
+		<br><br>
+		<footer class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1/dist/umd/popper.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
 	</body>
 </html>

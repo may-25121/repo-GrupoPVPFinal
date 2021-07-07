@@ -16,28 +16,28 @@
 			<div class="row">
 				<div class="col-12 mt-3 mb-3 py-2 d-flex bd-highlight mb-3">
 					<div class="p-2 bd-highlight">
-						<h2><i class="fas fa-boxes  fa-lg"></i>&nbsp;Listar lineas de productos</h2>
+						<h2><i class="fas fa-boxes  fa-lg"></i>&nbsp;List product lines</h2>
 					</div>
 					<div class="p-2 bd-highlight">
-						<a class="btn btn-info" th:href="@{/lineaproducto/nuevo}"><i class="fas fa-plus"></i>&nbsp;Create Productline</a>
+						<a class="btn btn-info" th:href="@{/productline/new}"><i class="fas fa-plus"></i>&nbsp;Create Product line</a>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
 						
-						<form class="form-inline" th:action="@{/lineaproducto/buscar}" th:method="get">
-						   <input class="form-control mr-sm-2" type="text" id="productlines" name="productlines" placeholder="Linea de producto " aria-label="Search">
+						<form class="form-inline" th:action="@{/productline/search}" th:method="get">
+						   <input class="form-control mr-sm-2" type="text" id="productlines" name="productlines" placeholder="Search" aria-label="Search">
 				
-						   <button type="submit" class="btn btn btn-info my-2 my-sm-0"><i class="fas fa-search"></i>&nbsp;Buscar</button>
+						   <button type="submit" class="btn btn btn-info my-2 my-sm-0"><i class="fas fa-search"></i>&nbsp;Search</button>
 						</form>
 					</div>
 				</div>
-				<table class="table table-striped col-sm-12 bg-light border ">
+				<table class="table table-striped col-sm-12 bg-light border text-center">
 				  <thead>
 				    <tr class="bg-buebird text-white">
-				      <th scope="col">Linea de producto</th>
-				      <th scope="col">Descripción</th>
-				      <th scope="col">Descipción de la página</th>
-				      <th scope="col">Imagen</th>
-				      <th scope="col">Acciones</th>
+				      <th class="my-auto py-auto" scope="col">Product line</th>
+				      <th scope="col">Description</th>
+				      <th scope="col">Description of the page</th>
+				      <th scope="col">Image</th>
+				      <th scope="col">Actions</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -46,10 +46,12 @@
 				      <td th:text="${p.productLine}"></td>
 				      <td th:text="${p.textDescription}"></td>
 				      <td th:text="${p.htmlDescription}"></td>
-				      <td th:text="${p.image}"><img th:src="@{/img/noimageavaiable.png}" class="img-thumbnail imageline" alt="..."></td>
+				      <td style="max-width: 8rem;">
+				      	<img th:src="@{'/resources/' + ${p.image}}" class="img-formater img-thumbnail" id="img" th:alt="p.image">
+				      </td>
 				      <td>
-				      	<a class="btn btn-warning" th:href="@{/lineaproducto/editar/}+${p.productLine}"><i class="fas fa-edit"></i></a>
-				      	<a class="btn btn-danger" th:href="@{/lineaproducto/borrar/}+${p.productLine}"><i class="far fa-trash-alt"></i></a>
+				      	<a class="btn btn-warning" th:href="@{/productline/edit/}+${p.productLine}"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger" th:href="@{/productline/delete/}+${p.productLine}"><i class="far fa-trash-alt"></i></a>
 				      </td>
 				    </tr>				  
 				  </tbody>
@@ -60,7 +62,7 @@
 		<footer  class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.1/dist/umd/popper.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
 	</body>
 </html>

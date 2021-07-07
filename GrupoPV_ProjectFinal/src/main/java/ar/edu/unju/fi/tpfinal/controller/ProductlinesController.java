@@ -1,6 +1,11 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.fi.tpfinal.model.Productlines;
 import ar.edu.unju.fi.tpfinal.service.IProductlinesService;
@@ -30,49 +36,59 @@ Productlines productlines;
 @Qualifier("productlinesServiceMysql")
 private IProductlinesService productlinesService;
 
-@GetMapping("/lineaproducto/nuevo")
-public String getProductoPage(Model model) {
-LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/nuevo invoke the get method");
+@GetMapping("/productline/new")
+public String getProductLinePage(Model model) {
+LOGGER.info("CONTROLLER : ProductlinesController with /productline/new invoke the get method");
 LOGGER.info("METHOD : getProductoPage()");
 LOGGER.info("RESULT : Page is displayed nuevalineaproducto.html");
 	model.addAttribute("productlines",productlinesService.getProductlines());
 	return "nuevalineaproducto";
 }
 
-
-@PostMapping("/lineaproducto/guardar")
-public String saveLineProductoPage(@Valid @ModelAttribute("productlines")Productlines productlines,BindingResult result, Model model) {
-	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/guardar invoke the post method");
+@PostMapping("/productline/save")
+public String saveProductLinePage(@Valid @ModelAttribute("productlines")Productlines productlines,BindingResult result, Model model, @RequestParam("file") MultipartFile image) {
+	LOGGER.info("CONTROLLER : ProductlinesController with /productline/save invoke the post method");
 	LOGGER.info("METHOD : saveLineProductoPage() -- PARAMS: productlines'"+productlines+"'");
-	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");
+	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html"); 
 	if(result.hasErrors()) {
-		model.addAttribute("productlnes", productlines);
+		model.addAttribute("productlines", productlines);
 		return "nuevalineaproducto";
 	}else {
-try {
-	productlinesService.saveProductlines(productlines);
-} catch (Exception e) {
-	System.out.println(e.getMessage());
+		if(!image.isEmpty()) {
+			//Path dirImage = Paths.get("src//main//resources//static/img");
+			//String routeAbsolute = dirImage.toFile().getAbsolutePath();
+			String routeAbsolute = "C://Productlines//resources";
+			try {
+				byte[] bytesImg = image.getBytes();
+				Path routeComplete = Paths.get(routeAbsolute + "//" + image.getOriginalFilename());
+				LOGGER.info("RUTA DE LA IMAGEN: '"+routeComplete+"'");
+				Files.write(routeComplete, bytesImg);
+				productlines.setImage(image.getOriginalFilename());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		productlinesService.saveProductlines(productlines);
+		model.addAttribute("productlines", productlinesService.getAllProductlines());
+		
+		return "listarlineasproductos";
+	}
 }
-model.addAttribute("productlines", productlinesService.getAllProductlines());
 
-return "listarlineasproductos";
-}
-}
-@GetMapping("/lineaproducto/listar")
-public String getListarLineaProductoPage(Model model) {
-	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/listar invoke the get method");
-	LOGGER.info("METHOD : getListarLineaProductoPage()");
+@GetMapping("/productline/list")
+public String getListProductLinePage(Model model) {
+	LOGGER.info("CONTROLLER : ProductlinesController with /productline/list invoke the get method");
+	LOGGER.info("METHOD : getListProductLinePage()");
 	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");
 	model.addAttribute("productlines", productlinesService.getAllProductlines());
 	System.out.println(" ");
 	return "listarlineasproductos";
 
 }
-@GetMapping("/lineaproducto/editar/{Line}")
-public String getEditarPage(@PathVariable ("Line") String Line, Model model) {
-	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/editar/{Line} invoke the get method");
-	LOGGER.info("METHOD : getEditarPage()");
+@GetMapping("/productline/edit/{Line}")
+public String getProductLineEditPage(@PathVariable ("Line") String Line, Model model) {
+	LOGGER.info("CONTROLLER : ProductlinesController with /productline/edit/{Line} invoke the get method");
+	LOGGER.info("METHOD : getProductLineEditPage()");
 	LOGGER.info("RESULT : Page is displayed nuevalineaproducto.html");
 	this.productlines = productlinesService.getProductlinesById(Line);
 	model.addAttribute("productlines", this.productlines);
@@ -80,30 +96,30 @@ public String getEditarPage(@PathVariable ("Line") String Line, Model model) {
 
 }
 
-@GetMapping("/lineaproducto/borrar/{Line}")
-public String getBorrarPage(@PathVariable ("Line") String Line, Model model) {
-	LOGGER.info("CONTROLLER : ProductinesController with /lineaproducto/borrar/{Line} invoke the get method");
-	LOGGER.info("METHOD : getBorrarPage()");
+@GetMapping("/productline/delete/{Line}")
+public String getProductLineDeletePage(@PathVariable ("Line") String Line, Model model) {
+	LOGGER.info("CONTROLLER : ProductinesController with /productline/delete/{Line} invoke the get method");
+	LOGGER.info("METHOD : getProductLineDeletePage()");
 	LOGGER.info("RESULT : Page is displayed eliminarlineaproducto.html");
 	Productlines productline = productlinesService.getProductlinesById(Line);
 	model.addAttribute("productlines", productline);
 	return "eliminarlineaproducto";
 }
 
-@GetMapping("/lineaproducto/borrar/confirmar/{Line}")
-public String getConfirmarBorrarPage(@PathVariable("Line") String Line, Model model) {
-	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/borrar/confirmar/{Line} invoke the get method");
-	LOGGER.info("METHOD : getConfirmarBorrarPage()");
+@GetMapping("/productline/delete/confirm/{Line}")
+public String getProductLineDeleteConfirmPage(@PathVariable("Line") String Line, Model model) {
+	LOGGER.info("CONTROLLER : ProductlinesController with /productline/delete/confirm/{Line} invoke the get method");
+	LOGGER.info("METHOD : getProductLineDeleteConfirmPage()");
 	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");
 	productlinesService.deleteProductlinesById(Line);
 	model.addAttribute("productlines", productlinesService.getAllProductlines());
 	return "listarlineasproductos";
 }
 
-@GetMapping("/lineaproducto/buscar")
-public String getBuscarProductlinesPage(@RequestParam(name="productlines") String productlines, Model model) {
+@GetMapping("/productline/search")
+public String getProductLineSearchPage(@RequestParam(name="productlines") String productlines, Model model) {
 	LOGGER.info("CONTROLLER : ProductlinesController with /lineaproducto/buscar invoke the get method");
-	LOGGER.info("METHOD : getBuscarProductlinesPage()");
+	LOGGER.info("METHOD : getProductLineSearchPage()");
 	LOGGER.info("RESULT : Page is displayed listarlineasproductos.html");		
 	model.addAttribute("productlines", productlines);
 	model.addAttribute("productlines", productlinesService.getProductlines(productlines));

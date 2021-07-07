@@ -42,3 +42,17 @@ body{
 
 .hoverlink:hover { background: #0E6251; } 
 
+.img-formater{
+	max-width: 5rem;
+	max-height: 5rem;
+}
+
+#image{
+	position:absolute;
+	opacity: 0;
+}
+
+.img-format{
+	max-width: 20%;
+	max-height: 20%
+}
