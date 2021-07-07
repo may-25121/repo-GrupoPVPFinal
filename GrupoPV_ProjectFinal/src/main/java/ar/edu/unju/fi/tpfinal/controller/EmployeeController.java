@@ -56,7 +56,7 @@ public class EmployeeController {
 		Employee employe = new Employee();
 		//User user = new User();
 		//employe = this.employeeService.getEmployee();
-		employe.setEmployeeNumber(Integer.valueOf(employeeNumber));
+		employe.setEmployeeNumber(employeeNumber);
 		employe.setLastName(lastName);
 		employe.setFirstName(firstName);
 		employe.setExtension(extension);
@@ -130,13 +130,13 @@ public class EmployeeController {
 		model.addAttribute("employees", employeeService.getAllEmployees());
 		return "listarempleados";
 	}
-
+	
 	@GetMapping("/employee/search")
-	public String getSearchEmployeePage(@RequestParam(name="employeenumber") String employeenumber, @RequestParam(name="lastname") String lastname, @RequestParam(name="jobtitle") String jobtitle, Model model) {
+	public String getSearchEmployeePage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : EmployeeController with /employee/search invoke the get method");
 		LOGGER.info("METHOD : getSearchEmployeePage()");
 		LOGGER.info("RESULT : Page is displayed listarempleados.html");
-		model.addAttribute("employees", employeeService.getEmployees(employeenumber, lastname, jobtitle));
+		model.addAttribute("employees", employeeService.getEmployees(var));
 		return "listarempleados";
 	}
 	

@@ -11,6 +11,6 @@ public interface IEmployeeService {
 	public Employee getEmployeeById(int id);
 	public List<Employee> getAllEmployees();
 	public void deteEmployeById(int id);
-	public List<Employee> getEmployees(String employeenumber, String lastname, String jobtitle);
+	public List<Employee> getEmployees(String var);
 
 }

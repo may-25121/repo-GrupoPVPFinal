@@ -38,7 +38,7 @@ public class OfficeController {
 		model.addAttribute("office", officeService.getOffice());
 		return "nuevaoficina";
 	}
-
+	
 	@PostMapping("/office/save")
 	public String  saveOfficePage(@Valid @ModelAttribute("office") Office office, BindingResult result, Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/save invoke the post method");
@@ -66,7 +66,6 @@ public class OfficeController {
 		model.addAttribute("offices", officeService.getAllOffices());
 		return "listaroficinas";
 	}
-	
  
 	@GetMapping("/office/edit/{code}")
 	public String getEditOfficePage(@PathVariable ("code") String code, Model model) {
@@ -77,7 +76,6 @@ public class OfficeController {
 		model.addAttribute("office", this.office);
 		return "nuevaoficina";
 	}
-	
 	
 	@GetMapping("/office/delete/{code}")
 	public String getDeleteOfficePage(@PathVariable ("code") String code, Model model) {
@@ -98,16 +96,15 @@ public class OfficeController {
 		model.addAttribute("offices", officeService.getAllOffices());
 		return "listaroficinas";
 	}
-	
+
 	@GetMapping("/office/search")
-	public String getSearchOfficePage(@RequestParam(name="officecode") String officecode, @RequestParam(name="officecity") String officecity, Model model) {
+	public String getSearchOfficePage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/search invoke the get method");
 		LOGGER.info("METHOD : getSearchOfficePage()");
 		LOGGER.info("RESULT : Page is displayed listaroficinas.html");		
-		model.addAttribute("code", officecode);
-		model.addAttribute("offices", officeService.getOffices(officecode, officecity));
+		model.addAttribute("code", var);
+		model.addAttribute("offices", officeService.getOffices(var));
 		return "listaroficinas";
 	}
 
-	
 }

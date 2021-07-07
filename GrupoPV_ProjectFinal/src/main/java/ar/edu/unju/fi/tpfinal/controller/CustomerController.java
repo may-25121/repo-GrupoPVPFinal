@@ -98,11 +98,11 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/customer/search")
-	public String getSearchCustomerPage(@RequestParam(name="customernumber") String customernumber, @RequestParam(name="city") String city, Model model) {
+	public String getSearchCustomerPage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/search invoke the get method");
 		LOGGER.info("METHOD : getSearchCustomerPage()");
 		LOGGER.info("RESULT : Page is displayed listarclientes.html");
-		model.addAttribute("customers", customerService.getCustomers(customernumber, city));
+		model.addAttribute("customers", customerService.getCustomers(var));
 		return "listarclientes";
 	}
 	

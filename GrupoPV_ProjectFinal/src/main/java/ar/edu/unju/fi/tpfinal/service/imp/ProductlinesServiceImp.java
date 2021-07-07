@@ -22,7 +22,6 @@ public class ProductlinesServiceImp implements IProductlinesService {
 	
 	@Override
 	public Productlines getProductlines() {
-		// TODO Auto-generated method stub
 		return this.productlines;
 	}
 
@@ -59,8 +58,8 @@ public class ProductlinesServiceImp implements IProductlinesService {
 		}
 		return productlines;
 	
-		// TODO Auto-generated method stub
-	
 	}
+	
+	
 
 }

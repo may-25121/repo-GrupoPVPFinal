@@ -21,7 +21,7 @@ public class Customer {
 	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_number")
-	private Integer customerNumber;
+	private String customerNumber;
 	
 	@Column(name = "customer_name")
 	private String customerName;
@@ -67,7 +67,7 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(Integer customerNumber, String customerName, String contactLastName, String contactFirstName,
+	public Customer(String customerNumber, String customerName, String contactLastName, String contactFirstName,
 			String phone, String addressLine1, String addressLine2, String city, String state, String postalCode,
 			String country, Employee salesRepEmployeeNumber, Double creditLimit) {
 		this.customerNumber = customerNumber;
@@ -87,11 +87,11 @@ public class Customer {
 	
 	//----- METODOS ACCESORES ------
 
-	public Integer getCustomerNumber() {
+	public String getCustomerNumber() {
 		return customerNumber;
 	}
 
-	public void setCustomerNumber(Integer customerNumber) {
+	public void setCustomerNumber(String customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
