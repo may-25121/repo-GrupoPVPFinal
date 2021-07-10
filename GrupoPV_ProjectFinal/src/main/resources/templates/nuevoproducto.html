@@ -15,24 +15,24 @@
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
-					<h2><i class="fab fa-dropbox fa-lg"></i>&nbsp;Registro producto</h2>
+					<h2><i class="fab fa-dropbox fa-lg"></i>&nbsp;Product registration</h2>
 				</div>
-				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/producto/guardar}" th:method="post" th:object="${products}">
+				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/product/save}" th:method="post" th:object="${products}">
 					<div class="p-2">
 					  <div class="form-group">
 						  	<div class="p-3">
 						  		<div class="form-group">
-								    <label for="codigo">Código</label>
-								    <input type="text" class="form-control" id="productCode" th:field="*{productCode}" placeholder="Ingresar el codigo del producto">
+								    <label for="codigo">Code</label>
+								    <input type="number" class="form-control" id="productCode" th:field="*{productCode}" placeholder="Enter the product code">
 						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productCode')}" th:errors="*{productCode}" ></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="nombre">Nombre</label>
-								    <input type="text" class="form-control" id="productName" th:field="*{productName}" placeholder="Ingresar el nombre del producto">
+								    <label for="nombre">Name</label>
+								    <input type="text" class="form-control" id="productName" th:field="*{productName}" placeholder="Enter the product name">
 						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="lineaproducto">Linea de producto</label>
+								    <label for="lineaproducto">Product line</label>
 								    <select th:field="*{productlines.productLine}" class="form-control" name="productLine" id="productLine">
 									  <option th:each="p:${productlines}" th:value="${p.productLine}">
 										<span th:text="${p.productLine}"></span>
@@ -42,39 +42,39 @@
 									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productlines.productLine')}" th:errors="*{productlines.productLine}"></div>											    
 							  	</div>
 							  	<div class="form-group">
-								    <label for="vendedorproducto">Escala</label>
-								    <input type="text" class="form-control" id="productScale"  th:field="*{productScale}" placeholder="Ingresar la escala del producto">
+								    <label for="vendedorproducto">Scale</label>
+								    <input type="text" class="form-control" id="productScale"  th:field="*{productScale}" placeholder="Enter the product scale">
 						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productScale')}" th:errors="*{productScale}"></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="vendedorproducto">Proveedor</label>
-								    <input type="text" class="form-control" id="productVendor" th:field="*{productVendor}" placeholder="Ingresar el proveedor del producto">
+								    <label for="vendedorproducto">Vendor</label>
+								    <input type="text" class="form-control" id="productVendor" th:field="*{productVendor}" placeholder="Enter the product vendor">
 						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productVendor')}" th:errors="*{productVendor}"></div>
 						  		</div>
 							  	<div class="form-group">
-								    <label for="descripcion">Descripción</label>
-								    <input type="text" class="form-control" id="productDescripton" th:field="*{productDescripton}" placeholder="Ingresar descripción del producto">
+								    <label for="descripcion">Description</label>
+								    <input type="text" class="form-control" id="productDescripton" th:field="*{productDescripton}" placeholder="Enter product description">
 							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('productDescripton')}" th:errors="*{productDescripton}"></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="stock">Stock</label>
-								    <input type="text" class="form-control" id="quantityInStock" th:field="*{quantityInStock}" placeholder="Ingresar stock del producto">
+								    <input type="text" class="form-control" id="quantityInStock" th:field="*{quantityInStock}" placeholder="Enter product stock">
 							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"></div>
 							  	</div>
 						  		<div class="form-group">
-								    <label for="preciocompra">Precio de compra</label>
-								    <input type="text" class="form-control" id="buyPrice" th:field="*{buyPrice}" placeholder="Ingresar precio de compra del producto">
+								    <label for="preciocompra">Buy price</label>
+								    <input type="text" class="form-control" id="buyPrice" th:field="*{buyPrice}" placeholder="Enter the buy price of the product">
 						  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('buyPrice')}" th:errors="*{buyPrice}"></div>
 						  		</div>
 							  	<div class="form-group">
-								    <label for="preciolista">Precio de lista</label>
-								    <input type="text" class="form-control" id="msrp" th:field="*{msrp}" placeholder="Ingresar precio de lista del producto">
+								    <label for="preciolista">MSRP</label>
+								    <input type="text" class="form-control" id="msrp" th:field="*{msrp}" placeholder="Enter product list price">
 							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('msrp')}" th:errors="*{msrp}"></div>
 							  	</div>
 							  
 							  	<div class="mt-4">
-							  		<button type="submit" th:href="@{/producto/guardar}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save customer</button>
-							  		<a th:href="@{/producto/listar}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+							  		<button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save product</button>
+							  		<a th:href="@{/product/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>
 								  
 							</div>

@@ -99,11 +99,11 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/order/search")
-	public String getSearchOrderPage(@RequestParam(name= "ordernumber") String ordernumber, @RequestParam(name="state") String state, Model model) {
+	public String getSearchOrderPage(@RequestParam(name= "var") String var, Model model) {
 		LOGGER.info("CONTROLLER : OrdersController with /customer/search invoke the get method");
 		LOGGER.info("METHOD : getSearchOrderPage()");
 		LOGGER.info("RESULT : Page is displayed listarordenes.html");
-		model.addAttribute("orders", orderService.getOrders(ordernumber, state));
+		model.addAttribute("orders", orderService.getOrders(var));
 		return "listarordenes";
 	}
 	
