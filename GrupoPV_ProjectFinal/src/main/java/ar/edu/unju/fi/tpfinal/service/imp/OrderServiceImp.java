@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class OrderServiceImp implements IOrderService {
 
 	@Override
 	public Order getOrderById(int id) {
-		Order order = orderDAO.findById(id).get();
+		Order order = orderDAO.findById(String.valueOf(id)).get();
 		return order;
 	}
 
@@ -43,14 +44,20 @@ public class OrderServiceImp implements IOrderService {
 
 	@Override
 	public void deleteOrderById(int id) {
-		orderDAO.deleteById(id);
+		orderDAO.deleteById(String.valueOf(id));
 	}
 
-	//FALTA DESARROLLAR
 	@Override
-	public List<Order> getOrders(String ordernumber, String state) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getOrders(String var) {
+		List<Order> orders = new ArrayList<>();
+		if(!var.isEmpty() && !orderDAO.findById(var).isEmpty()) {
+			orders.add(orderDAO.findById(var).get());
+		}else if(!var.isEmpty() && !orderDAO.findByStatus(var).isEmpty()) {
+			orders = orderDAO.findByStatus(var);
+		}else {
+			orders = (List<Order>) orderDAO.findAll();
+		}
+		return orders;
 	}
 
 }

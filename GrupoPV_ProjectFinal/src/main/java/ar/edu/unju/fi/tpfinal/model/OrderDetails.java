@@ -27,7 +27,7 @@ public class OrderDetails implements Serializable {
 	private Double priceEach;
 	
 	@Column(name = "ORDER_LINE_NUMBER")
-	private Short orderLineNumber;
+	private Integer orderLineNumber;
 	
 	
 	//------ CONSTRUCTORES -------
@@ -52,7 +52,7 @@ public class OrderDetails implements Serializable {
 	 */
 	
 
-	public OrderDetails(OrderDetailsId id, Integer quantityOrdered, Double priceEach, Short orderLineNumber) {
+	public OrderDetails(OrderDetailsId id, Integer quantityOrdered, Double priceEach, Integer orderLineNumber) {
 		super();
 		this.id = id;
 		this.quantityOrdered = quantityOrdered;
@@ -90,12 +90,12 @@ public class OrderDetails implements Serializable {
 	}
 
 
-	public Short getOrderLineNumber() {
+	public Integer getOrderLineNumber() {
 		return orderLineNumber;
 	}
 
 
-	public void setOrderLineNumber(Short orderLineNumber) {
+	public void setOrderLineNumber(Integer orderLineNumber) {
 		this.orderLineNumber = orderLineNumber;
 	}
 

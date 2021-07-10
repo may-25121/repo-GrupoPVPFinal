@@ -23,17 +23,17 @@
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="codigo">Product line</label>
-								    <input th:field="*{productLine}" type="text" class="form-control" id="productLine" placeholder="Ingresar linea de producto">
+								    <input th:field="*{productLine}" type="text" class="form-control" id="productLine" placeholder="Enter product line">
 						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('productLine')}" th:errors="*{productLine}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="descripcion">Description</label>
-								    <input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" placeholder="Ingresar descripción de la linea">
+								    <input th:field="*{textDescription}" type="text" class="form-control" id="textDescription" placeholder="Enter line description">
 						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('textDescription')}" th:errors="*{textDescription}" ></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="vendedorproducto">Description of the page</label>
-								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" placeholder="Ingresar la descripcion de la pagina">
+								    <input th:field="*{htmlDescription}" type="text" class="form-control" id="htmlDescription" placeholder="Enter the page description">
 						  		<div class=" alert alert-danger" th:if="${#fields.hasErrors('htmlDescription')}" th:errors="*{htmlDescription}" ></div>
 						  		</div>
 								

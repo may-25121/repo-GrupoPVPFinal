@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import ar.edu.unju.fi.tpfinal.model.Products;
 
-public interface IProductsDAO  extends CrudRepository<Products, Integer> {
+public interface IProductsDAO  extends CrudRepository<Products, String> {
 
-	//public List<Products> findByName(String productname);
+	public List<Products> findByProductName(String var);
 }

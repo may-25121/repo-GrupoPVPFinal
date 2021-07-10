@@ -14,7 +14,7 @@ public interface IOrderService {
 	public Order getOrderById(int id);
 	public List<Order> getAllOrders();
 	public void deleteOrderById(int id);
-	public List<Order> getOrders(String ordernumber, String state);
+	public List<Order> getOrders(String var);
 	
 
 }

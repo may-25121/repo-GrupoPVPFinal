@@ -16,83 +16,39 @@
 			<div class="row">
 				<div class="col-12 mt-3 mb-3 py-2 d-flex bd-highlight mb-3">
 					<div class="p-2 bd-highlight">
-						<h2><i class="fas fa-clipboard-list fa-lg"></i>&nbsp;Lista de detalles de ordenes</h2>
+						<h2><i class="fas fa-clipboard-list fa-lg"></i>&nbsp;Order details list</h2>
 					</div>
 					<div class="p-2 bd-highlight">
-						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear detalle</button>
+						<a class="btn btn-info" th:href="@{/orderdetail/new}"><i class="fas fa-plus"></i>&nbsp;Create order detail</a>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
-						<form class="form-inline">
-						   <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Buscar</button>
+						<form class="form-inline" th:action="@{/orderdetail/search}" th:method="get">
+						   <input class="form-control mr-sm-2" type="text" placeholder="Search" id="var" name="var" aria-label="Search">
+						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Search</button>
 						</form>
 					</div>
 				</div>
 				<table class="table table-striped col-sm-12 bg-light border">
 				  <thead>
 				    <tr class="bg-buebird text-white">
-				      <th scope="col">Número de orden</th>
-				      <th scope="col">Código de producto</th>
-				      <th scope="col">Cantidad pedida</th>
-				      <th scope="col">Precio unitario</th>
-				      <th scope="col">Número de linea del pedido</th>
-				      <th scope="col">Acciones</th>
+				      <th scope="col">Order number</th>
+				      <th scope="col">Product code</th>
+				      <th scope="col">Quantity ordered</th>
+				      <th scope="col">Price each</th>
+				      <th scope="col">Line number</th>
+				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>Mark</td>
+				    <tr th:each="d: ${orderDetails}">
+				      <td th:text="${d.id.orderNumber.orderNumber}"></td>
+				      <td th:text="${d.id.productCode.productCode}"></td>
+				      <td th:text="${d.quantityOrdered}"></td>
+				      <td th:text="${d.priceEach}"></td>
+				      <td th:text="${d.orderLineNumber}"></td>
 				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				      <td>Jacob</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>Larry</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				      	<a th:href="@{/orderdetail/edit/}+${d.id.orderNumber.orderNumber}+'/'+${d.id.productCode.productCode}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+				      	<a th:href="@{/orderdetail/delete/}+${d.id.orderNumber.orderNumber}+'/'+${d.id.productCode.productCode}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
 				      </td>
 				    </tr>
 				  </tbody>
@@ -100,7 +56,7 @@
 			</div>
 		</div>
 		
-		<footer th:insert="layout/footer :: footer"></footer>
+		<footer class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>

@@ -7,11 +7,12 @@ import ar.edu.unju.fi.tpfinal.model.OrderDetailsId;
 
 
 public interface IOrderDetailsService {
-	/*
-	public void guardarOrderDetails(OrderDetails orderDetail);
-	public void eliminarOrderDetails(OrderDetailsId id);
-	public List<OrderDetails> getAllOrderDetail();
-	public OrderDetails getOrderDetailById(OrderDetailsId id);
-	
-*/
+
+	public OrderDetails getorderDetail();
+	public void saveOrderDetail(OrderDetails orderDetails);
+	public OrderDetails getOrderDetailById(OrderDetailsId Id);
+	public List<OrderDetails> getAllOrderDetails();
+	public void deleteOrderDetailById(OrderDetailsId Id);
+	public List<OrderDetails> getOrderDetails(String var);
+
 }

@@ -1,15 +1,10 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-
-
 import java.time.LocalDate;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,7 +25,7 @@ public class Order {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ORDER_NUMBER")
-	private Integer orderNumber;
+	private String orderNumber;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name = "ORDER_DATE")
@@ -65,9 +60,7 @@ public class Order {
 	 @JoinColumn(name = "customer_number" )
 	 private Customer customerNumber;
 	 
-	 
-	 
-	
+
 	//------ CONSTRUCTORES -------
 	
 	public Order() {
@@ -88,10 +81,8 @@ public class Order {
 	 * @param comments
 	 * @param customers
 	 */
-	
-	
 
-	public Order(Integer orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
+	public Order(String orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate,
 			String status, String comments, Customer customerNumber) {
 		super();
 		this.orderNumber = orderNumber;
@@ -104,8 +95,6 @@ public class Order {
 	}
 
 
-
-
 	//----- METODOS ACCESORES ------
 
 	
@@ -113,7 +102,7 @@ public class Order {
 	 * @return the orderNumber
 	 */
 
-	public Integer getOrderNumber() {
+	public String getOrderNumber() {
 		return orderNumber;
 	}
 
@@ -123,7 +112,7 @@ public class Order {
 	 * @param orderNumber the orderNumber to set
 	 */
 
-	public void setOrderNumber(Integer orderNumber) {
+	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 

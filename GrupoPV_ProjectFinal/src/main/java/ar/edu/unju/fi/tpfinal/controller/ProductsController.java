@@ -24,27 +24,28 @@ public class ProductsController {
 	@Autowired
 	 private Products products;
 	
-	
 	@Autowired 
 	@Qualifier("productsServiceMysql")
 	private IProductsService productsService;
+	
 	@Autowired
 	@Qualifier("productlinesServiceMysql")
 	private IProductlinesService productlinesService;
 	
-	@GetMapping("/producto/nuevo")
-	public String getProductoPage (Model model) {
-		LOGGER.info("CONTROLLER : ProductsController con /producto/nuevo invoke the get method");
-		LOGGER.info("METHOD : getProductoPage()");
+	@GetMapping("/product/new")
+	public String getProductPage (Model model) {
+		LOGGER.info("CONTROLLER : ProductsController con /product/new invoke the get method");
+		LOGGER.info("METHOD : getProductPage()");
 		LOGGER.info("RESULT : Page is displayed nuevoproducto.html");
-	model.addAttribute("products", productsService.getProducts());
-	model.addAttribute("productlines", productlinesService.getAllProductlines());
-	return "nuevoproducto";
+		model.addAttribute("products", productsService.getProducts());
+		model.addAttribute("productlines", productlinesService.getAllProductlines());
+		return "nuevoproducto";
 	}
-	@PostMapping("/producto/guardar")
-	public String saveProductoPage(@Valid @ModelAttribute("products")Products products,BindingResult result,  Model model) {
-		LOGGER.info("CONTROLLER : ProductsController with /peoducto/guardar invoke the post method");
-		LOGGER.info("METHOD : saveProductoPage() -- PARAMS: customer'"+products+"'");
+	
+	@PostMapping("/product/save")
+	public String saveProductPage(@Valid @ModelAttribute("products")Products products,BindingResult result,  Model model) {
+		LOGGER.info("CONTROLLER : ProductsController with /product/save invoke the post method");
+		LOGGER.info("METHOD : saveProductPage() -- PARAMS: customer'"+products+"'");
 		LOGGER.info("RESULT : Page is displayed listarproductos.html");
 		if(result.hasErrors()) {
 			model.addAttribute("products", products);
@@ -61,58 +62,55 @@ public class ProductsController {
 	
 	}
 
-	@GetMapping("/producto/listar")
-	public String getListarProductoPage(Model model) {
-		LOGGER.info("CONTROLLER : ProductsController with /producto/listar invoke the get method");
-		LOGGER.info("METHOD : getListarProductoPage()");
+	@GetMapping("/product/list")
+	public String getListProductPage(Model model) {
+		LOGGER.info("CONTROLLER : ProductsController with /product/list invoke the get method");
+		LOGGER.info("METHOD : getListProductPage()");
 		LOGGER.info("RESULT : Page is displayed listproductos.html");
 		model.addAttribute("products", productsService.getAllProducts());
 		return "listarproductos";
 		
 	}
 	
-@GetMapping("/producto/editar/{code}")
-public String getEditarPage(@PathVariable ("code") int code,Model model){
-	LOGGER.info("CONTROLLER : ProductsController with /producto/editar/{code} invoke the get method");
-	LOGGER.info("METHOD : getEditarPage(@PathVariable()");
-	LOGGER.info("RESULT : Page is displayed nuevoproducto.html");
-this.products = productsService.getProductsById(code);
-model.addAttribute("products", this.products);
-model.addAttribute("productlines", productlinesService.getAllProductlines());
-return"nuevoproducto";
-}
+	@GetMapping("/product/edit/{code}")
+	public String getEditProductPage(@PathVariable ("code") int code,Model model){
+		LOGGER.info("CONTROLLER : ProductsController with /product/edit/{code} invoke the get method");
+		LOGGER.info("METHOD : getEditProductPage(@PathVariable()");
+		LOGGER.info("RESULT : Page is displayed nuevoproducto.html");
+		this.products = productsService.getProductsById(String.valueOf(code));
+		model.addAttribute("products", this.products);
+		model.addAttribute("productlines", productlinesService.getAllProductlines());
+		return"nuevoproducto";
+	}
 
-@GetMapping("/producto/borrar/{Code}")
-public String getBorrarPage(@PathVariable ("code") String code , Model model) {
-	LOGGER.info("CONTROLLER : ProductsController with /producto/borrar/{code} invoke the get method");
-	LOGGER.info("METHOD : getBorrarPage()");
-	LOGGER.info("RESULT : Page is displayed eliminarproducto.html");
-	Products products = productsService.getProductsById(Integer.valueOf(code));
-model.addAttribute("products", products);
-return "eliminarproducto";
+	@GetMapping("/product/delete/{code}")
+	public String getDeleteProductPage(@PathVariable ("code") String code , Model model) {
+		LOGGER.info("CONTROLLER : ProductsController with /product/delete/{code} invoke the get method");
+		LOGGER.info("METHOD : getDeleteProductPage()");
+		LOGGER.info("RESULT : Page is displayed eliminarproducto.html");
+		Products product = productsService.getProductsById(code);
+		model.addAttribute("products", product);
+		return "eliminarproducto";
+	}
 
-}
+	@GetMapping("/product/delete/confirm/{code}")
+	public String getConfirmDeleteProductPage(@PathVariable("code") String code, Model model) {
+		LOGGER.info("CONTROLLER : ProductsController with /product/delete/confirm/{code} invoke the get method");
+		LOGGER.info("METHOD : getConfirmDeleteProductPage()");
+		LOGGER.info("RESULT : Page is displayed listarproductos.html");
+		productsService.deleteProductsById(code);
+		model.addAttribute("products", productsService.getAllProducts());
+		return "listarproductos";
+	}
 
-@GetMapping("/producto/borrar/confirmar/{code}")
-public String getConfirmarBorrarPage(@PathVariable("code") String code, Model model) {
-	LOGGER.info("CONTROLLER : ProductsController with /producto/borrar/confirmar/{code} invoke the get method");
-	LOGGER.info("METHOD : getConfirmarBorrarPage()");
-	LOGGER.info("RESULT : Page is displayed listarproductos.html");
-	productsService.deleteProductsById(Integer.valueOf(code));
-	model.addAttribute("products", productsService.getAllProducts());
-	return "listarproductos";
-	
-}
-
-@GetMapping("/producto/buscar")
-public String getBuscarProductoPage(@RequestParam(name="productcode") String productcode,  Model model) {
-	LOGGER.info("CONTROLLER : ProductsController with /producto/buscarinvoke the get method");
-	LOGGER.info("METHOD : getBuscarProductoPage()");
-	LOGGER.info("RESULT : Page is displayed listarproductos.html");
-	model.addAttribute("products", products);
-	model.addAttribute("products", productsService.getProducts(productcode));
-	return "listarproductos";
-
-}
+	@GetMapping("/product/search")
+	public String getSearchProductPage(@RequestParam(name="var") String var,  Model model) {
+		LOGGER.info("CONTROLLER : ProductsController with /product/search invoke the get method");
+		LOGGER.info("METHOD : getSearchProductPage()");
+		LOGGER.info("RESULT : Page is displayed listarproductos.html");
+		model.addAttribute("products", products);
+		model.addAttribute("products", productsService.getProducts(var));
+		return "listarproductos";
+	}
 
 }

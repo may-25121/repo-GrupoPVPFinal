@@ -10,11 +10,11 @@ public interface IProductsService {
 	
     public Products getProducts();
     public void saveProducs(Products products);
-	public Products getProductsById(int code);
+	public Products getProductsById(String code);
 	public Products getNuevoProducto();
 	public List<Products> getAllProducts();
-	public void deleteProductsById(int code);
-	public List<Products> getProducts(String productCode);
+	public void deleteProductsById(String code);
+	public List<Products> getProducts(String var);
 	
 
 }
