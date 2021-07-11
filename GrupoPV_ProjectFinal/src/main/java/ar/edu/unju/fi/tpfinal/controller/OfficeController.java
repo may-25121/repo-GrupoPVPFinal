@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Office;
 import ar.edu.unju.fi.tpfinal.service.IOfficeService;
@@ -34,27 +35,30 @@ public class OfficeController {
 	public String getNewOfficePage(Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/new invoke the get method");
 		LOGGER.info("METHOD : getNewOfficePage()");
-		LOGGER.info("RESULT : Page is displayed nuevaofficina.html");
 		model.addAttribute("office", officeService.getOffice());
+		LOGGER.info("RESULT : Page is displayed nuevaofficina.html");
 		return "nuevaoficina";
 	}
 	
 	@PostMapping("/office/save")
-	public String  saveOfficePage(@Valid @ModelAttribute("office") Office office, BindingResult result, Model model) {
+	public String  saveOfficePage(@Valid @ModelAttribute("office") Office office, BindingResult result, 
+			Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/save invoke the post method");
 		LOGGER.info("METHOD : saveOfficePage() -- PARAMS: office'"+office+"'");
-		LOGGER.info("RESULT : Page is displayed listaroficinas.html");
 		if(result.hasErrors()) {
 			model.addAttribute("office", office);
+			LOGGER.info("RESULT : Page is displayed nuevaoficina.html");
 			return "nuevaoficina";
 		}else {
 			try {
 				officeService.saveOffice(office);
+				attribute.addFlashAttribute("success", "The changes were saved successfully!");
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				LOGGER.info("EXCEPTION INFO: '"+e+"'");
+				attribute.addFlashAttribute("error", "Error: There was an error performing the requested operation!");				
 			}
-			model.addAttribute("offices", officeService.getAllOffices());
-			return "listaroficinas";	
+			LOGGER.info("RESULT : the page is redirected to /office/list/");
+			return "redirect:/office/list/";
 		}
 	}
 	
@@ -62,48 +66,63 @@ public class OfficeController {
 	public String getListOfficePage(Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/list invoke the get method");
 		LOGGER.info("METHOD : getListOfficePage()");
-		LOGGER.info("RESULT : Page is displayed listaroficinas.html");
 		model.addAttribute("offices", officeService.getAllOffices());
+		LOGGER.info("RESULT : Page is displayed listaroficinas.html");
 		return "listaroficinas";
 	}
  
 	@GetMapping("/office/edit/{code}")
-	public String getEditOfficePage(@PathVariable ("code") String code, Model model) {
+	public String getEditOfficePage(@PathVariable ("code") String code, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/edit/{code} invoke the get method");
 		LOGGER.info("METHOD : getEditOfficePage()");
-		LOGGER.info("RESULT : Page is displayed nuevaoficina.html");
+		if(!officeService.getCheckOfficeById(code)) {
+			attribute.addFlashAttribute("error", "Error: The requested record does not exist.");
+			LOGGER.info("RESULT : the page is redirected to /office/list/");
+			return "redirect:/office/list/";
+		}
 		this.office = officeService.getOfficeById(code);
 		model.addAttribute("office", this.office);
+		LOGGER.info("RESULT : Page is displayed nuevaoficina.html");
 		return "nuevaoficina";
 	}
 	
 	@GetMapping("/office/delete/{code}")
-	public String getDeleteOfficePage(@PathVariable ("code") String code, Model model) {
+	public String getDeleteOfficePage(@PathVariable ("code") String code, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/delete/{code} invoke the get method");
 		LOGGER.info("METHOD : getDeleteOfficePage()");
-		LOGGER.info("RESULT : Page is displayed eliminaroficina.html");
+		if(!officeService.getCheckOfficeById(code)) {
+			attribute.addFlashAttribute("error", "Error: The requested record does not exist.");
+			LOGGER.info("RESULT : the page is redirected to /office/list/");
+			return "redirect:/office/list/";
+		}
 		Office office = officeService.getOfficeById(code);
 		model.addAttribute("office", office );
+		LOGGER.info("RESULT : Page is displayed eliminaroficina.html");
 		return "eliminaroficina";
 	}
 	
 	@GetMapping("/office/delete/confirm/{code}")
-	public String getConfirmDeleteOfficePage(@PathVariable("code") String code, Model model) {
+	public String getConfirmDeleteOfficePage(@PathVariable("code") String code, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/delete/confirm/{code} invoke the get method");
 		LOGGER.info("METHOD : getConfirmDeleteOfficePage()");
-		LOGGER.info("RESULT : Page is displayed listaroficinas.html");
-		officeService.deleteOfficeById(code);
-		model.addAttribute("offices", officeService.getAllOffices());
-		return "listaroficinas";
+		try {
+			officeService.deleteOfficeById(code);
+			attribute.addFlashAttribute("warning", "Record deleted successfully!");	
+		} catch (Exception e) {
+			LOGGER.info("EXCEPTION INFO: '"+e+"'");
+			attribute.addFlashAttribute("error", "Error: It is not possible to delete this record.");
+		}
+		LOGGER.info("RESULT : the page is redirected to /office/list/");
+		return "redirect:/office/list/";
 	}
 
 	@GetMapping("/office/search")
 	public String getSearchOfficePage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/search invoke the get method");
 		LOGGER.info("METHOD : getSearchOfficePage()");
-		LOGGER.info("RESULT : Page is displayed listaroficinas.html");		
-		model.addAttribute("code", var);
+		//model.addAttribute("code", var);
 		model.addAttribute("offices", officeService.getOffices(var));
+		LOGGER.info("RESULT : Page is displayed listaroficinas.html");
 		return "listaroficinas";
 	}
 

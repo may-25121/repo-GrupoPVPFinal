@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,36 +25,56 @@ public class Customer {
 	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_number")
+	@NotBlank(message ="You must enter a number")
+	@Size(min = 1,max = 30, message="Enter a minimum of 3 characters and a maximum of 30")
 	private String customerNumber;
 	
 	@Column(name = "customer_name")
+	@NotBlank(message ="You must enter a name")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String customerName;
 	
 	@Column(name = "contact_last_name")
+	@NotBlank(message ="You must enter a contact last name")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String contactLastName;
 	
 	@Column(name = "contact_first_name")
+	@NotBlank(message ="You must enter a contact first name")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String contactFirstName;
 	
 	@Column(name = "phone")
+	@NotBlank(message ="You must enter a phone number")
+	@Size(min = 3,max = 20, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String phone;
 	
 	@Column(name = "address_line1")
+	@NotBlank(message ="You must enter an address")
+	@Size(min = 3,max = 20, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String addressLine1;
 	
 	@Column(name = "address_line2")
 	private String addressLine2;
 	
 	@Column(name = "city")
+	@NotBlank(message ="You must enter a city")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String city;
 	
 	@Column(name = "state")
+	@NotBlank(message ="You must enter a state")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String state;
 	
 	@Column(name = "postal_code")
+	@NotBlank(message ="You must enter a code postal")
+	@Size(min = 3,max = 20, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String postalCode;
 	
 	@Column(name = "country")
+	@NotBlank(message ="You must enter a country")
+	@Size(min = 3,max =50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String country;
 	
 	@Autowired
@@ -59,6 +83,8 @@ public class Customer {
 	private Employee salesRepEmployeeNumber;
 	
 	@Column(name = "credit_limit")
+	@NotNull(message = "You must enter a credito limit")
+	@Min(value=100,message="You must enter a value greater than 100")
 	private Double creditLimit;
 
 	

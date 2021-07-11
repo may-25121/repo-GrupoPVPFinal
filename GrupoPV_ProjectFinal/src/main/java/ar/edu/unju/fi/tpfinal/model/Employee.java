@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,18 +25,23 @@ public class Employee {
 	
 	@Id
 	@Column(name = "employee_number")
+	@NotBlank(message ="You must enter a employe number")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String employeeNumber;
 	
 	@Column(name = "last_name")
 	@NotBlank(message ="You must enter a last name")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String lastName;
 	
 	@Column(name = "first_name")
 	@NotBlank(message ="You must add a first name")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String firstName;
 	
 	@Column(name = "extension")
 	@NotBlank(message ="You must add an extension")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String extension;
 	
 	@Column(name = "email")
@@ -45,8 +49,8 @@ public class Employee {
 	@Email(message = "Enter a valid email")
 	private String email;
 	
-	//RELATIONSHIP WITH THE OFFICE CLASS
-	
+	//RELACION CONLA CLASE OFICINA
+//	@Valid
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "office_code")
@@ -57,13 +61,14 @@ public class Employee {
 	@NotBlank(message ="You must add a job title")
 	private String jobTitle;
 	
-	//RELATIONSHIP WITH YOURSELF
+	//RECLACION CON SIGO MISMA
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "reportsTo")
 	private Employee employee;
 	
-	//RELATIONSHIP WITH THE USER
+	//RELACION CON LA CLASE USUARIO
+	
 	@Valid
 	@Autowired
 	@OneToOne(cascade = CascadeType.ALL)

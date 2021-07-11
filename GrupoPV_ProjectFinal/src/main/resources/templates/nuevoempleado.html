@@ -3,32 +3,31 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
-	<title>Página principal</title>
+	<title>Solivex - Facturation system</title>
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{/css/styles.css}">
 	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
 	</head>
 	<body>
+	
 		<!-- HEADER -->
-		
 		<header th:insert="layout/header :: header"></header>
-		
+
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="fas fa-user-tie fa-lg"></i>&nbsp;Employee registration</h2>
 				</div>
-				  <form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/employee/save}" th:method="post" th:object="${employee}">
 				
+				<!-- FORMULARIO DE DATOS PERSONALES DEL EMPLEADO -->
+				  <form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/employee/save}" th:method="post" th:object="${employee}">								
 					<div class="p-2">
-					
-					  <!-- FORM WITH EMPLOYEE DATA -->
-					  
 					  <div class="form-group">
+					  
+					  		<!-- CAMPOS DEL FORMULARIO th:unless=${employee.employeeNumber} -->
 						  	<div class="p-3">
-						  	
-						  		<!-- PERSONAL INFORMATION -->
-						  		
 						  		<div class="form-group">
 								    <label for="number">Number</label>
 								    <input type="number" class="form-control" id="number" th:field="*{employeeNumber}" placeholder="Enter the employee number">
@@ -61,8 +60,9 @@
 									  		<span th:text="${o.officeCode}"></span>	
 									  	</option>
 									</select>
-									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode.officeCode')}" th:errors="*{officeCode.officeCode}"></div>						    
 							  	</div>
+							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode.officeCode')}" th:errors="*{officeCode.officeCode}"></div>
+							  	
 						  		<div class="form-group">
 								    <label for="jobTitle">Job title</label>
 								    <input type="text" class="form-control" id="jobTitle" th:field="*{jobTitle}" placeholder="Enter the employee's job title">
@@ -78,7 +78,7 @@
 									</select>								    
 							  	</div>
 							  	
-							  	<!-- USER DATA 
+							  	<!-- DATOS DE USUARIO 
 							  	
 							  	<div class="my-2 p-2 bg-darkgray text-dark text-center">
 							  		<h3><i class="fas fa-user-lock fa-sm"></i>&nbsp;User date</h3>
@@ -101,6 +101,8 @@
 									  <option value="seller">Seller</option>
 									</select>								    
 							  	</div>-->
+							  	
+							  	<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
 							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save employee</button>
 									<a th:href="@{/employee/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
@@ -113,7 +115,6 @@
 		</div>
 		
 		<!-- FOOTER -->
-		
 		<footer th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
