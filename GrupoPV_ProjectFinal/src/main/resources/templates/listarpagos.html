@@ -22,9 +22,9 @@
 						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear pago</button>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
-						<form class="form-inline">
-						   <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-						   <button class="btn btn btn-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i>&nbsp;Buscar</button>
+						<form class="form-inline" th:action="@{/payment/search}" th:method="get">
+						   <input class="form-control mr-sm-2" type="text" id="var" name="var" placeholder="Search" aria-label="Search">
+						   <button type="submit" class="btn btn btn-info my-2 my-sm-0"><i class="fas fa-search"></i>&nbsp;Search</button>
 						</form>
 					</div>
 				</div>
@@ -39,54 +39,14 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-				      </td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Larry</td>
-				      <td>the Bird</td>
-				      <td>@twitter</td>
-				      <td>
-				      	<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-				      	<button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+				    <tr th:each="p: ${payments}">
+				      <td th:text="${p.customers.customerNumber}"></td>
+						<td th:text="${p.checkNumber}"></td>
+						<td th:text="${p.paymentDate}"></td>
+						<td th:text="${p.amount}"></td>
+						<td>
+				      	<a class="btn btn-warning" th:href="@{/payment/edit/}+${p.checkNumber}"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger" th:href="@{/payment/borrar/}+${p.checkNumber}"><i class="far fa-trash-alt"></i></a>
 				      </td>
 				    </tr>
 				  </tbody>
