@@ -45,16 +45,7 @@ public class Order {
 	@Column(name = "COMMENTS")
 	private String comments;
 	
-	/*@Column(name = "CUSTOMER_NUMBER")
-	private Integer customerNumber;
-	*/
 	
-	
-	/* @Autowired
-	 @ManyToOne
-	 @JoinColumn(name = "order_details")
-	private OrderDetails orderDetails;
-	 */
 	 @Autowired
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "customer_number" )
