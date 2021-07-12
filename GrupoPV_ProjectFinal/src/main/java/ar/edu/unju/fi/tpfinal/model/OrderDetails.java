@@ -7,6 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -16,7 +17,7 @@ public class OrderDetails implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	
+
 	@EmbeddedId
 	private OrderDetailsId id;
 	

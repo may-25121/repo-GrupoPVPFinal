@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpfinal.model.Customer;
 import ar.edu.unju.fi.tpfinal.model.Payment;
+import ar.edu.unju.fi.tpfinal.model.PaymentsId;
 import ar.edu.unju.fi.tpfinal.repository.ICustomerDAO;
 import ar.edu.unju.fi.tpfinal.repository.IPaymentsDAO;
 import ar.edu.unju.fi.tpfinal.service.IPaymentService;
@@ -36,7 +37,7 @@ public class PaymentServiceImp implements IPaymentService {
 	}
 
 	@Override
-	public Payment getPaymentById(String id) {
+	public Payment getPaymentById(PaymentsId id) {
 		Payment payment = paymentDAO.findById(id).get();
 		return payment;
 	}
@@ -48,14 +49,14 @@ public class PaymentServiceImp implements IPaymentService {
 	}
 
 	@Override
-	public void deletePaymentById(String id) {
+	public void deletePaymentById(PaymentsId id) {
 		paymentDAO.deleteById(id);
 	}
 	
 	//Falta el metodo de busqueda
-
+/*
 	@Override
-	public List<Payment> getPayment(String var) {
+	public List<Payment> getPayments(String var) {
 		List<Payment> payment = new ArrayList<>();
 		Customer customer = new Customer();
 		customer = customerDAO.findById(var).get();
@@ -70,5 +71,5 @@ public class PaymentServiceImp implements IPaymentService {
 			}
 		return payment;
 	}
-
+*/
 }
