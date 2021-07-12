@@ -3,23 +3,30 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
-	<title>Página principal</title>
+	<title>Solivex - Facturation system</title>
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{/css/styles.css}">
 	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
 	</head>
 	<body>
 	
+	<!-- HEADER -->
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="far fa-building fa-lg"></i>&nbsp;Office registration</h2>
 				</div>
+				
+				<!-- FORMULARIO DE REGISTRO -->
 				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/office/save}" th:method="post" th:object="${office}">
 					<div class="p-2">
 					  <div class="form-group">
+					  
+					  		<!-- CAMPOS DEL FORMULARIO  th:unless=${office.officeCode}-->
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="officeCode">Code</label>
@@ -64,6 +71,8 @@
 								    <input type="text" class="form-control" id="territory" th:field="*{territory}" placeholder="Enter the territory where the office is located">
 								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('territory')}" th:errors="*{territory}"></div>
 						  		</div>
+						  		
+						  		<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
 							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save office</button>
 							  		<a th:href="@{/office/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
@@ -75,6 +84,8 @@
 			</div>
 		</div>
 		<br><br><br>
+		
+		<!-- FOOTER -->
 		<footer th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

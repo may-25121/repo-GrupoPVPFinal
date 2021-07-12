@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -16,18 +17,22 @@ public class Office {
 	@Id
 	@Column(name = "office_code")
 	@NotBlank(message ="You must enter a code")
+	@Size(min = 3,max = 20, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String officeCode;
 	
 	@Column(name = "city")
 	@NotBlank(message ="You must add the city")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String city;
 	
 	@Column(name = "phone")
 	@NotBlank(message ="You must add phone")
+	@Size(min = 7,max = 20, message="Enter a minimum of 7 characters and a maximum of 20")
 	private String phone;
 	
 	@Column(name = "address_line1")
 	@NotBlank(message ="You must add an address")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String addressLine1;
 	
 	@Column(name = "address_line2")
@@ -38,14 +43,17 @@ public class Office {
 	
 	@Column(name = "country")
 	@NotBlank(message ="You must add a country")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String country;
 	
 	@Column(name = "postal_code")
 	@NotBlank(message ="You must add a zip code")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String postalCode;
 	
 	@Column(name = "territory")
 	@NotBlank(message ="You must add phone a territory")
+	@Size(min = 3,max = 50, message="Enter a minimum of 3 characters and a maximum of 50")
 	private String territory;
 	
 	//------ CONSTRUCTORES -------

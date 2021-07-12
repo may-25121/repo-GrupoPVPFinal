@@ -1,16 +1,20 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Customer;
 import ar.edu.unju.fi.tpfinal.service.ICustomerService;
@@ -37,14 +41,15 @@ public class CustomerController {
 	public String getNewCustomerPage(Model model) {
 		LOGGER.info("CONTROLLER : CustomerController con /customer/new invoke the get method");
 		LOGGER.info("METHOD : getNewCustomerPage()");
-		LOGGER.info("RESULT : Page is displayed nuevocliente.html");
 		model.addAttribute("customer", customerService.getCustomer());
 		model.addAttribute("employees", employeeService.getAllEmployees());
+		LOGGER.info("RESULT : Page is displayed nuevocliente.html");
 		return "nuevocliente";
 	}
 	
 	@PostMapping("/customer/save")
-	public String saveCustomerPage(@ModelAttribute("customer") Customer customer, Model model) {
+	public String saveCustomerPage(@Valid @ModelAttribute("customer") Customer customer, Model model, BindingResult result
+			,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/save invoke the post method");
 		LOGGER.info("METHOD : saveCustomerPage() -- PARAMS: customer'"+customer+"'");
 		LOGGER.info("RESULT : Page is displayed listarclientes.html");

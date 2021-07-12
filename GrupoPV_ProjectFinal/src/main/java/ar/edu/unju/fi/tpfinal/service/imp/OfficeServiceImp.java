@@ -59,4 +59,13 @@ public class OfficeServiceImp implements IOfficeService{
 		return offices;
 	}
 
+	@Override
+	public boolean getCheckOfficeById(String code) {
+		boolean var = false;
+		if(!code.isEmpty() && !officeDAO.findById(code).isEmpty()) {
+			var = true;
+		}
+		return var;
+	}
+
 }

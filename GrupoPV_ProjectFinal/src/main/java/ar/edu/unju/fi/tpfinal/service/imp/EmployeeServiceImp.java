@@ -61,4 +61,13 @@ public class EmployeeServiceImp implements IEmployeeService {
 		return employees;
 	}
 
+	@Override
+	public boolean getCheckEmployeeById(String number) {
+		boolean var = false;
+		if(!number.isEmpty() && !employeeDAO.findById(number).isEmpty()) {
+			var = true;
+		}
+		return var;
+	}
+
 }
