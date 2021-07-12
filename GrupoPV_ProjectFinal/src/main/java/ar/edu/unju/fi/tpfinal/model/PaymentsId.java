@@ -6,12 +6,15 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Embeddable
 public class PaymentsId implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+
 	@OneToOne
 	@JoinColumn(name = "customer_number")
 	private Customer customerNumber;
@@ -19,6 +22,7 @@ public class PaymentsId implements Serializable{
 	@JoinColumn(name = "check_number")
 	private String checkNumber;
 
+	
 	public PaymentsId() {
 	}
 
@@ -26,7 +30,6 @@ public class PaymentsId implements Serializable{
 		this.customerNumber = customerNumber;
 		this.checkNumber = checkNumber;
 	}
-
 
 	public Customer getCustomerNumber() {
 		return customerNumber;
@@ -47,5 +50,6 @@ public class PaymentsId implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 
 }

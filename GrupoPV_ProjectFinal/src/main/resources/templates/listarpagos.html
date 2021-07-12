@@ -22,7 +22,8 @@
 						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear pago</button>
 					</div>
 					<div class ="ml-auto p-2 bd-highlight">
-						<form class="form-inline" th:action="@{/payment/search}" th:method="get">
+					<!--  	<form class="form-inline" th:action="@{/payment/search}" th:method="get">-->
+						<form class="form-inline">
 						   <input class="form-control mr-sm-2" type="text" id="var" name="var" placeholder="Search" aria-label="Search">
 						   <button type="submit" class="btn btn btn-info my-2 my-sm-0"><i class="fas fa-search"></i>&nbsp;Search</button>
 						</form>
@@ -40,13 +41,15 @@
 				  </thead>
 				  <tbody>
 				    <tr th:each="p: ${payments}">
-				      <td th:text="${p.customers.customerNumber}"></td>
-						<td th:text="${p.checkNumber}"></td>
+				      <td th:text="${p.paymentsId.customerNumber}"></td>
+						<td th:text="${p.paymentsId.checkNumber}"></td>
 						<td th:text="${p.paymentDate}"></td>
 						<td th:text="${p.amount}"></td>
 						<td>
-				      	<a class="btn btn-warning" th:href="@{/payment/edit/}+${p.checkNumber}"><i class="fas fa-edit"></i></a>
-				      	<a class="btn btn-danger" th:href="@{/payment/borrar/}+${p.checkNumber}"><i class="far fa-trash-alt"></i></a>
+						<a class="btn btn-warning"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+<!-- 				      	<a class="btn btn-warning" th:href="@{/payment/edit/}+${p.checkNumber}"><i class="fas fa-edit"></i></a>
+				      	<a class="btn btn-danger" th:href="@{/payment/borrar/}+${p.checkNumber}"><i class="far fa-trash-alt"></i></a> -->
 				      </td>
 				    </tr>
 				  </tbody>
