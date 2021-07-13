@@ -19,6 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ar.edu.unju.fi.tpfinal.model.Office;
 import ar.edu.unju.fi.tpfinal.service.IOfficeService;
 
+/**
+ * Clase OfficeController
+ * Clase que responde a los eventos e invoca peticiones de Office
+ * y ademas es el intermediario entre la vista y el modelo .
+ * @author Yapura-Bejarano
+ *
+ */
 @Controller
 public class OfficeController {
 	
@@ -31,6 +38,12 @@ public class OfficeController {
 	@Qualifier("officeServiceMysql")
 	private IOfficeService officeService;
 	
+	/**
+	 * Metodo que nos permite mostrar el formulario para ingresar una nuevaoficina
+	 * donde por medio del controller mostramos el template nuevaoficina.html
+	 * @param model Parametro que se usa para agregar informacion al template,
+	 * @return retorna el template nuevaoficina.html
+	 */
 	@GetMapping("/office/new")
 	public String getNewOfficePage(Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/new invoke the get method");
@@ -39,6 +52,16 @@ public class OfficeController {
 		LOGGER.info("RESULT : Page is displayed nuevaofficina.html");
 		return "nuevaoficina";
 	}
+	
+	/**
+	 * Metodo que sirve para capturar los valores o informacion ingresada en el template
+	 * nuevapficina.html por medio del metodo POST, para mandarla y almacenarla a la base
+	 * de datos.
+	 * @param office parametro Modelo que captura lo ingresado en la vista.
+	 * @param result parametro que caputra si existe algun error en la vista.
+	 * @return retorna la vista donde se almacenan todos los customers (listaroficinas.html)
+	 * o si se presenta algun error de validacion muestra nuevamente la vista nuevaoficina.html
+	 */
 	
 	@PostMapping("/office/save")
 	public String  saveOfficePage(@Valid @ModelAttribute("office") Office office, BindingResult result, 
@@ -61,6 +84,12 @@ public class OfficeController {
 			return "redirect:/office/list/";
 		}
 	}
+	/**
+	 * Modelo que muestra la vista donde esta la tabla de todas las Offices, la vista se
+	 * llama listaroficinas.html
+	 * @return retorna el modelo donde esta la vista listaroficinas.html que muestra la lista 
+	 * de todos los employees.
+	 */
 	
 	@GetMapping("/office/list")
 	public String getListOfficePage(Model model) {
@@ -70,6 +99,13 @@ public class OfficeController {
 		LOGGER.info("RESULT : Page is displayed listaroficinas.html");
 		return "listaroficinas";
 	}
+	/**
+	 * Modelo principalmente que sirve para editar informacion del objeto (Office)
+	 * mostrando la vista del formulario (nuevaoficina.html) con valores que ya tiene 
+	 * en la base de datos para ser modificado a eleccion. 
+	 * @param code parametro que nos permite identificar el objeto a editar por medio del code
+	 * @return retorna la vista nuevaoficina.html
+	 */
  
 	@GetMapping("/office/edit/{code}")
 	public String getEditOfficePage(@PathVariable ("code") String code, Model model,RedirectAttributes attribute) {
@@ -86,6 +122,12 @@ public class OfficeController {
 		return "nuevaoficina";
 	}
 	
+	/**
+	 * Metodo que permite eliminar un objeto de la vista (listaroficinas.html)
+	 * atraves del id del objeto.
+	 * @param code parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listaroficinas.html
+	 */
 	@GetMapping("/office/delete/{code}")
 	public String getDeleteOfficePage(@PathVariable ("code") String code, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/delete/{code} invoke the get method");
@@ -100,6 +142,12 @@ public class OfficeController {
 		LOGGER.info("RESULT : Page is displayed eliminaroficina.html");
 		return "eliminaroficina";
 	}
+	/**
+	 * Metodo que permite confirmar antes de eliminar un objeto de la vista (listaroficinas.html)
+	 * atraves del id del objeto.
+	 * @param id parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listaroficinas.html
+	 */
 	
 	@GetMapping("/office/delete/confirm/{code}")
 	public String getConfirmDeleteOfficePage(@PathVariable("code") String code, Model model,RedirectAttributes attribute) {
@@ -116,6 +164,12 @@ public class OfficeController {
 		return "redirect:/office/list/";
 	}
 
+	/**
+	 * Metodo que permite buscar un objeto de la vista (listaroficinas.html)
+	 * atraves del id del objeto.
+	 * @param var parametro que permite identificar el objeto a buscar
+	 * @return retorna la vista listaroficinas.html
+	 */
 	@GetMapping("/office/search")
 	public String getSearchOfficePage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : OfficeController with /office/search invoke the get method");

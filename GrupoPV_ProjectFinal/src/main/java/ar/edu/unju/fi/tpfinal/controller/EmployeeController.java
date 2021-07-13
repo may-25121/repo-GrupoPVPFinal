@@ -21,6 +21,13 @@ import ar.edu.unju.fi.tpfinal.model.Usser;
 import ar.edu.unju.fi.tpfinal.service.IEmployeeService;
 import ar.edu.unju.fi.tpfinal.service.IOfficeService;
 
+/**
+ * Clase EmployeeController
+ * Clase que responde a los eventos e invoca peticiones de Employee
+ * y ademas es el intermediario entre la vista y el modelo .
+ * @author Yapura-Anahi
+ *
+ */
 @Controller
 public class EmployeeController {
 	
@@ -37,6 +44,13 @@ public class EmployeeController {
 	@Qualifier("officeServiceMysql")
 	private IOfficeService officeService;
 	
+	/**
+	 * Metodo que nos permite mostrar el formulario para ingresar un nuevo Employee
+	 * donde por medio del controller mostramos el template new-employee.html
+	 * @param model Parametro que se usa para agregar informacion al template,
+	 * @return retorna el template nuevoempleado.html
+	 */
+	
 	@GetMapping("/employee/new")
 	public String getNewEmployeePage(Model model) {
 		LOGGER.info("CONTROLLER : EmployeeController con /employee/new invoke the get method");
@@ -47,6 +61,32 @@ public class EmployeeController {
 		LOGGER.info("RESULT : Page is displayed nuevoempleado.html");
 		return "nuevoempleado";
 	}
+	/**
+	 * Metodo que sirve para capturar los valores o informacion ingresada en el template
+	 * nuevoempleado.html por medio del metodo GET, para mandarla y almacenarla a la base
+	 * de datos y ademas crear el objeto usuario para para employee.
+	 * @param emp parametro Modelo que captura lo ingresado en la vista.
+	 * @param result parametro que caputra si existe algun error en la vista.
+	 * Atributos de la clase employee que sirven para asignar los valores manualmente. 
+	 * @param employeeNumber
+	 * @param lastName
+	 * @param firstName
+	 * @param extension
+	 * @param email
+	 * @param officeCode
+	 * @param reportsTo
+	 * @param jobTitle
+	 * Atributos de la clase Usuario que sirven para asignar los valores manualmente. 
+	 * @param id
+	 * @param usuario
+	 * @param password
+	 * @param role
+	 * @param model parametro que caputra los valores ingresados en la vista para devolver 
+	 * los valores cargados en caso de que ocurra un validacion.
+	 * @return retorna la vista donde se almacenan todos los Employee (listarempleados.html) o 
+	 * si se presenta algun error de validacion en la vista nos muestra nuevamente la vista
+	 * nuevoempleado.html
+	 */
 	
 	@PostMapping("/employee/save")
 	public String saveEmployeePage(@Valid @ModelAttribute("employee") Employee emp, BindingResult result, @RequestParam(name="employeeNumber") String employeeNumber, @RequestParam(name="lastName") String lastName,
@@ -97,6 +137,12 @@ public class EmployeeController {
 			}
 		}
 	}
+	/**
+	 * Modelo que muestra la vista donde esta la tabla de todos los employees, la vista se
+	 * llama listarempleados.html
+	 * @return retorna el modelo donde esta la vista listarempleados.html que muestra la lista 
+	 * de todos los employees.
+	 */
 	
 	@GetMapping("/employee/list")
 	public String getListEmployeePage(Model model) {
@@ -106,6 +152,13 @@ public class EmployeeController {
 		LOGGER.info("RESULT : Page is displayed listarempleados.html");
 		return "listarempleados";
 	}
+	/**
+	 * Modelo principalmente que sirve para editar informacion del objeto (Employee)
+	 * mostrando la vista del formulario (nuevoempleado.html) con valores que ya tiene 
+	 * en la base de datos para ser modificado a eleccion. 
+	 * @param number parametro que nos permite identificar el objeto a editar por medio del id
+	 * @return retorna la vista nuevoempleado.html
+	 */
 	
 	@GetMapping("/employee/edit/{number}")
 	public String getEditEmployeePage(@PathVariable("number") int number, Model model, RedirectAttributes attribute) {
@@ -125,6 +178,13 @@ public class EmployeeController {
 		return "nuevoempleado";
 	}
 	
+	/**
+	 * Metodo que permite eliminar un objeto de la vista (listarempleados.html)
+	 * atraves del id del objeto.
+	 * @param number parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listarempleados.html
+	 */
+	
 	@GetMapping("/employee/delete/{number}")
 	public String getDeleteEmployeePage(@PathVariable("number") String number, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : EmployeeController with /employee/delete/{number} invoke the get method");
@@ -139,6 +199,12 @@ public class EmployeeController {
 		model.addAttribute("employee", employee);
 		return "eliminarempleado";
 	}
+	/**
+	 * Metodo que permite confirmar el objeto a eliminar de la vista (listarempleados.html)
+	 * atraves del id del objeto.
+	 * @param number parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listarempleados.html
+	 */
 	
 	@GetMapping("/employee/delete/confirm/{number}")
 	public String getConfirmDeleteEmployeePage(@PathVariable("number") String number, Model model,RedirectAttributes attribute) {
@@ -155,6 +221,12 @@ public class EmployeeController {
 		return "redirect:/employee/list/";
 	}
 	
+	/**
+	 * Metodo que permite buscar un objeto de la vista (listarempleados.html)
+	 * atraves del id del objeto.
+	 * @param var parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listarempleados.html
+	 */
 	@GetMapping("/employee/search")
 	public String getSearchEmployeePage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : EmployeeController with /employee/search invoke the get method");

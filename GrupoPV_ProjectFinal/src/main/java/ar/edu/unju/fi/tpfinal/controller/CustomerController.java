@@ -21,6 +21,13 @@ import ar.edu.unju.fi.tpfinal.service.ICustomerService;
 import ar.edu.unju.fi.tpfinal.service.IEmployeeService;
 
 
+/**
+ * Clase CustomerController
+ * Clase que responde a los eventos e invoca peticiones de Customers
+ * y ademas es el intermediario entre la vista y el modelo .
+ * @author Yapura- Bejarano
+ *
+ */
 @Controller
 public class CustomerController {
 	
@@ -37,6 +44,13 @@ public class CustomerController {
 	@Qualifier("employeeServiceMysql")
 	private IEmployeeService employeeService;
 	
+	
+	/**
+	 * Metodo que nos permite mostrar el formulario para ingresar un nuevo Customers
+	 * donde por medio del controller mostramos el template new-customer.html
+	 * @param model Parametro que se usa para agregar informacion al template,
+	 * @return retorna el template nuevocliente.html
+	 */
 	@GetMapping("/customer/new")
 	public String getNewCustomerPage(Model model) {
 		LOGGER.info("CONTROLLER : CustomerController con /customer/new invoke the get method");
@@ -46,6 +60,17 @@ public class CustomerController {
 		LOGGER.info("RESULT : Page is displayed nuevocliente.html");
 		return "nuevocliente";
 	}
+	
+	/**
+	 * Metodo que sirve para capturar los valores o informacion ingresada en el template
+	 * nuevocustomer.html por medio del metodo POST, para mandarla y almacenarla a la base
+	 * de datos.
+	 * @param unCustomer parametro Modelo que captura lo ingresado en la vista.
+	 * @param result parametro que caputra si existe algun error en la vista.
+	 * @return retorna la vista donde se almacenan todos los clientes (listarclientes.html) o si 
+	 * se presenta algun error de validacion en la vista nos muestra nuevamente la 
+	 * vista nuevocustomer.html
+	 */
 	
 	@PostMapping("/customer/save")
 	public String saveCustomerPage(@Valid @ModelAttribute("customer") Customer customer, BindingResult result, Model model
@@ -76,6 +101,13 @@ public class CustomerController {
 		}
 	}
 	
+	/**
+	 * Modelo que muestra la vista donde esta la tabla de todos los customers, la vista se
+	 * llama listarclientes.html
+	 * @return retorna el modelo donde esta la vista listarclientes.html que muestra la lista 
+	 * de todos los clientes.
+	 */
+	
 	@GetMapping("/customer/list")
 	public String getListCustomerPage(Model model) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/list invoke the get method");
@@ -84,6 +116,14 @@ public class CustomerController {
 		LOGGER.info("RESULT : Page is displayed listarclientes.html");
 		return "listarclientes";
 	}
+	
+	/**
+	 * Modelo principalmente que sirve para editar informacion del objeto (Customer)
+	 * mostrando la vista del formulario (nuevocliente.html) con valores que ya tiene 
+	 * en la base de datos para ser modificado a eleccion. 
+	 * @param number parametro que nos permite identificar el objeto a editar por medio del number
+	 * @return retorna la vista nuevocliente.html
+	 */
 	
 	@GetMapping("/customer/edit/{number}")
 	public String getEditCustomerPage(@PathVariable("number") int number, Model model,RedirectAttributes attribute) {
@@ -101,6 +141,13 @@ public class CustomerController {
 		return "nuevocliente";
 	}
 	
+	/**
+	 * Metodo que permite eliminar un objeto de la vista (listarclientes.html)
+	 * atraves del number del objeto.
+	 * @param number parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listarclientes.html
+	 */
+	
 	@GetMapping("/customer/delete/{number}")
 	public String getDeleteCustomerPage(@PathVariable("number")String number, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/delete/{number} invoke the get method");
@@ -115,6 +162,12 @@ public class CustomerController {
 		LOGGER.info("RESULT : Page is displayed eliminarcliente.html");
 		return "eliminarcliente";
 	}
+	/**
+	 * Metodo que permite confirmarar al borrar un objeto de la vista (listarclientes.html)
+	 * atraves del number del objeto.
+	 * @param number parametro que permite identificar el objeto a /delete/confirm
+	 * @return retorna la vista listarclientes.html
+	 */
 	
 	@GetMapping("/customer/delete/confirm/{number}")
 	public String getConfirmDeleteCustomerPage(@PathVariable("number") String number, Model model,RedirectAttributes attribute) {
@@ -130,6 +183,13 @@ public class CustomerController {
 		LOGGER.info("RESULT : the page is redirected to /customer/list/");
 		return "redirect:/customer/list/";
 	}
+	
+	/**
+	 * Metodo que permite bucar  un objeto de la vista (listarclientes.html)
+	 * atraves del var del objeto.
+	 * @param var parametro que permite identificar el objeto a buscar
+	 * @return retorna la vista listarclientes.html
+	 */
 	
 	@GetMapping("/customer/search")
 	public String getSearchCustomerPage(@RequestParam(name="var") String var, Model model) {

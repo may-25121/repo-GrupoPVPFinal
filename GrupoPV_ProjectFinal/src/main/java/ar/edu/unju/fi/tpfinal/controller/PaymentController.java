@@ -23,6 +23,12 @@ import ar.edu.unju.fi.tpfinal.model.PaymentsId;
 import ar.edu.unju.fi.tpfinal.service.ICustomerService;
 import ar.edu.unju.fi.tpfinal.service.IPaymentService;
 
+/**Clase PaymentsController
+ * Clase que responde a los eventos e invoca peticiones de Payments
+ * y ademas es el intermediario entre la vista y el modelo 
+ * @author Yapura-Bejarano
+ *
+ */
 @Controller
 public class PaymentController {
 	
@@ -36,6 +42,10 @@ public class PaymentController {
 	@Qualifier("customerServiceMysql")
 	private ICustomerService customerService;
 	
+	/** metodo que permite mostrar e inicializar el formulario 
+	 * @param model parametro utilizado para inyectar datos a la vista
+	 * @return retorna el template nuevopago
+	 */
 	@GetMapping("/payment/new")
 	public String getNewPaymentPage(Model model) {
 		LOGGER.info("CONTROLLER : PaymentController with /payment/new invoke the get method");
@@ -47,6 +57,10 @@ public class PaymentController {
 		return "nuevopago";
 	}
 	
+	/**Metodo para guardar valores ingresados en el template nuevopago
+	 * @param payment recibe valores de la vista
+	 * @return retorna el template nuevopago
+	 */
 	@PostMapping("/payment/save")
 	public String savePaymentPage(@Valid @ModelAttribute("payment") Payment payment, BindingResult result,Model model, RedirectAttributes attribute) {
 		//	,@RequestParam(name="id.customerNumber") String customerNumber, @RequestParam(name="id.checkNumber")String checkNumber) {
@@ -75,6 +89,9 @@ public class PaymentController {
 		}
 	}
 	
+	/**metodo para mostrar el template all-paymentsy en el una coleccion de payments 
+	 * @return retorna el template listarpagos
+	 */
 	@GetMapping("/payment/list")
 	public String getListPaymentPage(Model model) {
 		LOGGER.info("CONTROLLER :  PaymentController with /payment/list invoke the get method");
@@ -84,6 +101,11 @@ public class PaymentController {
 		return "listarpagos";
 	}
 
+	/**metodo que sirve para editar Payment  mostrando el template nuevopago
+	 * @param id.checkNumber parametro q permite identificar el objeto
+	 * @param id.customerNumber parametro q permite identificar el objeto
+	 * @return retorna template nuevopago con los datos de un payment
+	 */
 	@GetMapping("/payment/edit/{id.customerNumber}/{id.checkNumber}")
 	public String editPaymentPage(@PathVariable("id.customerNumber") String customerNumber,
 			@PathVariable("id.checkNumber") String checkNumber, Model model, RedirectAttributes attribute) {
@@ -100,7 +122,11 @@ public class PaymentController {
 		LOGGER.info("RESULT : Page is displayed nuevopago.html");
 		return "nuevopago";
 	}
-	
+	/**Metodo de eliminacion de un obj payment
+	 *@param id.checkNumber parametro q permite identificar el objeto
+	 * @param id.customerNumber parametro q permite identificar el objeto
+	 * @return retorna la pagina listarpagos
+	 */
 	@GetMapping("/payment/delete/{id.customerNumber}/{id.checkNumber}")
 	public String deletePaymentPage(@PathVariable("id.customerNumber") String customerNumber,
 			@PathVariable("id.checkNumber") String checkNumber, Model model, RedirectAttributes attribute) {
@@ -117,7 +143,11 @@ public class PaymentController {
 		return "eliminarpago";
 	}
 	
-	
+	/**Metodo que permite confirmar antes de eliminar un obj payment
+	 *@param id.checkNumber parametro q permite identificar el objeto
+	 * @param id.customerNumber parametro q permite identificar el objeto
+	 * @return retorna la pagina listarpagos
+	 */
 	@GetMapping("/payment/delete/confirm/{id.customerNumber}/{id.checkNumber}")
 	public String getConfirmDeletePaymentPage(@PathVariable("id.customerNumber") String customerNumber,@PathVariable("id.checkNumber") String checkNumber, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : PaymentController with /payment/delete/confirm/{customerNumber}/{checkNumber} invoke the get method");

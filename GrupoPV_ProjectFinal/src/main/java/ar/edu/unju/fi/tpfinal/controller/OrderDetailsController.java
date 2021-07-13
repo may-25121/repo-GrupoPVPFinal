@@ -22,6 +22,13 @@ import ar.edu.unju.fi.tpfinal.service.IOrderDetailsService;
 import ar.edu.unju.fi.tpfinal.service.IOrderService;
 import ar.edu.unju.fi.tpfinal.service.IProductsService;
 
+/**
+ * Clase OrderDetailController
+ * Clase que responde a los eventos e invoca peticiones de Office
+ * y ademas es el intermediario entre la vista y el modelo .
+ * @author Yapura-Bejarano
+ *
+ */
 @Controller
 public class OrderDetailsController {
 	
@@ -39,6 +46,12 @@ public class OrderDetailsController {
 	@Qualifier("productsServiceMysql")
 	IProductsService productService;
 	
+	/**
+	 * Metodo que nos permite mostrar el formulario para ingresar una nueva OrderDetail
+	 * donde por medio del controller mostramos el template nuevodetalleorden.html
+	 * @param model Parametro que se usa para agregar informacion al template,
+	 * @return retorna el template nuevodetalleorden.html
+	 */
 	@GetMapping("/orderdetail/new")
 	public String getNewOrderDetailPage(Model model) {
 		LOGGER.info("CONTROLLER : OrderDetailsController with /orderdetail/ new invoke the get method");
@@ -50,6 +63,18 @@ public class OrderDetailsController {
 		return "nuevodetalleorden";
 	}
 	
+	/**
+	 * Metodo que sirve para capturar los valores o informacion ingresada en el template
+	 * nuevodetalleorden.html por medio del metodo POST, para mandarla y almacenarla a la base
+	 * de datos y ademas ingresa valores a los atributos a la clase OrderDetailId para que se
+	 * genere la tabla que relaciona Products con OrderDetail en la base de datos.
+	 * @param orderDetail
+	 * @param result
+	 * @param model
+	 * @return retorna la vista (all-orderdetail) donde se muestran todas las OrderDetails que estan en la
+	 * base de datos o si presenta alguna error de validacion nos muetra nuevamente la vista 
+	 * nuevadetalleorden.html
+	 */
 	@PostMapping("/orderdetail/save")
 	public String saveOrderDetailPage(@Valid @ModelAttribute("orderDetail") OrderDetails orderDetail, BindingResult result, Model model,
 		 RedirectAttributes attribute) {
@@ -82,6 +107,13 @@ public class OrderDetailsController {
 		}
 	}
 	
+	
+	/**
+	 * Modelo que muestra la vista donde esta la tabla de todas las OrderDetail, la vista se
+	 * llama listardetalleordenes.html
+	 * @return retorna el modelo donde esta la vista listardetalleordenes.html que muestra la lista 
+	 * de todas las OrderDetail.
+	 */
 	@GetMapping("/orderdetail/list")
 	public String getListOrderDetailPage(Model model) {
 		LOGGER.info("CONTROLLER :  OrderDetailsController with /orderdetail/list invoke the get method");
@@ -91,6 +123,15 @@ public class OrderDetailsController {
 		return "listardetalleordenes";
 	}
 	
+	
+	/**
+	 * Modelo principalmente que sirve para editar informacion del objeto (OrderDetail)
+	 * mostrando la vista del formulario (nuevadetalleorden.html) con valores que ya tiene 
+	 * en la base de datos para ser modificado a eleccion. 
+	 * @param productCode parametro que sirve para identificar el product en la order.
+	 * @param orderNumber parametro que relaciona la order con el product.
+	 * @return retorna la vista nuevadetalleorden.html
+	 */
 	@GetMapping("/orderdetail/edit/{id.orderNumber}/{id.productCode}")
 	public String getEditOrderDetailPage(@PathVariable("id.orderNumber") String orderNumber,@PathVariable("id.productCode") String productCode, Model model, RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OrderDetailsController with /orderdetail/edit/{id.orderNumber}/{id.productCode} invoke the get method");
@@ -108,6 +149,13 @@ public class OrderDetailsController {
 		return "nuevodetalleorden";
 	}
 	
+	/**
+	 * Modelo principalmente que sirve para eliminar un objeto (OrderDetail) de
+	 * la vista listardetalleordenes.html
+	 * @param productCode parametro que sirve para identificar el product en la order.
+	 * @param orderNumber parametro que relaciona la order con el product.
+	 * @return retorna la vista listardetalleordenes.html
+	 */
 	@GetMapping("/orderdetail/delete/{id.orderNumber}/{id.productCode}")
 	public String getDeleteOrderDetailPage(@PathVariable("id.orderNumber") String orderNumber,@PathVariable("id.productCode") String productCode, Model model, RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OrderDetailsController with /orderdetail/delete/{id.orderNumber}/{id.productCode} invoke the get method");
@@ -123,6 +171,13 @@ public class OrderDetailsController {
 		return "eliminardetalleorden";
 	}
 	
+	/**
+	 * Modelo principalmente que sirve para confirmar antes de eliminar un objeto (OrderDetail) de
+	 * la vista listardetalleordenes.html
+	 * @param productCode parametro que sirve para identificar el product en la order.
+	 * @param orderNumber parametro que relaciona la order con el product.
+	 * @return retorna la vista listardetalleordenes.html
+	 */
 	@GetMapping("/orderdetail/delete/confirm/{id.orderNumber}/{id.productCode}")
 	public String getConfirmDeleteOrderDetailPage(@PathVariable("id.orderNumber") String orderNumber,@PathVariable("id.productCode") String productCode, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OrderDetailsController with /orderdetail/delete/confirm/{id.orderNumber}/{id.productCode} invoke the get method");
@@ -139,6 +194,12 @@ public class OrderDetailsController {
 		return "redirect:/orderdetail/list/";
 	}
 	
+	/**
+	 * Modelo principalmente que sirve para buscar un objeto (OrderDetail) de
+	 * la vista listardetalleordenes.html
+	 * @param var parametro que sirve para identificar el var a buscar
+	 * @return retorna la vista listardetalleordenes.html
+	 */
 	@GetMapping("/orderdetail/search")
 	public String getSearchOrderDetailPage(@RequestParam(name="var")String var, Model model) {
 		LOGGER.info("CONTROLLER : OrderDetailsController with /orderdetail/search invoke the get method");

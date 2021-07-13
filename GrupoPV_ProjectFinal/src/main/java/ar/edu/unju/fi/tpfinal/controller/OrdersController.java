@@ -22,6 +22,12 @@ import ar.edu.unju.fi.tpfinal.model.Order;
 import ar.edu.unju.fi.tpfinal.service.ICustomerService;
 import ar.edu.unju.fi.tpfinal.service.IOrderService;
 
+/**Clase OrderController
+ * Clase que responde a los eventos e invoca peticiones de Order
+ *  ademas es el intermediario entre la vista y el modelo .
+ * @author Yapura-Bejarano
+ *
+ */
 @Controller
 public class OrdersController {
 	
@@ -37,7 +43,10 @@ public class OrdersController {
 	@Autowired
 	@Qualifier("customerServiceMysql")
 	private ICustomerService customerService;
-	
+	/**Metodo para levantar pagina
+	 * @param model
+	 * @return Retorna la pagina nuevaorden.html
+	 */
 	@GetMapping("/order/new")
 	public String getNewOrderPage(Model model) {
 		LOGGER.info("CONTROLLER : OrdersController con /order/new invoke the get method");
@@ -48,6 +57,10 @@ public class OrdersController {
 		return "nuevaorden";
 	}
 	
+	/**Guardar oneOrder
+	 * @param order de la vista 
+	 * @return pagina listarordenes
+	 */
 	@PostMapping("/order/save")
 	public String saveOrderPage(@Valid @ModelAttribute("order") Order order, BindingResult result, Model model,
 			RedirectAttributes attribute) {
@@ -79,7 +92,11 @@ public class OrdersController {
 			}
 		}
 	}
-	
+	/**Modelo que muestra la vista donde esta la tabla de todos los orders, la vista se
+	 * llama listarordenes.html
+	 * @return retorna el modelo donde esta la vista listarordenes.html que muestra la lista 
+	 * de todos los orders.
+	 */
 	@GetMapping("/order/list")
 	public String getListOrderPage(Model model) {
 		LOGGER.info("CONTROLLER : OrdersController with /order/list invoke the get method");
@@ -89,6 +106,12 @@ public class OrdersController {
 		return "listarordenes";
 	}
 	
+	/**Modelo principalmente que sirve para editar informacion del objeto (Order)
+	 * mostrando la vista del formulario (nuevaorden.html) con valores que ya tiene 
+	 * en la base de datos para ser modificado a eleccion.
+	 * @param number parametro que nos permite identificar el objeto a editar por medio del id(number)
+	 * @return retorna la vista nuevaorden.html
+	 */
 	@GetMapping("/order/edit/{number}")
 	public String getEditOrderPage(@PathVariable("number") String number, Model model, RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OrdersController with /customer/edit/{number} invoke the get method");
@@ -105,6 +128,10 @@ public class OrdersController {
 		return "nuevaorden";
 	}
 	
+	/**
+	 * @param number parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listarordenes.html
+	 */
 	@GetMapping("/order/delete/{number}")
 	public String getDeleteOrderPage(@PathVariable("number") String number, Model model, RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OrderController with /order/delete/{number} invoke the get method");
@@ -120,6 +147,10 @@ public class OrdersController {
 		return "eliminarorden";
 	}
 	
+	/** Permite confirmar antes de elimar el objeto order
+	 * @param number parametro que permite identificar el objeto a eliminar
+	 * @return retorna la vista listarordenes.html
+	 */
 	@GetMapping("/order/delete/confirm/{number}")
 	public String getConfirmDeleteOrder(@PathVariable("number") String number, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : OrdersController with /order/delete/confirm/{number} invoke the get method");
@@ -135,6 +166,10 @@ public class OrdersController {
 		return "redirect:/order/list/";
 	}
 	
+	/** Permite buscar un objeto de la tabla order
+	 * @param var parametro que permite identificar el objeto a buscar
+	 * @return retorna la vista listarordenes.html
+	 */
 	@GetMapping("/order/search")
 	public String getSearchOrderPage(@RequestParam(name= "var") String var, Model model) {
 		LOGGER.info("CONTROLLER : OrdersController with /customer/search invoke the get method");
