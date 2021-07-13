@@ -4,9 +4,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,16 +19,21 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "USERS")
 @Component
-public class User {
+public class Usser {
 	
 	@Id
 	@Column(name = "user_id")
+	@NotNull(message = "You must enter an id")
 	private Integer id;
 	
 	@Column(name = "user_username")
+	@NotEmpty(message="The field cannot be empty")
+	@Size(min = 3,max = 20, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String username;
 	
 	@Column(name = "user_password")
+	@NotEmpty(message="The field cannot be empty")
+	@Size(min = 3,max = 100, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String password;
 	
 	@Column(name = "user_role")
@@ -35,10 +45,10 @@ public class User {
 	
 	//------ CONSTRUCTORES -------
 
-	public User() {
+	public Usser() {
 	}
 
-	public User(Integer id, String username, String password, String role, Employee employeeUser) {
+	public Usser(Integer id, String username, String password, String role, Employee employeeUser) {
 		this.id = id;
 		this.username = username;
 		this.password = password;

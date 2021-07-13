@@ -10,16 +10,23 @@
 	</head>
 	<body>
 	
+		<!-- HEADER -->
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="fab fa-dropbox fa-lg"></i>&nbsp;Product registration</h2>
 				</div>
+				
+				<!-- FORMULARIO DE REGISTRO -->
 				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/product/save}" th:method="post" th:object="${products}">
 					<div class="p-2">
 					  <div class="form-group">
+					  
+					  		<!-- CAMPOS DEL FORMULARIO -->
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="codigo">Code</label>
@@ -71,7 +78,8 @@
 								    <input type="text" class="form-control" id="msrp" th:field="*{msrp}" placeholder="Enter product list price">
 							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('msrp')}" th:errors="*{msrp}"></div>
 							  	</div>
-							  
+							  	
+							  	<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
 							  		<button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save product</button>
 							  		<a th:href="@{/product/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
@@ -84,6 +92,7 @@
 			</div>
 		</div>
 		
+		<!-- FOOTER -->
 		<footer th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

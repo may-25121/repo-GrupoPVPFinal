@@ -59,7 +59,14 @@ public class ProductlinesServiceImp implements IProductlinesService {
 		return productlines;
 	
 	}
-	
-	
+
+	@Override
+	public boolean getCheckProductLineById(String Line) {
+		boolean var =false;
+		if(!Line.isEmpty() && !productlinesDAO.findById(Line).isEmpty()) {
+			var = true;
+		}
+		return var;
+	}
 
 }

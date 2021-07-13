@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"> lang="es">
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
@@ -10,41 +10,53 @@
 	</head>
 	<body>
 	
+		<!-- HEADER-->
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="fas fa-user-friends fa-lg"></i>&nbsp;Customers registration</h2>
 				</div>
+				
+				<!-- FORMULARIO DE DATOS PERSONALES DEL CLIENTE  -->
 				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/customer/save}" th:method="post" th:object="${customer}">
 					<div class="p-2">
 					  <div class="form-group">
+					  
+					  		<!-- CAMPOS DEL FORMULARIO -->
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="customerNumber">Number</label>
 								    <input th:field="*{customerNumber}" type="number" class="form-control" id="customerNumber" placeholder="Enter the customer number">
+								    <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('customerNumber')}" th:errors="*{customerNumber}" ></div>
 						  		</div>
-						  		
 						  		<div class="form-group">
 								    <label for="customerName">Name</label>
 								    <input th:field="*{customerName}" type="text" class="form-control" id="customerName" placeholder="Enter the customer's full name">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="contactLastName">Contact last name</label>
 								    <input th:field="*{contactLastName}" type="text" class="form-control" id="contactLastName" placeholder="Enter the name of the customer contact">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('contactLastName')}" th:errors="*{contactLastName}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="contactFirstName">Contact first name</label>
 								    <input th:field="*{contactFirstName}" type="text" class="form-control" id="contactFirstName" placeholder="Enter the last name of the customer contact">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('contactFirstName')}" th:errors="*{contactFirstName}" ></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="phone">Phone</label>
 								    <input th:field="*{phone}" type="text" class="form-control" id="phone" placeholder="Enter the customer's phone number">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" ></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="addressLine1">Address line 1</label>
 								    <input th:field="*{addressLine1}" type="text" class="form-control" id="addressLine1" placeholder="Enter the customer address line 1">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}" ></div>
 							  	</div>
 						  		<div class="form-group">
 								    <label for="addressLine2">Address line 2</label>
@@ -53,18 +65,22 @@
 							  	<div class="form-group">
 								    <label for="city">City</label>
 								    <input th:field="*{city}" type="text" class="form-control" id="city" placeholder="Enter the city where the customer resides">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('city')}" th:errors="*{city}" ></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="state">State</label>
 								    <input th:field="*{state}" type="text" class="form-control" id="state" placeholder="Enter the state where the customer resides">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('state')}" th:errors="*{state}" ></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="postalCode">Postal code</label>
 								    <input th:field="*{postalCode}" type="text" class="form-control" id="postalCode" placeholder="Enter the zip code of the place where the customer resides">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" ></div>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="country">Country</label>
 								    <input th:field="*{country}" type="text" class="form-control" id="country" placeholder="Enter country where the customer resides">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('country')}" th:errors="*{country}" ></div>
 							  	</div> 
 						  		<div class="form-group">
 								    <label for="employeeNumber">Sales rep employee number</label>
@@ -77,7 +93,10 @@
 							  	<div class="form-group">
 								    <label for="cledito">Credit limit</label>
 								    <input th:field="*{creditLimit}" type="number" class="form-control" id="creditLimit" placeholder="Enter the customer's credit">
+							  		<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('creditLimit')}" th:errors="*{country}" ></div>
 							  	</div>
+							  	
+							  	<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
 							  		<button type="submit" th:href="@{/customer/save}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save customer</button>
 							  		<a th:href="@{/customer/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
@@ -90,6 +109,7 @@
 			</div>
 		</div>
 		
+		<!-- FOOTER -->
 		<footer th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

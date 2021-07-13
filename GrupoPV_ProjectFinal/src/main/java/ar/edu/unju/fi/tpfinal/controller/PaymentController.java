@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Customer;
 import ar.edu.unju.fi.tpfinal.model.Payment;
@@ -25,7 +26,7 @@ import ar.edu.unju.fi.tpfinal.service.IPaymentService;
 @Controller
 public class PaymentController {
 	
-	//private static final Log LOGGER = LogFactory.getLog(CustomerController.class);
+	private static final Log LOGGER = LogFactory.getLog(CustomerController.class);
 	
 	@Autowired
 	@Qualifier("paymentServiceMysql")
@@ -35,76 +36,102 @@ public class PaymentController {
 	@Qualifier("customerServiceMysql")
 	private ICustomerService customerService;
 	
-	@GetMapping("/payment/nuevo")
-	public String getNuevoPaymentPage(Model model) {
+	@GetMapping("/payment/new")
+	public String getNewPaymentPage(Model model) {
+		LOGGER.info("CONTROLLER : PaymentController with /payment/new invoke the get method");
+		LOGGER.info("METHOD : getNewPaymentPage()");
 		model.addAttribute("payment", paymentService.getPayment());
 		model.addAttribute("customer", customerService.getAllCustomers());
-		model.addAttribute("payments", paymentService.getAllPayment());
+		//model.addAttribute("payments", paymentService.getAllPayment());
+		LOGGER.info("RESULT : Page is displayed nuevopago.html");
 		return "nuevopago";
 	}
-	/*
-	@PostMapping("/orderdetail/save")
-	public String saveOrderDetailPage(@ModelAttribute("orderDetail") OrderDetails orderDetail, Model model, 
-		@RequestParam(name="id.orderNumber") String orderNumber, @RequestParam(name="id.productCode")String productCode) {
-		LOGGER.info("CONTROLLER : OrderDetailsController with /orderdetail/save invoke the post method");
-		OrderDetailsId orderDetailsId= new OrderDetailsId(productService.getProductsById(productCode),orderService.getOrderById(Integer.valueOf(orderNumber)));
-		//orderDetailsId.setOrderNumber(orderService.getOrderById(Integer.valueOf(orderNumber)));
-		//orderDetailsId.setProductCode(productService.getProductsById(productCode)); 
-		orderDetail.setId(orderDetailsId);
-		LOGGER.info("METHOD : saveOrderDetailPage() -- PARAMS: orderDetail'"+orderDetail+"'");
-		orderDetailService.saveOrderDetail(orderDetail);
-		model.addAttribute("orderDetails", orderDetailService.getAllOrderDetails());
-		LOGGER.info("RESULT : Page is displayed listardetalleordenes.html");
-		return "listardetalleordenes";
-	}
-	*/
 	
-	@PostMapping("/payment/guardar")
-	public ModelAndView savePaymentPage(@Valid @ModelAttribute("payment") Payment payment, BindingResult result
-			,@RequestParam(name="id.customerNumber") String customerNumber, @RequestParam(name="id.checkNumber")String checkNumber) {
+	@PostMapping("/payment/save")
+	public String savePaymentPage(@Valid @ModelAttribute("payment") Payment payment, BindingResult result,Model model, RedirectAttributes attribute) {
+		//	,@RequestParam(name="id.customerNumber") String customerNumber, @RequestParam(name="id.checkNumber")String checkNumber) {
+		LOGGER.info("CONTROLLER : PaymentController with /payment/save invoke the post method");
+		LOGGER.info("METHOD : savePaymentPage() -- PARAMS: payment'"+payment+"'");
 		if(result.hasErrors()) {
-			ModelAndView model = new ModelAndView("nuevopago");
-			model.addObject(payment);
-			model.addObject("customer",customerService.getAllCustomers());
-			return model;
+			model.addAttribute("payment", payment);
+			model.addAttribute("customer", customerService.getAllCustomers());
+			return "nuevopago";
 		} else {
-			PaymentsId paymentsId = new PaymentsId(customerService.getCustomerById(Integer.valueOf(customerNumber)),checkNumber);
-			ModelAndView modelView = new ModelAndView("listarpago");
-			payment.setId(paymentsId);
-			paymentService.savePayment(payment);
-			modelView.addObject("payments", paymentService.getAllPayment());
-			return modelView;
+			if(!payment.getId().getCheckNumber().isEmpty() && payment.getId().getCustomerNumber()!=null ) {
+				try {
+					paymentService.savePayment(payment);
+					attribute.addFlashAttribute("success", "The changes were saved successfully!");
+				} catch (Exception e) {
+					LOGGER.info("EXCEPTION INFO: '"+e+"'");
+					attribute.addFlashAttribute("error", "Error: There was an error performing the requested operation!");
+				}
+				LOGGER.info("RESULT : the page is redirected to /payment/list/");
+				return "redirect:/payment/list/";	
+			}else {
+				attribute.addFlashAttribute("info", "Info: There are no customer products loaded in the system and/or check number, you must load at least one of each!");
+				LOGGER.info("RESULT : The page is redirected to /payment/new/");
+				return "redirect:/payment/new/";
+			}
 		}
 	}
 	
-	@GetMapping("/payment/lista")
+	@GetMapping("/payment/list")
 	public String getListPaymentPage(Model model) {
+		LOGGER.info("CONTROLLER :  PaymentController with /payment/list invoke the get method");
+		LOGGER.info("METHOD : getListPaymentPage()");
 		model.addAttribute("payments", paymentService.getAllPayment());
+		LOGGER.info("RESULT : Page is displayed listarpagos.html");
 		return "listarpagos";
 	}
-	/*
-	@GetMapping("/payment/edit/{id}")
-	public ModelAndView editPaymentPage(@PathVariable(value="id") String id) {
-		ModelAndView modelView = new ModelAndView("nuevopago");
-		Payment payment = paymentService.getPaymentById(id);
-		modelView.addObject("payment", payment);
-		modelView.addObject("customer", customerService.getAllCustomers());
-		return modelView;
+
+	@GetMapping("/payment/edit/{id.customerNumber}/{id.checkNumber}")
+	public String editPaymentPage(@PathVariable("id.customerNumber") String customerNumber,
+			@PathVariable("id.checkNumber") String checkNumber, Model model, RedirectAttributes attribute) {
+		LOGGER.info("CONTROLLER : PaymentController with /payment/edit/{customerNumber}/{checkNumber} invoke the get method");
+		LOGGER.info("METHOD : editPaymentPage()");		
+		PaymentsId paymentsId = new PaymentsId(customerService.getCustomerById(Integer.valueOf(customerNumber)),checkNumber);
+		if(!paymentService.getCheckPaymentById(paymentsId)) {
+			attribute.addFlashAttribute("error", "Error: The requested record does not exist.");
+			LOGGER.info("RESULT : the page is redirected to /payment/list/");
+			return "redirect:/payment/list/";			
+		}
+		model.addAttribute("payment", paymentService.getPaymentById(paymentsId));
+		model.addAttribute("customer", customerService.getAllCustomers());
+		LOGGER.info("RESULT : Page is displayed nuevopago.html");
+		return "nuevopago";
 	}
 	
-	@GetMapping("/payment/borrar/{id}")
-	public ModelAndView deletePaymentPage(@PathVariable(value="id") String id) {
-		ModelAndView modelView = new ModelAndView("eliminarpago");
-		paymentService.deletePaymentById(id);
-		return modelView;
+	@GetMapping("/payment/delete/{id.customerNumber}/{id.checkNumber}")
+	public String deletePaymentPage(@PathVariable("id.customerNumber") String customerNumber,
+			@PathVariable("id.checkNumber") String checkNumber, Model model, RedirectAttributes attribute) {
+		LOGGER.info("CONTROLLER : PaymentController with /payment/delete/{customerNumber}/{checkNumber} invoke the get method");
+		LOGGER.info("METHOD : deletePaymentPage()");
+		PaymentsId paymentsId = new PaymentsId(customerService.getCustomerById(Integer.valueOf(customerNumber)),checkNumber);
+		if(!paymentService.getCheckPaymentById(paymentsId)) {
+			attribute.addFlashAttribute("error", "Error: The requested record does not exist.");
+			LOGGER.info("RESULT : the page is redirected to /payment/list/");
+			return "redirect:/payment/list/";			
+		}
+		model.addAttribute("payment", paymentService.getPaymentById(paymentsId));
+		LOGGER.info("RESULT : Page is displayed eliminarpago.html");
+		return "eliminarpago";
 	}
 	
-	@GetMapping("/payment/borrar/confirmar/{id}")
-	public ModelAndView getConfirmarBorrarPaymentPage(@PathVariable(value="id") String id) {
-		ModelAndView modelView = new ModelAndView("listarpagos");
-		paymentService.deletePaymentById(id);
-		modelView.addObject("payment", paymentService.getAllPayment());
-		return modelView;
-	}*/
+	
+	@GetMapping("/payment/delete/confirm/{id.customerNumber}/{id.checkNumber}")
+	public String getConfirmDeletePaymentPage(@PathVariable("id.customerNumber") String customerNumber,@PathVariable("id.checkNumber") String checkNumber, Model model,RedirectAttributes attribute) {
+		LOGGER.info("CONTROLLER : PaymentController with /payment/delete/confirm/{customerNumber}/{checkNumber} invoke the get method");
+		LOGGER.info("METHOD : getConfirmDeletePaymentPage()");
+		PaymentsId paimentId = new PaymentsId(customerService.getCustomerById(Integer.valueOf(customerNumber)),checkNumber);
+		try {
+			paymentService.deletePaymentById(paimentId);
+			attribute.addFlashAttribute("warning", "Record deleted successfully!");
+		} catch (Exception e) {
+			LOGGER.info("EXCEPTION INFO: '"+e+"'");
+			attribute.addFlashAttribute("error", "Error: It is not possible to delete this record.");
+		}
+		LOGGER.info("RESULT : the page is redirected to /payment/list/");
+		return "redirect:/payment/list/";
+	}
 	
 }

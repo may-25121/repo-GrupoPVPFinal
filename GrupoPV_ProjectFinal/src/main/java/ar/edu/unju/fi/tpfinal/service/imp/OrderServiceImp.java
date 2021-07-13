@@ -1,7 +1,6 @@
 package ar.edu.unju.fi.tpfinal.service.imp;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +57,15 @@ public class OrderServiceImp implements IOrderService {
 			orders = (List<Order>) orderDAO.findAll();
 		}
 		return orders;
+	}
+
+	@Override
+	public boolean getCheckOrderById(String number) {
+		boolean var = false;
+		if(!number.isEmpty() && !orderDAO.findById(number).isEmpty()) {
+			var = true;
+		}
+		return var;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.events.Event.ID;
 
 import ar.edu.unju.fi.tpfinal.model.Order;
 import ar.edu.unju.fi.tpfinal.model.OrderDetails;
@@ -81,5 +82,16 @@ public class OrderDetailsServiceImp implements IOrderDetailsService {
 		}
 		return orderDetails;
 	}
+
+	@Override
+	public boolean getCheckOrderDetailById(OrderDetailsId Id) {
+		boolean var = false;
+		if(Id!=null && !orderDetailDAO.findById(Id).isEmpty()) {
+			var = true;
+		}
+		return var;
+	}
+	
+	
 
 }

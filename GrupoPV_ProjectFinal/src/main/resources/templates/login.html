@@ -17,14 +17,28 @@
 			<!-- FORMULARIO DE INICIO DE SESION -->
 			<div class="py-5 my-3">
 			<div class="row py-4 mt-4">
-				<form class="bg-white col-sm-4 p-auto m-auto">
+				<form class="bg-white col-sm-4 p-auto m-auto" th:action="@{/login}" method="post">
 					<div class="text-center p-2">
 					  <div class="form-group text-uppercase">
 						  	<div class="px-3 py-2 mb-3 my-2 bg-dodgerblue text-uppercase">
 						  		<h4 class="font-weight-bold text-white">Login</h4>
 						  	</div>
+						  	<!-- MENSAJES PARA EL USUARIO -->
+							<div class="alert alert-danger alert-dismissible fade show" th:if="${param.error}" role="alert">
+							  	<label>Invalid user name or password</label>
+							  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  	</button>
+							</div>
+							<div class="alert alert-info alert-dismissible fade show" th:if="${param.logout}" role="alert">
+							  	<label>You have logged out. Thanks!</label>
+							  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  	</button>
+							</div>
 						  	<img class="img-fluid" alt="" th:src="@{/img/isesion.png}">
 						  	<br>
+						  	
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="username">User name</label>
@@ -34,7 +48,8 @@
 								    <label for="password">Password</label>
 								    <input type="password" class="form-control text-center" id="password" name="password" placeholder="Enter password">
 							  	</div>
-								  <button type="button" class="btn bg-medsuccess btn-lg btn-block text-uppercase font-weight-bold text-white"><i class="fas fa-sign-out-alt"></i>&nbsp;Login</button>
+								  <button type="submit" class="btn bg-medsuccess btn-lg btn-block text-uppercase font-weight-bold text-white"><i class="fas fa-sign-out-alt"></i>&nbsp;Login</button>
+								  <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${formLoginErrorMessage}" th:text="${formLoginErrorMessage}" ></div>
 							</div>
 						</div>
 					</div>

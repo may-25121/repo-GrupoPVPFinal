@@ -14,5 +14,6 @@ public interface IOrderDetailsService {
 	public List<OrderDetails> getAllOrderDetails();
 	public void deleteOrderDetailById(OrderDetailsId Id);
 	public List<OrderDetails> getOrderDetails(String var);
+	public boolean getCheckOrderDetailById(OrderDetailsId Id);
 
 }

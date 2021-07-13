@@ -10,11 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
 
 
 @Entity
@@ -24,27 +26,32 @@ public class Order {
 	
 	@Id
 	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ORDER_NUMBER")
+	@Column(name = "order_number")
+	@NotBlank(message ="You must enter a order number")
+	@Size(min = 1,max = 50, message="Enter a minimum of 3 characters and a maximum of 20")
 	private String orderNumber;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Column(name = "ORDER_DATE")
+	@Column(name = "order_date")
+	@NotNull(message = "You must enter a order date")
 	private LocalDate orderDate;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Column(name = "REQUIRED_DATE")
+	@Column(name = "required_date")
+	@NotNull(message = "You must enter a required date")
 	private LocalDate requiredDate;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Column(name = "SHIPPED_DATE")
+	@Column(name = "shipped_date")
+	@NotNull(message = "You must enter a shipped date")
 	private LocalDate shippedDate;
 	
-	@Column(name = "STATUS")
+	@Column(name = "status")
+	@NotBlank(message ="You must enter a status")
 	private String status;
 	
-	@Column(name = "COMMENTS")
+	@Column(name = "coments")
 	private String comments;
-	
 	
 	 @Autowired
 	 @ManyToOne(fetch = FetchType.LAZY)
@@ -55,8 +62,6 @@ public class Order {
 	//------ CONSTRUCTORES -------
 	
 	public Order() {
-		// TODO Auto-generated constructor stub
-		super();
 	}
 	
 
@@ -98,7 +103,6 @@ public class Order {
 	}
 
 
-	
 	/**
 	 * @param orderNumber the orderNumber to set
 	 */
@@ -192,24 +196,6 @@ public class Order {
 		this.comments = comments;
 	}
 
-
-
-/*
-
-	public OrderDetails getOrderDetails() {
-		return orderDetails;
-	}
-
-
-
-
-	public void setOrderDetails(OrderDetails orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-
-*/
-
-
 	public Customer getCustomerNumber() {
 		return customerNumber;
 	}
@@ -218,8 +204,6 @@ public class Order {
 	public void setCustomerNumber(Customer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
-	
-	
 
 	@Override
 	public String toString() {

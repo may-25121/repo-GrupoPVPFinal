@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.tpfinal.model.Office;
 import ar.edu.unju.fi.tpfinal.model.Products;
 
 import ar.edu.unju.fi.tpfinal.repository.IProductsDAO;
@@ -68,6 +67,15 @@ public class ProductsServiceImp implements IProductsService{
 			products = (List<Products>) productsDAO.findAll();
 		}
 		return products  ;
+	}
+
+	@Override
+	public boolean getCheckProductById(String code) {
+		boolean var = false;
+		if(!code.isEmpty() && !productsDAO.findById(code).isEmpty()) {
+			var = true;
+		}
+		return var;
 	}
 }
 
