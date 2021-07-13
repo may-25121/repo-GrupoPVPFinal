@@ -10,17 +10,24 @@
 	</head>
 	<body>
 	
+		<!-- HEADER -->
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
 				<div class="col-12 mt-3 mb-3 py-2 d-flex bd-highlight mb-3">
+				
+					<!-- TITULO -->
 					<div class="p-2 bd-highlight">
-						<h2><i class="fas fa-coins fa-lg"></i>&nbsp;Lista de pagos</h2>
+						<h2><i class="fas fa-coins fa-lg"></i>&nbsp;List of payments</h2>
 					</div>
+					
+					<!-- BOTON CREAR PAGO -->
 					<div class="p-2 bd-highlight">
-						<button type="button" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Crear pago</button>
+						<a class="btn btn-info" th:href="@{/payment/new}"><i class="fas fa-plus"></i>&nbsp;Create payment</a>
 					</div>
+					
+					<!-- FORMULARIO DE BUSQUEDA -->
 					<div class ="ml-auto p-2 bd-highlight">
 					<!--  	<form class="form-inline" th:action="@{/payment/search}" th:method="get">-->
 						<form class="form-inline">
@@ -29,35 +36,42 @@
 						</form>
 					</div>
 				</div>
+				
+				<!-- TABLA -->
 				<table class="table table-striped col-sm-12 bg-light border">
+				 
+				  <!-- CABECERA -->
 				  <thead>
 				    <tr class="bg-buebird text-white">
-				      <th scope="col">N° de cliente</th>
-				      <th scope="col">N° de verificación</th>
-				      <th scope="col">Fecha de pago</th>
-				      <th scope="col">Cantidad</th>
-				      <th scope="col">Acciones</th>
+				      <th scope="col">Customer number</th>
+				      <th scope="col">Check number</th>
+				      <th scope="col">Payment Date</th>
+				      <th scope="col">Amount</th>
+				      <th scope="col">Actions</th>
 				    </tr>
 				  </thead>
 				  <tbody>
+				  
+				  <!-- CONTENIDO -->
 				    <tr th:each="p: ${payments}">
-				      <td th:text="${p.paymentsId.customerNumber}"></td>
-						<td th:text="${p.paymentsId.checkNumber}"></td>
+				      	<td th:text="${p.id.customerNumber.customerNumber}"></td>
+						<td th:text="${p.id.checkNumber}"></td>
 						<td th:text="${p.paymentDate}"></td>
 						<td th:text="${p.amount}"></td>
+						
+						<!-- BOTONES EDITAR Y BORRAR -->
 						<td>
-						<a class="btn btn-warning"><i class="fas fa-edit"></i></a>
-				      	<a class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
-<!-- 				      	<a class="btn btn-warning" th:href="@{/payment/edit/}+${p.checkNumber}"><i class="fas fa-edit"></i></a>
-				      	<a class="btn btn-danger" th:href="@{/payment/borrar/}+${p.checkNumber}"><i class="far fa-trash-alt"></i></a> -->
-				      </td>
+ 			      		  <a class="btn btn-warning" th:href="@{/payment/edit/}+${p.id.customerNumber.customerNumber}+'/'+${p.id.checkNumber}"><i class="fas fa-edit"></i></a>
+				      	  <a class="btn btn-danger" th:href="@{/payment/delete/}+${p.id.customerNumber.customerNumber}+'/'+${p.id.checkNumber}"><i class="far fa-trash-alt"></i></a>
+				      	</td>
 				    </tr>
 				  </tbody>
 				</table>
 			</div>
 		</div>
 		
-		<footer th:insert="layout/footer :: footer"></footer>
+		<!-- FOOTER -->
+		<footer class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>

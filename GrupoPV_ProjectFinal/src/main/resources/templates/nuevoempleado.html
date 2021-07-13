@@ -26,7 +26,7 @@
 					<div class="p-2">
 					  <div class="form-group">
 					  
-					  		<!-- CAMPOS DEL FORMULARIO th:unless=${employee.employeeNumber} -->
+					  		<!-- CAMPOS DEL FORMULARIO -->
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="number">Number</label>
@@ -61,7 +61,7 @@
 									  	</option>
 									</select>
 							  	</div>
-							  	<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode.officeCode')}" th:errors="*{officeCode.officeCode}"></div>
+							  	<!--  <div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('officeCode.officeCode')}" th:errors="*{officeCode.officeCode}"></div>-->
 							  	
 						  		<div class="form-group">
 								    <label for="jobTitle">Job title</label>
@@ -78,29 +78,35 @@
 									</select>								    
 							  	</div>
 							  	
-							  	<!-- DATOS DE USUARIO 
+							  	<!-- DATOS DE USUARIO -->
 							  	
 							  	<div class="my-2 p-2 bg-darkgray text-dark text-center">
 							  		<h3><i class="fas fa-user-lock fa-sm"></i>&nbsp;User date</h3>
 							  	</div>
+							  	<div class="form-group">
+								    <label for="username">User ID</label>
+								    <input type="text" class="form-control" th:field="*{user.id}" id="username" name="username" placeholder="Enter a username">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('user.id')}" th:errors="*{user.id}"></div>
+						  		</div>	
 						  		<div class="form-group">
 								    <label for="username">Username</label>
 								    <input type="text" class="form-control" th:field="*{user.username}" id="username" name="username" placeholder="Enter a username">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}"></div>
 						  		</div>						  	
 						  		<div class="form-group">
 								    <label for="jobTitle">Password</label>
 								    <input type="password" class="form-control" th:field="*{user.password}" id="password" name="password" placeholder="Enter a user password">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}"></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="role">Role</label>
 								    <select th:field="*{user.role}" class="form-control" id="role" name="role">
-									  <option value="">Select option</option>
-									  <option value="admin">Administrator</option>
-									  <option value="director">Director</option>
-									  <option value="supervisor">Supervisor</option>
-									  <option value="seller">Seller</option>
-									</select>								    
-							  	</div>-->
+									  <option value="Administrator">Administrator</option>
+									  <option value="Director">Director</option>
+									  <option value="Employee">Seller</option>
+									</select>
+									<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('user.role')}" th:errors="*{user.role}"></div>					    
+							  	</div>
 							  	
 							  	<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">

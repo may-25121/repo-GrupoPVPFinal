@@ -13,5 +13,6 @@ public interface IPaymentService {
 	public List<Payment> getAllPayment();
 	public void deletePaymentById(PaymentsId id);
 	//public List<Payment> getPayments(String var);
+	public boolean getCheckPaymentById(PaymentsId id);
 	
 }

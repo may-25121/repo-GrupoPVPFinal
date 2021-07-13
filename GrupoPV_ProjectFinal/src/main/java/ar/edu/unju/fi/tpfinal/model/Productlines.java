@@ -19,33 +19,28 @@ import org.springframework.stereotype.Component;
 public class Productlines {
 
 	@Id
-	@Column(name = "PRODUCT_LINE")
-	@NotEmpty(message="Debes ingresar productline")
+	@Column(name = "product_line")
+	@NotEmpty(message="You must enter a product line")
 	private String productLine;
 	
-	@Column(name = "TEXT_DESCRIPTION")
-	@NotBlank(message="Debes ingresar textDescription")
-	@Size(min = 3,max = 30, message="Minimo 3 y Maximo 30 caracteres")
+	@Column(name = "text_description")
+	@NotBlank(message="You must add the text description")
+	@Size(min = 3,max = 30, message="Enter a minimum of 3 characters and a maximum of 30")
 	private String textDescription;
 	
-	@Column(name = "HTML_DESCRIPTION")
-	@NotEmpty(message="Debes ingresar htmlDescription")
-	@Size(min = 5,max = 30, message="Minimo 5 y Maximo 30 caracteres")
+	@Column(name = "HTML_description")
+	@NotEmpty(message="You must enter a html description")
+	@Size(min = 5,max = 30, message="Enter a minimum of 3 characters and a maximum of 30")
 	private String htmlDescription;
 	
 	@Lob
-	@Column(name = "IMAGE")
-	//@NotEmpty(message="Debes ingresar image")
+	@Column(name = "image")
 	private String image;
 	
-	
-	
-	
+
 	//------ CONSTRUCTORES -------
 	
 	public Productlines() {
-		// TODO Auto-generated constructor stub
-		super();
 	}
 
 	/**
@@ -57,7 +52,6 @@ public class Productlines {
 	 * @param image
 	 * 
 	 */
-	
 	
 	public Productlines(@NotEmpty(message = "Debes ingresar productline") String productLine,
 			@NotBlank(message = "Debes ingresar textDescription") @Size(min = 3, max = 30, message = "Minimo 3 y Maximo 30 caracteres") String textDescription,
@@ -71,17 +65,10 @@ public class Productlines {
 	}
 
 	//----- METODOS ACCESORES ------
-
-	
-	
 	
 	public String getTextDescription() {
 		return textDescription;
 	}
-
-
-
-
 
 	public void setTextDescription(String textDescription) {
 		this.textDescription = textDescription;
@@ -91,34 +78,21 @@ public class Productlines {
 		return productLine;
 	}
 
-
-
 	public void setProductLine(String productLine) {
 		this.productLine = productLine;
 	}
-
-
-
-	
-
 
 	public String getHtmlDescription() {
 		return htmlDescription;
 	}
 
-
-
 	public void setHtmlDescription(String htmlDescription) {
 		this.htmlDescription = htmlDescription;
 	}
 
-
-
 	public String getImage() {
 		return image;
 	}
-
-
 
 	public void setImage(String image) {
 		this.image = image;
@@ -129,21 +103,5 @@ public class Productlines {
 		return "Productlines [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
 				+ htmlDescription + ", image=" + image + "]";
 	}
-
-
-	
-/*
-	public Products getProduct() {
-		return product;
-	}
-
-
-	public void setProduct(Products product) {
-		this.product = product;
-	}
-
-*/
-	
-
 	
 }

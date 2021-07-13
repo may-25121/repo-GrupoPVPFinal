@@ -10,16 +10,23 @@
 	</head>
 	<body>
 	
+		<!-- HEADER -->
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="fas fa-boxes  fa-lg"></i>&nbsp;Product line registration</h2>
 				</div>
+				
+				<!-- FORMULARIO DE LA LINEA DEL PRODUCTO -->
 				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/productline/save}" th:method="post" th:object="${productlines}" enctype="multipart/form-data">
 					<div class="p-2">
 					  <div class="form-group">
+					  
+					  		<!-- CAMPOS DEL FORMULARIO -->
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="codigo">Product line</label>
@@ -53,7 +60,8 @@
 										<input type="file" name="file" class="form-control form-control-sm p-0" id="image" accept="image/png, image/jpeg">
 									</div>
 								</div>
-
+								
+								<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
 							  		<button type="submit" class="btn bg-info btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save Product line</button>
 							  		<a th:href="@{/productline/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
@@ -81,6 +89,8 @@
 		</script>
 		
 		<br><br>
+		
+		<!-- FOOTER -->
 		<footer class="fixed-bottom" th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

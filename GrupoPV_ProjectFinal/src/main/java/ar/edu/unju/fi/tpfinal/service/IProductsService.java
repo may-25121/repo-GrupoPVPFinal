@@ -15,6 +15,6 @@ public interface IProductsService {
 	public List<Products> getAllProducts();
 	public void deleteProductsById(String code);
 	public List<Products> getProducts(String var);
-	
+	public boolean getCheckProductById(String code);
 
 }

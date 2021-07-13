@@ -46,21 +46,6 @@ public class CustomerServiceImp implements ICustomerService {
 	public void deleteCustomerById(int id) {
 		customerDAO.deleteById(String.valueOf(id));
 	}
-/*
-	@Override
-	public List<Customer> getCustomers(String customerNumber, String city) {
-		List<Customer> customers = new ArrayList<>();
-		if(!customerNumber.isEmpty() && !customerDAO.findById(Integer.valueOf(customerNumber)).isEmpty()){
-			customers.add(customerDAO.findById(Integer.valueOf(customerNumber)).get());
-		}else if(!city.isEmpty() && !customerDAO.findByCity(city).isEmpty()) {
-			customers = customerDAO.findByCity(city);
-		}else {
-			customers = (List<Customer>) customerDAO.findAll();
-		}
-		return customers;
-	}
-*/
-	
 
 	@Override
 	public List<Customer> getCustomers(String var) {
@@ -73,6 +58,15 @@ public class CustomerServiceImp implements ICustomerService {
 			customers = (List<Customer>) customerDAO.findAll();
 		}
 		return customers;
+	}
+
+	@Override
+	public boolean getCheckCustomerById(String id) {
+		boolean var = false;
+		if(!id.isEmpty() && !customerDAO.findById(id).isEmpty()) {
+			var = true;
+		}
+		return var;
 	}
 
 	

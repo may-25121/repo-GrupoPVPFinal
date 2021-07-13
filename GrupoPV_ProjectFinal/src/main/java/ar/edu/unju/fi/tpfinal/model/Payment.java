@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -35,11 +36,11 @@ public class Payment {
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name = "payment_date")
-	@NotNull(message = "El campo no puede estar vacio")
+	@NotNull(message = "The field cannot be empty")
 	private LocalDate paymentDate;
 	
 	@Column(name = "amount")
-	@NotNull(message = "El campo no puede estar vacio")
+	@NotNull(message = "The field cannot be empty")
 	private Double amount;
 	
 	/*@Autowired
@@ -85,52 +86,6 @@ public class Payment {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-
-
-
-	/*
-	public Payment(@NotBlank(message = "El campo no puede estar vacio") String checkNumber,
-			@NotNull(message = "El campo no puede estar vacio") LocalDate paymentDate,
-			@NotNull(message = "El campo no puede estar vacio") Double amount,
-			@NotNull(message = "El campo no puede estar vacio") Customer customers) {
-		super();
-		this.checkNumber = checkNumber;
-		this.paymentDate = paymentDate;
-		this.amount = amount;
-		this.customers = customers;
-	}*/
-
-
-	//----- METODOS ACCESORES ------
-	
-	/*public String getCheckNumber() {
-		return checkNumber;
-	}
-
-	public void setCheckNumber(String checkNumber) {
-		this.checkNumber = checkNumber;
-	}*/
-
-
-	
-/*
-	public Customer getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(Customer customers) {
-		this.customers = customers;
-	}*/
-
-
-/*
-	@Override
-	public String toString() {
-		return "Payment [checkNumber=" + checkNumber + ", paymentDate=" + paymentDate + ", amount=" + amount
-				+ ", customers=" + customers + "]";
-	}*/
-		
+	}	
 	
 }

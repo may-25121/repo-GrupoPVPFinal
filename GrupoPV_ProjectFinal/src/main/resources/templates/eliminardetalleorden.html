@@ -28,7 +28,7 @@
 							<p>Product code:<span th:text="${orderDetail.id.productCode.productCode}"></span></p>
 						</div>
 						<div class="my-3">
-							<a type="button" th:href="@{/order/list}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+							<a type="button" th:href="@{/orderdetail/list}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							<a type="button" th:href="@{/orderdetail/delete/confirm/}+${orderDetail.id.orderNumber.orderNumber}+'/'+${orderDetail.id.productCode.productCode}" class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Delete</a>
 						</div>
 					</div>

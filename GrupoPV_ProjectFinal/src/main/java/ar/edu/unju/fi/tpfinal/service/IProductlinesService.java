@@ -14,4 +14,6 @@ public interface IProductlinesService {
 	public List<Productlines> getAllProductlines();
 	public void deleteProductlinesById(String Line);
 	public List<Productlines>getProductlines(String Line);
+	public boolean getCheckProductLineById(String Line);
+	
 }

@@ -48,66 +48,95 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customer/save")
-	public String saveCustomerPage(@Valid @ModelAttribute("customer") Customer customer, Model model, BindingResult result
+	public String saveCustomerPage(@Valid @ModelAttribute("customer") Customer customer, BindingResult result, Model model
 			,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/save invoke the post method");
 		LOGGER.info("METHOD : saveCustomerPage() -- PARAMS: customer'"+customer+"'");
-		LOGGER.info("RESULT : Page is displayed listarclientes.html");
-		try {
-				customerService.saveCustomer(customer);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		if(result.hasErrors()) {
+			model.addAttribute("customer", customer);
+			model.addAttribute("employees", employeeService.getAllEmployees());
+			LOGGER.info("RESULT : Page is displayed nuevocliente.html");
+			return "nuevocliente";
+		}else {
+			if(customer.getSalesRepEmployeeNumber()!=null) {
+				try {
+					customerService.saveCustomer(customer);
+					attribute.addFlashAttribute("success", "The changes were saved successfully!");
+				} catch (Exception e) {
+					LOGGER.info("EXCEPTION INFO: '"+e+"'");
+					attribute.addFlashAttribute("error", "Error: There was an error performing the requested operation!");
+				}
+				LOGGER.info("RESULT: the page is redirected to /customer/list/");
+				return "redirect:/customer/list/";	
+			}else {
+				attribute.addFlashAttribute("info", "Info: There are no employees loaded in the system, you must load at least one!");
+				LOGGER.info("RESULT : The page is redirected to /customer/new/");
+				return "redirect:/customer/new/";
+			}
 		}
-		model.addAttribute("customers", customerService.getAllCustomers());
-		return "listarclientes";
 	}
 	
 	@GetMapping("/customer/list")
 	public String getListCustomerPage(Model model) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/list invoke the get method");
 		LOGGER.info("METHOD : getListCustomerPage()");
-		LOGGER.info("RESULT : Page is displayed listarclientes.html");
 		model.addAttribute("customers", customerService.getAllCustomers());
+		LOGGER.info("RESULT : Page is displayed listarclientes.html");
 		return "listarclientes";
 	}
 	
 	@GetMapping("/customer/edit/{number}")
-	public String getEditCustomerPage(@PathVariable("number") int number, Model model) {
+	public String getEditCustomerPage(@PathVariable("number") int number, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/edit/{number} invoke the get method");
 		LOGGER.info("METHOD : getEditCustomerPage()");
-		LOGGER.info("RESULT : Page is displayed nuevoempleado.html");
+		if(!customerService.getCheckCustomerById(String.valueOf(number))) {
+			attribute.addFlashAttribute("error", "Error: The requested record does not exist.");
+			LOGGER.info("RESULT : the page is redirected to /customer/list/");
+			return "redirect:/customer/list/";
+		}
 		this.customer = customerService.getCustomerById(number);
 		model.addAttribute("customer", this.customer);
 		model.addAttribute("employees", employeeService.getAllEmployees());
+		LOGGER.info("RESULT : Page is displayed nuevoempleado.html");
 		return "nuevocliente";
 	}
 	
 	@GetMapping("/customer/delete/{number}")
-	public String getDeleteCustomerPage(@PathVariable("number")String number, Model model) {
+	public String getDeleteCustomerPage(@PathVariable("number")String number, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/delete/{number} invoke the get method");
 		LOGGER.info("METHOD : getDeleteCustomerPage()");
-		LOGGER.info("RESULT : Page is displayed eliminarcliente.html");
+		if(!customerService.getCheckCustomerById(String.valueOf(number))) {
+			attribute.addFlashAttribute("error", "Error: The requested record does not exist.");
+			LOGGER.info("RESULT : the page is redirected to /customer/list/");
+			return "redirect:/customer/list/";
+		}
 		Customer customer = customerService.getCustomerById(Integer.valueOf(number));
 		model.addAttribute("customer", customer);
+		LOGGER.info("RESULT : Page is displayed eliminarcliente.html");
 		return "eliminarcliente";
 	}
 	
 	@GetMapping("/customer/delete/confirm/{number}")
-	public String getConfirmDeleteCustomerPage(@PathVariable("number") String number, Model model) {
+	public String getConfirmDeleteCustomerPage(@PathVariable("number") String number, Model model,RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/delete/confirm/{number} invoke the get method");
 		LOGGER.info("METHOD : getConfirmDeleteCustomerPage()");
-		LOGGER.info("RESULT : Page is displayed listarclientes.html");
-		customerService.deleteCustomerById(Integer.valueOf(number));
-		model.addAttribute("customers", customerService.getAllCustomers());
-		return "listarclientes";
+		try {
+			customerService.deleteCustomerById(Integer.valueOf(number));
+			attribute.addFlashAttribute("warning", "Record deleted successfully!");	
+		} catch (Exception e) {
+			LOGGER.info("EXCEPTION INFO: '"+e+"'");
+			attribute.addFlashAttribute("error", "Error: It is not possible to delete this record.");
+		}
+		LOGGER.info("RESULT : the page is redirected to /customer/list/");
+		return "redirect:/customer/list/";
 	}
 	
 	@GetMapping("/customer/search")
 	public String getSearchCustomerPage(@RequestParam(name="var") String var, Model model) {
 		LOGGER.info("CONTROLLER : CustomerController with /customer/search invoke the get method");
 		LOGGER.info("METHOD : getSearchCustomerPage()");
-		LOGGER.info("RESULT : Page is displayed listarclientes.html");
 		model.addAttribute("customers", customerService.getCustomers(var));
+		LOGGER.info("RESULT : Page is displayed listarclientes.html");
 		return "listarclientes";
 	}
 	

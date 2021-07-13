@@ -52,6 +52,15 @@ public class PaymentServiceImp implements IPaymentService {
 	public void deletePaymentById(PaymentsId id) {
 		paymentDAO.deleteById(id);
 	}
+
+	@Override
+	public boolean getCheckPaymentById(PaymentsId id) {
+		boolean var=false;
+		if(id!=null && !paymentDAO.findById(id).isEmpty()) {
+			var = true;
+		}
+		return var;
+	}
 	
 	//Falta el metodo de busqueda
 /*

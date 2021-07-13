@@ -9,20 +9,26 @@
 	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
 	</head>
 	<body>
-	
+		<!-- HEADER -->
 		<header th:insert="layout/header :: header"></header>
 		
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
-					<h2><i class="fas fa-coins fa-lg"></i>&nbsp;Registro pago</h2>
+					<h2><i class="fas fa-coins fa-lg"></i>&nbsp;Payment registration</h2>
 				</div>
-				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/payment/guardar}" th:method="post" th:object="${payment}">
+				
+				<!-- FORMULARIO DE REGISTRO -->
+				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/payment/save}" th:method="post" th:object="${payment}">
 					<div class="p-2">
 					  <div class="form-group">
-						  	<div class="p-3">
-						 <div class="form-group">
-						  	<label for="numerocliente">N° de cliente</label>
+					  
+					 	 <!-- CAMPOS DEL FORMULARIO -->
+						  <div class="p-3">
+						 		<div class="form-group">
+						  			<label for="numerocliente">Customer number</label>
 								    <select th:field="*{id.customerNumber}" name="customerNumber" class="form-control" id="customerNumber">
 									  <option th:each="c: ${customer}" th:value="${c.customerNumber}">
 									  	<span th:text="${c.customerNumber}" ></span>
@@ -30,23 +36,25 @@
 									</select>								    
 							  	</div>
 						  		<div class="form-group">
-								    <label for="checkNumber">N° de verificación</label>
-								    <input th:field="*{id.checkNumber}" type="text" class="form-control" id="checkNumber" placeholder="Ingresar el numero de verificacion">
+								    <label for="checkNumber">Check number</label>
+								    <input th:field="*{id.checkNumber}" type="text" class="form-control" id="checkNumber" placeholder="Enter the check number">
 								    <div class=" alert alert-danger" th:if="${#fields.hasErrors('id.checkNumber')}" th:errors="*{id.checkNumber}" ></div>
 						  		</div>
 						  		<div class="form-group">
-								    <label for="paymentDate">Fecha de pago</label>
-								    <input th:field="*{paymentDate}" type="date" class="form-control" id="paymentDate" placeholder="Ingresar la fecha de pago">
+								    <label for="paymentDate">Payment Date</label>
+								    <input th:field="*{paymentDate}" type="date" class="form-control" id="paymentDate" placeholder="Enter the payment date">
 								    <div class=" alert alert-danger" th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}" ></div>
 						  		</div>
 							  	<div class="form-group">
-								    <label for="amount">Cantidad</label>
-								    <input th:field="*{amount}" type="number" class="form-control" id="amount" placeholder="Ingresar cantidad a pagar">
+								    <label for="amount">Amount</label>
+								    <input th:field="*{amount}" type="number" class="form-control" id="amount" placeholder="Enter the amout">
 								    <div class=" alert alert-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" ></div>
 						  		</div>
+						  		
+						  		<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
-							  		<button type="submit" th:href = "@{/payment/guardar}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Guardar pago</button>
-							  		<a th:href="@{/payment/lista}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+							  		<button type="submit" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save payment</button>
+							  		<a th:href="@{/payment/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
 							  	</div>
 							</div>
 						</div>
@@ -55,6 +63,7 @@
 			</div>
 		</div>
 		
+		<!-- FOOTER -->
 		<footer th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

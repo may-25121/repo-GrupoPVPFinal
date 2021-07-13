@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.tpfinal.model.Employee;
-import ar.edu.unju.fi.tpfinal.model.User;
+import ar.edu.unju.fi.tpfinal.model.Usser;
 import ar.edu.unju.fi.tpfinal.service.IEmployeeService;
 import ar.edu.unju.fi.tpfinal.service.IOfficeService;
 
@@ -50,9 +50,11 @@ public class EmployeeController {
 	
 	@PostMapping("/employee/save")
 	public String saveEmployeePage(@Valid @ModelAttribute("employee") Employee emp, BindingResult result, @RequestParam(name="employeeNumber") String employeeNumber, @RequestParam(name="lastName") String lastName,
-		@RequestParam(name="firstName") String firstName, @RequestParam(name="extension") String extension, @RequestParam(name="email") String email, @RequestParam(name="officeCode.officeCode") String officeCode,
-		@RequestParam(name="jobTitle") String jobTitle, @RequestParam(name="employee.employeeNumber") String employee, Model model, RedirectAttributes attribute) {
+			@RequestParam(name="firstName") String firstName, @RequestParam(name="extension") String extension, @RequestParam(name="email") String email,
+			@RequestParam(name="jobTitle") String jobTitle, @RequestParam(name="employee.employeeNumber") String employee, @RequestParam (name="user.id") String id, @RequestParam (name="user.username") String username,
+			@RequestParam (name="user.password") String password,@RequestParam (name="user.role") String role, Model model, RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : EmployeeController with /employee/save invoke the post method");
+		
 		if(result.hasErrors()) {
 			model.addAttribute("employee", emp);
 			model.addAttribute("employees", employeeService.getAllEmployees());
@@ -60,31 +62,39 @@ public class EmployeeController {
 			LOGGER.info("RESULT : Page is displayed nuevoempleado.html");
 			return "nuevoempleado";
 		}else {
-			Employee employe = new Employee();
-			//User user = new User();
-			//employe = this.employeeService.getEmployee();
-			employe.setEmployeeNumber(employeeNumber);
-			employe.setLastName(lastName);
-			employe.setFirstName(firstName);
-			employe.setExtension(extension);
-			employe.setEmail(email);
-			employe.setOfficeCode(this.officeService.getOfficeById(officeCode));
-			employe.setJobTitle(jobTitle);		
-			if(Integer.valueOf(employee)==0) {
-				employe.setEmployee(null);
+			if(emp.getOfficeCode()!=null) {
+				Employee employe = new Employee();
+				//User user = new User();
+				//employe = this.employeeService.getEmployee();
+				employe.setEmployeeNumber(employeeNumber);
+				employe.setLastName(lastName);
+				employe.setFirstName(firstName);
+				employe.setExtension(extension);
+				employe.setEmail(email);
+				employe.setOfficeCode(emp.getOfficeCode());
+				employe.setJobTitle(jobTitle);		
+				if(Integer.valueOf(employee)==0) {
+					employe.setEmployee(null);
+				}else {
+					employe.setEmployee(this.employeeService.getEmployeeById(Integer.valueOf(employee)));
+				}
+
+				employe.setUser(emp.getUser());
+				LOGGER.info("METHOD : saveEmployeePage() -- PARAMS: employee'"+employe+"'");
+				try {
+					employeeService.saveEmployee(employe);
+					attribute.addFlashAttribute("success", "The changes were saved successfully!");
+				} catch (Exception e) {
+					LOGGER.info("EXCEPTION INFO: '"+e+"'");
+					attribute.addFlashAttribute("error", "Error: There was an error performing the requested operation!");
+				}
+				LOGGER.info("RESULT : The page is redirected to /employee/list/");
+				return "redirect:/employee/list/";
 			}else {
-				employe.setEmployee(this.employeeService.getEmployeeById(Integer.valueOf(employee)));
+				attribute.addFlashAttribute("info", "Info: There are no offices loaded in the system, you must load at least one!");
+				LOGGER.info("RESULT : The page is redirected to /employee/new/");
+				return "redirect:/employee/new/";
 			}
-			LOGGER.info("METHOD : saveEmployeePage() -- PARAMS: employee'"+employe+"'");
-			try {
-				employeeService.saveEmployee(employe);
-				attribute.addFlashAttribute("success", "The changes were saved successfully!");
-			} catch (Exception e) {
-				LOGGER.info("EXCEPTION INFO: '"+e+"'");
-				attribute.addFlashAttribute("error", "Error: There was an error performing the requested operation!");
-			}
-			LOGGER.info("RESULT : the page is redirected to /employee/list/");
-			return "redirect:/employee/list/";
 		}
 	}
 	
@@ -98,7 +108,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employee/edit/{number}")
-	public String getEditEmployeePage(@PathVariable("number") int number, Model model,RedirectAttributes attribute) {
+	public String getEditEmployeePage(@PathVariable("number") int number, Model model, RedirectAttributes attribute) {
 		LOGGER.info("CONTROLLER : EmployeeController with /employee/edit/{number} invoke the get method");
 		LOGGER.info("METHOD : getEditEmployeePage()");
 		if(!employeeService.getCheckEmployeeById(String.valueOf(number))){
@@ -141,8 +151,8 @@ public class EmployeeController {
 			LOGGER.info("EXCEPTION INFO: '"+e+"'");
 			attribute.addFlashAttribute("error", "Error: It is not possible to delete this record.");
 		}
-		LOGGER.info("RESULT : Page is displayed listarempleados.html");
-		return "redirect:/employee/list";
+		LOGGER.info("RESULT : the page is redirected to /employee/list/");
+		return "redirect:/employee/list/";
 	}
 	
 	@GetMapping("/employee/search")

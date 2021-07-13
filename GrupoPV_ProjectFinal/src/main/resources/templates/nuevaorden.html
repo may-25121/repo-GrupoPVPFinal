@@ -9,37 +9,48 @@
 	<link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/5.15.3/css/all.css}">
 	</head>
 	<body>
-	
+		<!-- HEADER -->
 		<header th:insert="layout/header :: header"></header>
 	
 		<div class="container mb-5">
 			<div class="row">
+			
+				<!-- TITULO -->
 				<div class="col-7 px-auto mx-auto text-center mt-3 mb-4 py-2 border-bottom">
 					<h2><i class="far fa-list-alt fa-lg"></i>&nbsp;Orders registration</h2>
 				</div>
+				
+				<!-- FORMULARIO DE REGISTRO -->
 				<form class="bg-white col-sm-7 p-auto m-auto border" th:action="@{/order/save}" th:method="post" th:object="${order}">
 					<div class="p-2">
 					  <div class="form-group">
+					  
+					  		<!-- CAMPOS DEL FORMULARIO -->
 						  	<div class="p-3">
 						  		<div class="form-group">
 								    <label for="orderNumber">Order number</label>
 								    <input th:field="*{orderNumber}" type="number" class="form-control" id="orderNumber" placeholder="Enter the order number">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="orderDate">Order date</label>
 								    <input th:field="*{orderDate}" type="date" class="form-control" id="orderDate" placeholder="Enter the order date">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}" ></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="requiredDate">Required date</label>
 								    <input th:field="*{requiredDate}" type="date" class="form-control" id="requiredDate" placeholder="Enter order confirmation date">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('requiredDate')}" th:errors="*{requiredDate}" ></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="shippedDate">Shipped date</label>
 								    <input th:field="*{shippedDate}" type="date" class="form-control" id="shippedDate" placeholder="Enter order shipping date">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('shippedDate')}" th:errors="*{shippedDate}" ></div>
 						  		</div>
 						  		<div class="form-group">
 								    <label for="state">State</label>
 								    <input th:field="*{status}" type="text" class="form-control" id="state" placeholder="Enter order status">
+						  			<div class="alert alert-danger col-sm-12 mt-1" role="alert" th:if="${#fields.hasErrors('status')}" th:errors="*{status}" ></div>
 						  		</div>
 							  	<div class="form-group">
 								    <label for="comments">Commentary</label>
@@ -51,13 +62,14 @@
 									  <option th:each="c:${customers}" th:value="${c.customerNumber}">
 									  	<span th:text="${c.customerName}"></span>
 									  </option>
-									</select>								    
+									</select>							    
 							  	</div>
+							  	
+							  	<!-- BOTONES DE GUARDAR Y CANCELAR -->
 							  	<div class="mt-4">
 							  		<button type="submit" th:href="@{/order/save}" class="btn bg-maxblue btn-lg btn-block text-white"><i class="far fa-save"></i>&nbsp;Save customer</button>
 							  		<a th:href="@{/order/list}" class="btn bg-secondary btn-lg btn-block text-white"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
-							  	</div>
-								  
+							  	</div>  
 							</div>
 						</div>
 					</div>
@@ -65,6 +77,7 @@
 			</div>
 		</div>
 		
+		<!-- FOOTER -->
 		<footer th:insert="layout/footer :: footer"></footer>
 		
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>

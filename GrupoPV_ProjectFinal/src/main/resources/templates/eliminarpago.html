@@ -19,16 +19,18 @@
 				</div>
 				<div class="col-sm-7 p-auto m-auto">
 					<div class="p-3 text-center">
-						<i class="fas fa-boxes fa-8x" style="color: #C0392B;"></i>
+						<i class="fas fa-coins fa-8x" style="color: #C0392B;"></i>
+						<!--  <i class="fas fa-boxes fa-8x" style="color: #C0392B;"></i>-->
 						<br>
 						<div class="my-4">
 							<span class="font-weight-bolder">Are you sure to delete the following record?</span>
-							<p>Check Number: <span th:text="${payment.checkNumber}"></span></p>
+							<p>Customer Number: <span th:text="${payment.id.customerNumber.customerNumber}"></span></p>
+							<p>Check Number: <span th:text="${payment.id.checkNumber}"></span></p>
 						</div>
 						<div class="my-3">
-							
-						<a type="button" th:href="@{/payment/lista}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
-						<a type="button" th:href="@{/payment/borrar/confirmar/}+${payment.checkNumber}"  class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Delete</a>
+						
+						<a type="button" th:href="@{/payment/list}" class="btn btn-info mx-3"><i class="fas fa-ban"></i>&nbsp;Cancel</a>
+						<a type="button" th:href="@{/payment/delete/confirm/}+${payment.id.customerNumber.customerNumber}+'/'+${payment.id.checkNumber}"  class="btn btn-danger mx-3"><i class="far fa-trash-alt"></i>&nbsp;Delete</a>
 						</div>
 					</div>
 				</div>

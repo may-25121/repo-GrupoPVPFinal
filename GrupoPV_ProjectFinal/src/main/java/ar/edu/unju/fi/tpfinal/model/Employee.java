@@ -54,7 +54,7 @@ public class Employee {
 	@Autowired
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "office_code")
-	@NotNull(message ="You must select an office")
+	//@NotNull(message ="You must select an office")
 	private Office officeCode;
 	
 	@Column(name = "job_title")
@@ -72,8 +72,8 @@ public class Employee {
 	@Valid
 	@Autowired
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user")
-	private User user;
+	@JoinColumn(name = "user_id")
+	private Usser user;
 	
 	//------ CONSTRUCTORES -------
 	
@@ -81,7 +81,7 @@ public class Employee {
 	}
 
 	public Employee(String employeeNumber, String lastName, String firstName, String extension, String email,
-			Office officeCode, String jobTitle, Employee employee, User user) {
+			Office officeCode, String jobTitle, Employee employee, Usser user) {
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -92,7 +92,8 @@ public class Employee {
 		this.employee = employee;
 		this.user = user;
 	}
-
+	
+	
 	//----- METODOS ACCESORES ------
 
 	public String getEmployeeNumber() {
@@ -158,9 +159,18 @@ public class Employee {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	
+	public Usser getUser() {
+		return user;
+	}
 
+	public void setUser(Usser user) {
+		this.user = user;
+	}
+	
 	//----- METODO TOSTRING------
 	
+
 	@Override
 	public String toString() {
 		return "Employee [employeeNumber=" + employeeNumber + ", lastName=" + lastName + ", firstName=" + firstName
